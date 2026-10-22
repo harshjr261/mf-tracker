@@ -26,11 +26,13 @@ H = {"User-Agent": "Mozilla/5.0 (fund-lens weekly refresh)", "Referer": "https:/
 S = requests.Session()
 
 
-def get(url, as_json=True):
+def get(url, as_json=True, raw=False):
     for a in range(4):
         try:
             r = S.get(url, headers=H, timeout=60)
             r.raise_for_status()
+            if raw:
+                return r.content
             return r.json() if as_json else r.text
         except Exception:  # noqa: BLE001
             if a == 3:
@@ -91,10 +93,24 @@ def text(root, tag):
 
 def ssd(sid):
     try:
-        x = get(f"https://portal.amfiindia.com/spages/SSD_{sid}.xml", as_json=False)
-        root = ET.fromstring(x.encode("utf-8"))
+        x = get(f"https://portal.amfiindia.com/spages/SSD_{sid}.xml", raw=True)
     except Exception:  # noqa: BLE001
         return None
+    x = x.lstrip(b"\xef\xbb\xbf").strip()  # AMFI's files start with a UTF-8 byte-order mark
+    try:
+        root = ET.fromstring(x)
+    except ET.ParseError:  # malformed XML: fall back to tag-by-tag regex
+        t = x.decode("utf-8", "replace")
+        class R:  # minimal shim so text() works
+            def find(self, path):
+                tag = path.split("/")[-1]
+                m = re.search(rf"<{tag}>(.*?)</{tag}>", t, re.S)
+                if not m:
+                    return None
+                el = ET.Element(tag)
+                el.text = re.sub(r"&amp;", "&", m.group(1))
+                return el
+        root = R()
     codes = [int(c) for c in re.findall(r"\b(1\d{5})\b", text(root, "AMFI_Codes_To_be_phased_out") or "")]
     return dict(fm=text(root, "Fund_Manager_Name"), fmSince=text(root, "Fund_Manager_From_Date"),
                 fmType=text(root, "Fund_Manager_Type_PrimaryComanageDescription"),
