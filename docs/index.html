@@ -6,8 +6,8 @@
 <style>
 /* Layout: research terminal — sticky control bar, one dense peer table, fund dossier slides in from the right */
 :root{
-  --bg:#f4f6f8; --surface:#ffffff; --surface2:#f8fafb; --ink:#101820; --ink2:#46515d; --muted:#7a8591;
-  --line:#e2e6ea; --line2:#cfd6dc; --accent:#1d5ea8; --accent-ink:#ffffff; --accent-soft:#e7eff9;
+  --bg:#e8eef5; --surface:#ffffff; --surface2:#f3f7fb; --ink:#0f2a4a; --ink2:#2f4d70; --muted:#5f7792;
+  --line:#d8e2ed; --line2:#bccbdc; --accent:#1d5ea8; --accent-ink:#ffffff; --accent-soft:#e3edf9;
   --q1:rgba(29,94,168,.24); --q2:rgba(29,94,168,.12); --q3:rgba(29,94,168,.045); --q4:transparent;
   --pos:#006300; --neg:#b42318; --warn-bg:#fff4d6; --warn-ink:#7a5200;
   --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#6250d6; --bm:#898781;
@@ -16,22 +16,23 @@
   --shadow:0 12px 40px rgba(16,24,32,.14);
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0e1114; --surface:#151a1f; --surface2:#1a2026; --ink:#e7ebef; --ink2:#b4bdc6; --muted:#8a949e;
-  --line:#252c33; --line2:#33404b; --accent:#5d9de8; --accent-ink:#0e1114; --accent-soft:#1b2a3b;
+  --bg:#0b1524; --surface:#122033; --surface2:#16273d; --ink:#e3edf8; --ink2:#b9cbe0; --muted:#8aa2bd;
+  --line:#1f324a; --line2:#2c4562; --accent:#6aa7ee; --accent-ink:#0b1524; --accent-soft:#18304d;
   --q1:rgba(93,157,232,.30); --q2:rgba(93,157,232,.16); --q3:rgba(93,157,232,.06); --q4:transparent;
   --pos:#3ccf55; --neg:#f07070; --warn-bg:#3a2e10; --warn-ink:#f2cf7a;
   --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#9085e9; --bm:#9b9a93; --shadow:0 12px 40px rgba(0,0,0,.5);
   color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0e1114; --surface:#151a1f; --surface2:#1a2026; --ink:#e7ebef; --ink2:#b4bdc6; --muted:#8a949e;
-  --line:#252c33; --line2:#33404b; --accent:#5d9de8; --accent-ink:#0e1114; --accent-soft:#1b2a3b;
+  --bg:#0b1524; --surface:#122033; --surface2:#16273d; --ink:#e3edf8; --ink2:#b9cbe0; --muted:#8aa2bd;
+  --line:#1f324a; --line2:#2c4562; --accent:#6aa7ee; --accent-ink:#0b1524; --accent-soft:#18304d;
   --q1:rgba(93,157,232,.30); --q2:rgba(93,157,232,.16); --q3:rgba(93,157,232,.06); --q4:transparent;
   --pos:#3ccf55; --neg:#f07070; --warn-bg:#3a2e10; --warn-ink:#f2cf7a;
   --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#9085e9; --bm:#9b9a93; --shadow:0 12px 40px rgba(0,0,0,.5);
   color-scheme:dark}
 *{box-sizing:border-box}
 html,body{height:100%}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.45}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.45;font-weight:500}
+b,strong,h1,h2,h3,h4,th{font-weight:700}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
 button,input,select{font:inherit;color:inherit}
 .wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
@@ -86,9 +87,9 @@ thead th.fund{z-index:3;background:var(--surface2)}
 td.chk,th.chk{width:34px;text-align:center;padding-inline:6px;position:sticky;left:0;z-index:1;background:var(--surface)}
 thead th.chk{z-index:3;background:var(--surface2)}
 .hasChk th.fund,.hasChk td.fund{left:34px}
-td{font-family:var(--mono);font-size:12.5px}
+td{font-family:var(--mono);font-size:12.5px;font-weight:500}
 td.fund{font-family:var(--sans);font-size:13px}
-td.fund .fn{font-weight:500;cursor:pointer;color:var(--ink);background:none;border:0;padding:0;text-align:left}
+td.fund .fn{font-weight:600;cursor:pointer;color:var(--ink);background:none;border:0;padding:0;text-align:left}
 td.fund .fn:hover{color:var(--accent);text-decoration:underline}
 td.fund .am{display:block;font-size:11.5px;color:var(--muted)}
 tr.ref td{background:var(--surface2);font-weight:500}
@@ -152,6 +153,30 @@ td.q1{background:var(--q1)} td.q2{background:var(--q2)} td.q3{background:var(--q
 .method{font-size:12.5px;color:var(--ink2);line-height:1.6}
 .method summary{cursor:pointer;font-weight:600;color:var(--ink)}
 .method ul{margin:8px 0 0;padding-left:18px;max-width:92ch}
+.guide{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 18px}
+.guide summary{cursor:pointer;font-weight:700;font-size:15px;color:var(--ink)}
+.guide ol{margin:12px 0 0;padding-left:0;list-style:none;display:grid;gap:12px;counter-reset:st;max-width:100ch}
+.guide li{display:grid;grid-template-columns:28px 1fr;gap:10px;counter-increment:st}
+.guide li::before{content:counter(st);width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:12px;display:grid;place-items:center;margin-top:1px}
+.guide li b{display:block;color:var(--ink)}
+.guide li span{color:var(--ink2);font-size:13px;line-height:1.55}
+.guide .where{display:block;margin-top:4px;font-size:12px;color:var(--accent);font-weight:600}
+.ai{background:var(--surface);border:1px solid var(--line2);border-radius:10px;padding:14px 16px;display:grid;gap:10px;min-width:0}
+.ai h4{margin:0;font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ai h4 .badge{font-size:11px;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:999px}
+.ai .chips{display:flex;flex-wrap:wrap;gap:6px}
+.ai .msgs{display:grid;gap:10px;max-height:460px;overflow:auto}
+.ai .msg{padding:10px 12px;border-radius:8px;font-size:13.5px;line-height:1.6;white-space:normal;overflow-wrap:anywhere}
+.ai .msg.u{background:var(--accent-soft);justify-self:end;max-width:85%}
+.ai .msg.a{background:var(--surface2);border:1px solid var(--line)}
+.ai .msg.a ul{margin:6px 0;padding-left:18px}
+.ai .msg.a p{margin:0 0 8px}
+.ai .msg.a p:last-child{margin:0}
+.ai form{display:flex;gap:8px}
+.ai textarea{flex:1;min-width:0;resize:vertical;min-height:40px;max-height:160px;padding:8px 10px;border:1px solid var(--line2);border-radius:8px;background:var(--surface2);font:inherit;color:inherit}
+.ai textarea:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.ai .off{font-size:13px;color:var(--ink2)}
+.ai .disc{font-size:11.5px;color:var(--muted)}
 input[type=checkbox]{accent-color:var(--accent);width:15px;height:15px;cursor:pointer}
 @media (prefers-reduced-motion:no-preference){.drawer{animation:slide .18s ease-out}@keyframes slide{from{transform:translateX(24px);opacity:.6}to{transform:none;opacity:1}}}
 </style>
@@ -183,6 +208,20 @@ input[type=checkbox]{accent-color:var(--accent);width:15px;height:15px;cursor:po
     <label class="ctl">Filter <input id="f" type="search" placeholder="Name contains…" autocomplete="off"></label>
   </div>
   <div class="tablebox" id="tablebox"></div>
+  <div id="catAI"></div>
+  <details class="guide" open id="guide">
+    <summary>New to fund analysis? How to analyse a mutual fund in 8 steps</summary>
+    <ol>
+      <li><div><b>Start with your goal and time horizon, not the fund.</b><span>Money needed within 1 year belongs in Liquid, Money Market or Arbitrage funds. 1–3 years: short-duration debt or Conservative Hybrid. 5 years and more: equity. The horizon decides the category; only then pick funds inside it.</span><span class="where">Use: the asset-class tabs and sub-category chips</span></div></li>
+      <li><div><b>Compare a fund only with its own category.</b><span>A small-cap fund returning 18% is not "better" than a large-cap fund returning 14%; it takes more risk. Every ranking here is within the category, against the category median and the category's benchmark.</span><span class="where">Use: the Overview tab, then a category; check the "Category median" and benchmark rows</span></div></li>
+      <li><div><b>Look at consistency before headline returns.</b><span>A great last year can hide a weak record. Rolling 3-year returns show how often the fund beat its benchmark across hundreds of start dates, and how bad its worst 3-year stretch was.</span><span class="where">Use: Consistency view, "Rolling 3Y % beat BM" and "Rolling 3Y worst"</span></div></li>
+      <li><div><b>Check returns per unit of risk.</b><span>Sharpe and Sortino show return earned for the volatility taken; higher is better. Standard deviation and max drawdown show how bumpy the ride was and how far it fell from a peak.</span><span class="where">Use: Risk (3Y) view: Sharpe, Sortino, Std dev, Max drawdown</span></div></li>
+      <li><div><b>See how it behaves in up and down markets.</b><span>Upside capture above 100% means it rises more than the index; downside capture below 100% means it falls less. The best funds combine both. Alpha is the extra return after adjusting for market risk.</span><span class="where">Use: Risk (3Y) view: Upside capture, Downside capture, Alpha</span></div></li>
+      <li><div><b>Read the calendar years for bad-year behaviour.</b><span>Look at years like 2018, 2020 or 2022. Did the fund protect capital better than its index, or fall harder? Year-by-year results also reveal one lucky year propping up the average.</span><span class="where">Use: Calendar years view, or the bar chart in any fund's profile</span></div></li>
+      <li><div><b>Check costs, size and the manager.</b><span>Lower TER compounds in your favour every year; always use the Direct plan. Very large AUM can make small and mid-cap funds harder to manage. A recent fund-manager change means past returns may say less about the future.</span><span class="where">Use: Cost &amp; size view: TER Direct, AUM, Lead manager tenure</span></div></li>
+      <li><div><b>Decide, then ask follow-up questions.</b><span>Shortlist 2–4 funds, tick "Compare" to see them side by side, and use Ask AI in a fund's profile for a plain-English review of its strengths, weaknesses and who it suits. Treat it as analysis, not personal advice.</span><span class="where">Use: Compare tray at the bottom, and Ask AI in each fund profile</span></div></li>
+    </ol>
+  </details>
   <details class="method">
     <summary>How the numbers are calculated</summary>
     <ul>
@@ -308,7 +347,7 @@ function render() {
   $("#views").innerHTML = Object.entries(VIEWS).map(([k, v]) => `<button type="button" role="tab" aria-selected="${k === S.view}" class="${k === S.view ? "on" : ""}" data-v="${k}">${v.label}</button>`).join("");
   $("#views").hidden = !S.cat; $("#minAge").value = S.minAge; $("#amc").value = S.amc;
   S.cat ? renderTable() : renderOverview();
-  renderTray();
+  renderTray(); renderCatAI();
 }
 
 function renderOverview() {
@@ -452,6 +491,7 @@ function openFund(code) {
       <button type="button" class="x" aria-label="Close">×</button></div>
     <div class="dbody">
       <div class="facts">${facts.map(([k, v, s]) => `<div><div class="k">${k}</div><div class="v">${v}</div><div class="note">${esc(s)}</div></div>`).join("")}</div>
+      <div id="fundAI"></div>
       <div class="card"><h4>Growth of ₹10,000 <span class="seg" id="gp">${["1Y","3Y","5Y","10Y","Max"].map(p => `<button type="button" data-p="${p}" class="${p === "5Y" ? "on" : ""}">${p}</button>`).join("")}</span></h4><div class="chart" id="gchart"></div><div class="note">Month-end values. Benchmark rebased to the same start.</div></div>
       <div class="two">
         <div class="card"><h4>Trailing returns <span class="h">rank among ${ps.length} peers</span></h4><div style="overflow-x:auto"><table class="mini"><thead><tr><th></th><th>Fund</th><th>Bench.</th><th>+/− pts</th><th>Peer median</th><th>Rank</th></tr></thead><tbody>${trRows}</tbody></table></div></div>
@@ -478,6 +518,7 @@ function openFund(code) {
   d.querySelector("#gp").addEventListener("click", e => { const b = e.target.closest("button[data-p]"); if (!b) return; d.querySelectorAll("#gp button").forEach(x => x.classList.toggle("on", x === b)); draw(b.dataset.p); });
   draw("5Y");
   barChart($("#cchart"), years, years.map(y => f.cal[y]), years.map(y => f.bcal?.[y]));
+  aiPanel($("#fundAI"), { title: short(f.name), context: () => fundContext(f), chips: ["Is this fund good enough to invest in?", "What are its main strengths and weaknesses?", "How risky is it compared with peers?", "Who is this fund suitable for?"] });
 }
 
 function openCompare() {
@@ -496,12 +537,132 @@ function openCompare() {
       ${years.map(y => metric(y, f => f.cal?.[y], "pct")).join("")}
       <tr><td>Benchmark</td>${fs.map(f => `<td style="font-family:var(--sans);white-space:normal;color:var(--ink2)">${esc(f.bm || "–")}</td>`).join("")}</tr>
     </tbody></table><div class="note">Alpha, beta and capture ratios are measured against each fund's own benchmark.</div></div>
+    <div id="cmpAI"></div>
    </div>`;
   openDrawer(html);
   const d = $("#drawer"); d.querySelector(".x").addEventListener("click", closeDrawer);
   const draw = p => growthChart($("#gchart"), fs.map((f, i) => ({ code: f.code, color: SERIES[i], label: short(f.name) })), null, p);
   d.querySelector("#gp").addEventListener("click", e => { const b = e.target.closest("button[data-p]"); if (!b) return; d.querySelectorAll("#gp button").forEach(x => x.classList.toggle("on", x === b)); draw(b.dataset.p); });
   draw("3Y");
+  aiPanel($("#cmpAI"), { title: `${fs.length} funds`, context: () => compareContext(fs), chips: ["Which of these would you pick for a 5-year goal, and why?", "How do their risks differ?", "Is there a reason to hold more than one of these?"] });
+}
+
+// ---------------- Ask AI (Claude, on the viewer's own account; only inside the Claude-hosted page)
+const CLAUDE_URL = "https://claude.ai/artifact/DQaTCC39i8W2kgEGwUKaN4";
+let SAMPLE = null, SAMPLE_READY = false;
+const aiPanels = new Set();
+if (window.claude?.use) window.claude.use("sample").then(fn => { SAMPLE = fn; SAMPLE_READY = true; aiPanels.forEach(p => p.paint()); }).catch(() => { SAMPLE_READY = true; aiPanels.forEach(p => p.paint()); });
+else SAMPLE_READY = true;
+
+const RULES = `You are a mutual fund analyst helping an Indian investor understand funds in a screener app called Fund Lens India.
+Rules:
+- Base every claim on the DATA block below; quote specific numbers (returns, ranks, ratios, TER). Do not invent holdings, news or numbers that are not given.
+- Be balanced and direct: say what is strong, what is weak, and the main risks. If the data shows the fund is mediocre, say so plainly.
+- Compare against the category median and the benchmark, not against funds in other categories.
+- Explain jargon in a few words the first time (e.g. "downside capture 80%: fell 20% less than the index in falling months").
+- This is analysis, not personal investment advice. Whether a fund suits someone depends on their goal, time horizon and risk appetite; if the question needs those, say what would change the answer, or ask.
+- Never promise future returns. Mention data limits when they matter (no portfolio holdings; no YTM or duration for debt funds).
+- Plain English, short paragraphs or a few bullets, under 250 words unless the user asks for more. Use **bold** sparingly.`;
+
+function p1(v) { return v == null || isNaN(v) ? "n/a" : (v * 100).toFixed(1) + "%"; }
+function n2(v) { return v == null || isNaN(v) ? "n/a" : (+v).toFixed(2); }
+function fundContext(f) {
+  const ps = peersOf(f), L = [];
+  L.push(`Fund: ${short(f.name)} (${f.amc}), ${f.asset} / ${f.cat}${f.theme ? " / " + f.theme : ""}, Direct Growth. History ${f.age.toFixed(1)} years. NAV date ${f.navDate}. Peers in category: ${ps.length}.`);
+  L.push(`Benchmark used: ${f.bm || "none"}${f.info?.bm1 ? ` (official tier-1: ${f.info.bm1})` : ""}.`);
+  L.push("Trailing returns (fund | benchmark | peer median | rank):");
+  ["1M","3M","6M","1Y","3Y","5Y","10Y","Since inception"].forEach(k => { const v = f.r?.[k]; if (v == null) return;
+    L.push(`  ${k}: ${p1(v)} | ${p1(f.br?.[k])} | ${p1(median(ps.map(g => g.r?.[k])))} | ${rankOf(f, g => g.r?.[k]) || "n/a"}`); });
+  const yrs = Object.keys(f.cal || {}).sort();
+  if (yrs.length) L.push("Calendar years (fund vs benchmark vs peer median): " + yrs.map(y => `${y}: ${p1(f.cal[y])} vs ${p1(f.bcal?.[y])} vs ${p1(median(ps.map(g => g.cal?.[y])))}`).join("; "));
+  const k3 = f.k3 || {};
+  if (Object.keys(k3).length) L.push(`Risk, 3Y monthly (fund, peer median): std dev ${p1(k3.std_dev)} (${p1(median(ps.map(g => g.k3?.std_dev)))}), Sharpe ${n2(k3.sharpe)} (${n2(median(ps.map(g => g.k3?.sharpe)))}, rank ${rankOf(f, g => g.k3?.sharpe) || "n/a"}), Sortino ${n2(k3.sortino)}, beta ${n2(k3.beta)}, alpha ${p1(k3.alpha)} (${p1(median(ps.map(g => g.k3?.alpha)))}), information ratio ${n2(k3.information_ratio)}, upside capture ${p1(k3.upside_capture)}, downside capture ${p1(k3.downside_capture)} (${p1(median(ps.map(g => g.k3?.downside_capture)))}), max drawdown 3Y ${p1(k3.max_drawdown)}, months beating benchmark ${p1(k3.pct_months_beat_bm)}.`);
+  if (f.k5) L.push(`Risk, 5Y: Sharpe ${n2(f.k5.sharpe)}, alpha ${p1(f.k5.alpha)}, std dev ${p1(f.k5.std_dev)}, downside capture ${p1(f.k5.downside_capture)}.`);
+  if (f.roll3) L.push(`Rolling 3Y CAGR: average ${p1(f.roll3.average)}, worst ${p1(f.roll3.min)}, best ${p1(f.roll3.max)}, beat benchmark in ${p1(f.roll3.pct_beat_benchmark)} of periods (rank ${rankOf(f, g => g.roll3?.pct_beat_benchmark) || "n/a"}), loss in ${p1(f.roll3.pct_negative)} of periods.`);
+  L.push(`SIP XIRR: 3Y ${p1(f.sip3)}, 5Y ${p1(f.sip5)}. Max drawdown since start ${p1(f.mdd)}; currently ${p1(f.curDD)} from peak.`);
+  const I = f.info || {};
+  L.push(`Cost & size: TER Direct ${I.terD != null ? I.terD + "%" : "n/a"} base (${I.terDt != null ? I.terDt + "%" : "n/a"} incl. costs; peer median ${n2(median(ps.map(g => g.info?.terD)))}%), TER Regular ${I.terR != null ? I.terR + "%" : "n/a"}. AUM ${I.aum != null ? "Rs " + Math.round(I.aum) + " crore" : "n/a"}. Fund manager(s): ${I.fm || "n/a"}; managing since: ${I.fmSince || "n/a"}. Riskometer: ${I.risk || "n/a"}. Exit load: ${I.exitLoad || "n/a"}.`);
+  L.push(`Risk-free rate used for Sharpe: 6%. Data as of ${D.asOf}.`);
+  return L.join("\n");
+}
+function compareContext(fs) { return fs.map((f, i) => `--- Fund ${i + 1} ---\n` + fundContext(f)).join("\n\n"); }
+function categoryContext() {
+  if (!S.cat) {
+    const rows = catsFor(S.asset).map(([c]) => { const fs = F.filter(f => inAsset(f) && f.cat === c);
+      return `${c}: ${fs.length} funds, median 1Y ${p1(median(fs.map(f => f.r?.["1Y"])))}, 3Y ${p1(median(fs.map(f => f.r?.["3Y"])))}, 5Y ${p1(median(fs.map(f => f.r?.["5Y"])))}, std dev ${p1(median(fs.map(f => f.k3?.std_dev)))}, Sharpe ${n2(median(fs.map(f => f.k3?.sharpe)))}, median TER ${n2(median(fs.map(f => f.info?.terD)))}%`; });
+    return `Asset class on screen: ${S.asset}. Sub-category medians (Direct Growth plans):\n${rows.join("\n")}\nData as of ${D.asOf}.`;
+  }
+  const fs = visible().filter(f => f.r?.["1Y"] != null).sort((a, b) => (b.r?.["3Y"] ?? -9) - (a.r?.["3Y"] ?? -9)).slice(0, 45);
+  const bms = [...new Set(peerSet().map(f => f.bm).filter(Boolean))];
+  const head = "name | AMC | age yrs | 1Y | 3Y | 5Y | Sharpe 3Y | std dev 3Y | alpha 3Y | downside capture | rolling 3Y % beat BM | TER direct | AUM Rs cr";
+  const rows = fs.map(f => [short(f.name), f.amc.replace(" Mutual Fund", ""), f.age.toFixed(1), p1(f.r?.["1Y"]), p1(f.r?.["3Y"]), p1(f.r?.["5Y"]), n2(f.k3?.sharpe), p1(f.k3?.std_dev), p1(f.k3?.alpha), p1(f.k3?.downside_capture), p1(f.roll3?.pct_beat_benchmark), f.info?.terD != null ? f.info.terD + "%" : "n/a", f.info?.aum != null ? Math.round(f.info.aum) : "n/a"].join(" | "));
+  return `Category on screen: ${S.asset} / ${S.cat}${S.theme ? " / " + S.theme : ""}. Benchmark: ${bms.length === 1 ? bms[0] : "varies by fund"}. ${peerSet().length} funds in category; filters on screen: AMC ${S.amc || "all"}, minimum history ${S.minAge}y. Funds (top ${fs.length} by 3Y CAGR):\n${head}\n${rows.join("\n")}\nData as of ${D.asOf}.`;
+}
+
+function md(t) {
+  const lines = esc(t).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").split(/\n/);
+  let out = "", inList = false;
+  for (const l of lines) {
+    const m = l.match(/^\s*(?:[-*•]|\d+\.)\s+(.*)$/);
+    if (m) { if (!inList) { out += "<ul>"; inList = true; } out += `<li>${m[1]}</li>`; continue; }
+    if (inList) { out += "</ul>"; inList = false; }
+    if (l.trim()) out += `<p>${l.replace(/^#+\s*/, "")}</p>`;
+  }
+  return out + (inList ? "</ul>" : "");
+}
+
+function aiPanel(el, { title, chips, context }) {
+  if (!el) return;
+  const turns = []; let ctl = null, busy = false;
+  const panel = { el, paint };
+  aiPanels.add(panel);
+  function paint() {
+    if (!el.isConnected) { aiPanels.delete(panel); return; }
+    if (!SAMPLE) {
+      el.innerHTML = `<div class="ai"><h4>Ask AI <span class="badge">${esc(title)}</span></h4><p class="off">${!SAMPLE_READY ? "Connecting…" :
+        `Ask AI runs on Claude, so it works when Fund Lens is opened inside Claude. <a href="${CLAUDE_URL}" target="_blank" rel="noopener">Open Fund Lens in Claude</a> to ask questions like “Is this fund good enough to hold for 5 years?”`}</p></div>`;
+      return;
+    }
+    el.innerHTML = `<div class="ai"><h4>Ask AI <span class="badge">${esc(title)}</span></h4>
+      <div class="chips">${chips.map((c, i) => `<button type="button" class="chip" data-q="${i}">${esc(c)}</button>`).join("")}</div>
+      <div class="msgs" aria-live="polite"></div>
+      <form><textarea rows="2" placeholder="Ask anything about this, e.g. is it good enough for a 5-year SIP?" aria-label="Your question"></textarea><button type="submit" class="btn">Ask</button></form>
+      <div class="disc">Answers use the numbers on this page and run on your own Claude account. They are analysis, not personal investment advice.</div></div>`;
+    const msgs = el.querySelector(".msgs"), ta = el.querySelector("textarea"), form = el.querySelector("form"), btn = form.querySelector("button");
+    const draw = () => { msgs.innerHTML = turns.map(t => `<div class="msg ${t.role === "user" ? "u" : "a"}">${t.role === "user" ? esc(t.content) : t.html || md(t.content)}</div>`).join(""); msgs.scrollTop = msgs.scrollHeight; };
+    draw();
+    const ask = async q => {
+      if (busy) { ctl?.abort(); return; }
+      q = (q || "").trim(); if (!q) return;
+      turns.push({ role: "user", content: q }); const ans = { role: "assistant", content: "", html: "<i>Thinking…</i>" }; turns.push(ans); draw();
+      busy = true; btn.textContent = "Stop"; ta.value = ""; ctl = new AbortController();
+      const history = turns.slice(0, -1).filter(t => t.content).slice(-8).map(t => ({ role: t.role, content: t.content }));
+      while (history.length && history[0].role === "assistant") history.shift();
+      const convo = [{ role: "user", content: RULES + "\n\nDATA:\n" + context() + "\n\nThe investor's questions follow." }, ...history];
+      try {
+        const { text, truncated } = await SAMPLE(convo, { cache: false, signal: ctl.signal, onText: ({ text }) => { ans.content = text; ans.html = null; draw(); } });
+        ans.content = text + (truncated ? "\n\n(Answer cut short. Ask a narrower question.)" : ""); ans.html = null;
+      } catch (e) {
+        const msg = { cancelled: "Stopped.", not_granted: "Ask AI needs your permission to use Claude. Allow it when asked, or reload the page to be asked again.",
+          sampling_disabled: "Claude isn't available on this account.", rate_limited: "Too many questions in a short time. Wait a minute and try again.",
+          refused: "Claude declined that question. Try rephrasing it.", session_expired: "Sign in to Claude again, then retry." }[e?.code] || "The answer didn't come through. Try again.";
+        ans.content = (e?.code !== "refused" && e?.text ? e.text + "\n\n" : "") + msg; ans.html = null;
+        if (e?.code === "not_granted" || e?.code === "sampling_disabled") SAMPLE = null;
+      } finally { busy = false; btn.textContent = "Ask"; draw(); if (!SAMPLE) paint(); }
+    };
+    form.addEventListener("submit", e => { e.preventDefault(); ask(ta.value); });
+    ta.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); form.requestSubmit(); } });
+    el.querySelector(".chips").addEventListener("click", e => { const b = e.target.closest("[data-q]"); if (b) ask(chips[+b.dataset.q]); });
+  }
+  paint();
+}
+function renderCatAI() {
+  const el = $("#catAI"); if (!el) return;
+  const what = S.cat ? `${S.cat}${S.theme ? " · " + S.theme : ""}` : `${S.asset} overview`;
+  if (el.dataset.k === what) return; el.dataset.k = what;
+  aiPanel(el, { title: what, context: categoryContext, chips: S.cat ?
+    ["Which 3 funds here look strongest overall, and why?", "Which funds look weak or risky?", "Which fund suits a 5-year SIP with moderate risk?", "What matters most when picking in this category?"] :
+    ["Which sub-categories suit a 1–3 year goal?", "How do these sub-categories differ in risk?", "Where should a first-time investor start?"] });
 }
 
 // ---------------- charts
