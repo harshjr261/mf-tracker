@@ -29,6 +29,13 @@ TRI_NAMES = ["NIFTY 50", "NIFTY 100", "NIFTY MIDCAP 150", "NIFTY SMALLCAP 250", 
              "NIFTY INDIA MANUFACTURING", "NIFTY INDIA DEFENCE", "NIFTY COMMODITIES", "NIFTY SERVICES SECTOR"]
 
 
+def fnum(x):
+    try:
+        return float(x)
+    except (TypeError, ValueError):
+        return 0.0
+
+
 def get(url, **kw):
     for attempt in range(4):
         try:
@@ -55,7 +62,9 @@ def amfi_universe():
             typ, cat = m.group(1), re.sub(r"\s+", " ", m.group(2).strip())
             continue
         p = l.split(";")
-        if len(p) < 8:
+        if l.startswith("Scheme Code"):
+            continue
+        if len(p) < 8 or not p[0].strip().isdigit():
             if not l.startswith("Scheme Code"):
                 amc = l
             continue
@@ -84,7 +93,7 @@ def amfi_universe():
     for x in rows:
         if (x["type"] == "Open Ended" and not x["plan"] and not x["opt"] and x["r"] == "-"
                 and not re.search("direct|regular", x["name"], re.I) and recent(x)):
-            if x["name"] not in best or float(x["nav"] or 0) > float(best[x["name"]]["nav"] or 0):
+            if x["name"] not in best or fnum(x["nav"]) > fnum(best[x["name"]]["nav"]):
                 best[x["name"]] = x
     for x in best.values():
         if x["code"] not in have:
@@ -98,7 +107,9 @@ def history(code):
     out = []
     for x in reversed(d.get("data", [])):
         dd, mm, yy = x["date"].split("-")
-        out.append(f"{yy}{mm}{dd}:{float(x['nav'])}")
+        v = fnum(x["nav"])
+        if v > 0:
+            out.append(f"{yy}{mm}{dd}:{v}")
     return code, " ".join(out)
 
 
@@ -132,6 +143,7 @@ def main():
                 failed.append(futs[f])
     print(f"NAV histories: {len(hist)} ok, {len(failed)} failed")
     if len(hist) < 0.9 * len(meta):
+        print(f"::error title=NAV downloads::{len(failed)} of {len(meta)} failed")
         sys.exit("Too many NAV downloads failed; keeping yesterday's data.")
     with gzip.open(os.path.join(RAW, "mf_universe_nav.json.gz"), "wt") as fh:
         json.dump({"meta": meta, "hist": hist}, fh, separators=(",", ":"))
@@ -162,4 +174,12 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except SystemExit:
+        raise
+    except Exception as e:  # surface the reason as a GitHub annotation
+        import traceback
+        tb = traceback.format_exc().strip().splitlines()
+        print(f"::error title=fetch_data failed::{type(e).__name__}: {e} | " + " | ".join(tb[-4:]))
+        raise

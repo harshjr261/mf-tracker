@@ -291,4 +291,10 @@ def main(nav_gz, bm_path, out):
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:4])
+    try:
+        main(*sys.argv[1:4])
+    except Exception as e:
+        import traceback
+        tb = traceback.format_exc().strip().splitlines()
+        print(f"::error title=build_app_data failed::{type(e).__name__}: {e} | " + " | ".join(tb[-4:]))
+        raise
