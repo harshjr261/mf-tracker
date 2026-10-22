@@ -1,0 +1,3 @@
+raw/*.gz
+__pycache__/
+*.pyc
