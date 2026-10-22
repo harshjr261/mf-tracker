@@ -6,22 +6,33 @@
 <style>
 /* Layout: research terminal — sticky control bar, one dense peer table, fund dossier slides in from the right */
 :root{
-  /* single black theme, orange ink, in every viewer setting */
-  --bg:#000000; --surface:#0b0907; --surface2:#15110d; --ink:#ffa24a; --ink2:#ffc890; --muted:#c99366;
-  --line:#231b13; --line2:#3a2c1f; --accent:#ff8a1f; --accent-ink:#000000; --accent-soft:#2a1707;
-  --q1:rgba(255,138,31,.30); --q2:rgba(255,138,31,.16); --q3:rgba(255,138,31,.07); --q4:transparent;
-  --pos:#4cd964; --neg:#ff5c7a; --warn-bg:#2b2208; --warn-ink:#f2cf7a;
-  --s1:#ff8a1f; --s2:#3987e5; --s3:#1fc28a; --s4:#a594ff; --bm:#a8a49c;
+  /* research-report palette: off-white paper, charcoal ink, one teal accent; dark mode follows the viewer */
+  --bg:#f7f7f5; --surface:#ffffff; --surface2:#f2f2ef; --ink:#1c1c1c; --ink2:#4a4a46; --muted:#74746e;
+  --line:#e4e4df; --line2:#cfcfc8; --accent:#0f766e; --accent-ink:#ffffff; --accent-soft:#e3f1ef;
+  --q1:rgba(15,118,110,.22); --q2:rgba(15,118,110,.11); --q3:rgba(15,118,110,.045); --q4:transparent;
+  --pos:#137333; --neg:#b42318; --warn-bg:#fff4d6; --warn-ink:#7a5200;
+  --s1:#0f766e; --s2:#eb6834; --s3:#2a78d6; --s4:#6250d6; --bm:#898781;
   --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
-  --shadow:0 12px 40px rgba(0,0,0,.7);
-  color-scheme:dark;
+  --shadow:0 12px 40px rgba(28,28,28,.12);
 }
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121417; --surface:#181b1f; --surface2:#1e2227; --ink:#ececea; --ink2:#bdbdb7; --muted:#8c8c86;
+  --line:#2a2e34; --line2:#3a3f46; --accent:#3fbfaf; --accent-ink:#0b1214; --accent-soft:#15302d;
+  --q1:rgba(63,191,175,.26); --q2:rgba(63,191,175,.13); --q3:rgba(63,191,175,.055); --q4:transparent;
+  --pos:#4cc26e; --neg:#f07070; --warn-bg:#3a2e10; --warn-ink:#f2cf7a;
+  --s1:#3fbfaf; --s2:#d95926; --s3:#3987e5; --s4:#9085e9; --bm:#9b9a93; --shadow:0 12px 40px rgba(0,0,0,.5); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121417; --surface:#181b1f; --surface2:#1e2227; --ink:#ececea; --ink2:#bdbdb7; --muted:#8c8c86;
+  --line:#2a2e34; --line2:#3a3f46; --accent:#3fbfaf; --accent-ink:#0b1214; --accent-soft:#15302d;
+  --q1:rgba(63,191,175,.26); --q2:rgba(63,191,175,.13); --q3:rgba(63,191,175,.055); --q4:transparent;
+  --pos:#4cc26e; --neg:#f07070; --warn-bg:#3a2e10; --warn-ink:#f2cf7a;
+  --s1:#3fbfaf; --s2:#d95926; --s3:#3987e5; --s4:#9085e9; --bm:#9b9a93; --shadow:0 12px 40px rgba(0,0,0,.5); color-scheme:dark}
 html{background:var(--bg)}
 *{box-sizing:border-box}
 html,body{height:100%}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.45;font-weight:500}
-b,strong,h1,h2,h3,h4,th{font-weight:700}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.45;font-weight:400}
+b,strong,h1,h2,h3,h4{font-weight:700} th{font-weight:600}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
 button,input,select{font:inherit;color:inherit}
 a{color:var(--accent);font-weight:600}
@@ -78,7 +89,7 @@ thead th.fund{z-index:3;background:var(--surface2)}
 td.chk,th.chk{width:34px;text-align:center;padding-inline:6px;position:sticky;left:0;z-index:1;background:var(--surface)}
 thead th.chk{z-index:3;background:var(--surface2)}
 .hasChk th.fund,.hasChk td.fund{left:34px}
-td{font-family:var(--mono);font-size:12.5px;font-weight:500}
+td{font-family:var(--mono);font-size:12.5px;font-weight:400}
 td.fund{font-family:var(--sans);font-size:13px}
 td.fund .fn{font-weight:600;cursor:pointer;color:var(--ink);background:none;border:0;padding:0;text-align:left}
 td.fund .fn:hover{color:var(--accent);text-decoration:underline}
