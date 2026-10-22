@@ -6,35 +6,26 @@
 <style>
 /* Layout: research terminal — sticky control bar, one dense peer table, fund dossier slides in from the right */
 :root{
-  --bg:#e8eef5; --surface:#ffffff; --surface2:#f3f7fb; --ink:#0f2a4a; --ink2:#2f4d70; --muted:#5f7792;
-  --line:#d8e2ed; --line2:#bccbdc; --accent:#1d5ea8; --accent-ink:#ffffff; --accent-soft:#e3edf9;
-  --q1:rgba(29,94,168,.24); --q2:rgba(29,94,168,.12); --q3:rgba(29,94,168,.045); --q4:transparent;
-  --pos:#006300; --neg:#b42318; --warn-bg:#fff4d6; --warn-ink:#7a5200;
-  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#6250d6; --bm:#898781;
+  /* single black theme, blue ink, in every viewer setting */
+  --bg:#000000; --surface:#0a0a0a; --surface2:#121417; --ink:#5aa9ff; --ink2:#8ec3ff; --muted:#5f86b3;
+  --line:#1a1f26; --line2:#2a323d; --accent:#3d8bff; --accent-ink:#000000; --accent-soft:#0d1d33;
+  --q1:rgba(61,139,255,.30); --q2:rgba(61,139,255,.16); --q3:rgba(61,139,255,.07); --q4:transparent;
+  --pos:#3ccf55; --neg:#ff6b6b; --warn-bg:#2b2208; --warn-ink:#f2cf7a;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#9085e9; --bm:#9b9a93;
   --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
-  --shadow:0 12px 40px rgba(16,24,32,.14);
+  --shadow:0 12px 40px rgba(0,0,0,.7);
+  color-scheme:dark;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0b1524; --surface:#122033; --surface2:#16273d; --ink:#e3edf8; --ink2:#b9cbe0; --muted:#8aa2bd;
-  --line:#1f324a; --line2:#2c4562; --accent:#6aa7ee; --accent-ink:#0b1524; --accent-soft:#18304d;
-  --q1:rgba(93,157,232,.30); --q2:rgba(93,157,232,.16); --q3:rgba(93,157,232,.06); --q4:transparent;
-  --pos:#3ccf55; --neg:#f07070; --warn-bg:#3a2e10; --warn-ink:#f2cf7a;
-  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#9085e9; --bm:#9b9a93; --shadow:0 12px 40px rgba(0,0,0,.5);
-  color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0b1524; --surface:#122033; --surface2:#16273d; --ink:#e3edf8; --ink2:#b9cbe0; --muted:#8aa2bd;
-  --line:#1f324a; --line2:#2c4562; --accent:#6aa7ee; --accent-ink:#0b1524; --accent-soft:#18304d;
-  --q1:rgba(93,157,232,.30); --q2:rgba(93,157,232,.16); --q3:rgba(93,157,232,.06); --q4:transparent;
-  --pos:#3ccf55; --neg:#f07070; --warn-bg:#3a2e10; --warn-ink:#f2cf7a;
-  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#9085e9; --bm:#9b9a93; --shadow:0 12px 40px rgba(0,0,0,.5);
-  color-scheme:dark}
+html{background:var(--bg)}
 *{box-sizing:border-box}
 html,body{height:100%}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.45;font-weight:500}
 b,strong,h1,h2,h3,h4,th{font-weight:700}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
 button,input,select{font:inherit;color:inherit}
+a{color:var(--accent);font-weight:600}
+a:visited{color:var(--accent)}
 .wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
 .bar1{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-block:12px}
