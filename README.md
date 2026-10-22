@@ -13,6 +13,9 @@ risk and capture ratios, rolling consistency, peer ranks and side-by-side compar
 | Scheme list, AMC, SEBI category, latest NAV | AMFI `NAVAll.txt` |
 | Full NAV history | mfapi.in |
 | Equity benchmarks (Total Return Indices) | niftyindices.com |
+| Actual TER (base + costs, Direct and Regular) | AMFI daily TER disclosure |
+| Quarterly average AUM | AMFI scheme data |
+| Fund managers, official benchmark, exit load, riskometer | SEBI Scheme Summary Documents on AMFI (weekly) |
 
 Debt, hybrid, FoF and solution-oriented funds are compared with the equal-weighted average of their
 own category, because CRISIL's indices are not freely published.
@@ -34,4 +37,4 @@ docs/                      the web app
 ```
 
 ## Not yet included
-TER, AUM, fund manager, holdings, and YTM / duration for debt funds.
+Holdings, and YTM / duration for debt funds (only in each AMC's factsheet and portfolio files).

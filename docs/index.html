@@ -191,7 +191,8 @@ input[type=checkbox]{accent-color:var(--accent);width:15px;height:15px;cursor:po
       <li>Risk ratios use 36 (or 60) month-end returns to the last month end, annualised, with a 6.0% risk-free rate for every fund. Capture ratios use the geometric average of fund and benchmark returns in up and down months (Morningstar method).</li>
       <li>Benchmarks: the AMFI tier-1 index for each equity category, a matching sector index for sectoral and thematic funds, and the tracked index for passive funds where available. Debt, hybrid, FoF and solution funds are compared with the equal-weighted average of their own category, because their CRISIL indices are not freely published.</li>
       <li>Rolling 3Y: CAGR for every daily start date; shown only with at least one year of start dates. Shading marks peer quartile within the funds on screen: darker is better. For risk, lower volatility, lower downside capture and smaller drawdowns count as better; beta is not shaded.</li>
-      <li>Not yet included: TER, AUM, fund manager, holdings, and YTM / duration for debt funds. These need AMFI and factsheet disclosures and are the next build step. Rows tagged "plan inferred" come from AMFI rows with no plan label, where the higher-NAV growth row is taken as Direct.</li>
+      <li>TER comes from AMFI's daily TER disclosure: "TER Direct" is the base expense ratio (the figure factsheets quote); "incl. costs" adds brokerage, transaction costs and statutory levies. AUM is AMFI's quarterly average AUM across all plans. Fund managers, managing-since dates, the official benchmark, riskometer and exit load come from each scheme's SEBI Scheme Summary Document, refreshed weekly.</li>
+      <li>Not yet included: holdings, and YTM / duration for debt funds. These are only in each AMC's factsheet and portfolio files. Rows tagged "plan inferred" come from AMFI rows with no plan label, where the higher-NAV growth row is taken as Direct.</li>
     </ul>
   </details>
 </main>
@@ -235,13 +236,22 @@ const VIEWS = {
     ["BE","Beta",K(3,"beta"),"num","none"],["AL","Alpha",K(3,"alpha"),"pct"],["IR","Info ratio",K(3,"information_ratio"),"num"],
     ["TE","Tracking error",K(3,"tracking_error"),"pct","none"],["UC","Upside capture",K(3,"upside_capture"),"pct"],
     ["DC","Downside capture",K(3,"downside_capture"),"pct","low"],["MD","Max drawdown 3Y",K(3,"max_drawdown"),"pct"]], def: "SH" },
+  cost: { label: "Cost & size", cols: [
+    ["AU","AUM (₹ cr)",f=>f.info?.aum,"cr","none"],["TD","TER Direct",f=>f.info?.terD,"ter","low"],
+    ["TT","TER Direct incl. costs",f=>f.info?.terDt,"ter","low"],["TR","TER Regular",f=>f.info?.terR,"ter","low"],
+    ["GAP","Regular − Direct",f=>f.info?.terR != null && f.info?.terD != null ? f.info.terR - f.info.terD : null,"ter","none"],
+    ["FY","Lead manager tenure (yrs)",f=>f.info?.fmYrs,"yrs"],["R3","3Y CAGR",R("3Y"),"pct"],["SH3","Sharpe 3Y",K(3,"sharpe"),"num"]], def: "AU" },
   consistency: { label: "Consistency", cols: [
     ["RA","Rolling 3Y avg",f=>f.roll3?.average,"pct"],["RM","Rolling 3Y worst",f=>f.roll3?.min,"pct"],
     ["RB","Rolling 3Y % beat BM",f=>f.roll3?.pct_beat_benchmark,"pct0"],["RN","Rolling 3Y % negative",f=>f.roll3?.pct_negative,"pct0","low"],
     ["MB","Months beat BM (3Y)",K(3,"pct_months_beat_bm"),"pct0"],["S5","Sharpe 5Y",K(5,"sharpe"),"num"],
     ["A5","Alpha 5Y",K(5,"alpha"),"pct"],["DD","Max drawdown (all)",f=>f.mdd,"pct"],["CD","From peak now",f=>f.curDD,"pct"]], def: "RB" }
 };
-function fmt(v, t) { return t === "num" ? num(v) : t === "pct0" ? pct(v, 0) : pct(v); }
+function fmt(v, t) {
+  if (t === "cr") return v == null ? '<span class="na">–</span>' : Math.round(v).toLocaleString("en-IN");
+  if (t === "ter") return v == null ? '<span class="na">–</span>' : (+v).toFixed(2) + "%";
+  if (t === "yrs") return v == null ? '<span class="na">–</span>' : (+v).toFixed(1);
+  return t === "num" ? num(v) : t === "pct0" ? pct(v, 0) : pct(v); }
 
 // ---------------- data
 fetch("data.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(init).catch(e => {
@@ -312,12 +322,13 @@ function renderOverview() {
     const bms = [...new Set(fs.map(f => f.bm).filter(Boolean))];
     return { c, n: fs.length, r1: median(fs.map(f => f.r?.["1Y"])), r3: median(fs.map(f => f.r?.["3Y"])), r5: median(fs.map(f => f.r?.["5Y"])),
       sd: median(fs.map(f => f.k3?.std_dev)), sh: median(fs.map(f => f.k3?.sharpe)), dd: median(fs.map(f => f.k3?.max_drawdown)), best,
+      ter: median(fs.map(f => f.info?.terD)), aum: fs.reduce((a, f) => a + (f.info?.aum || 0), 0),
       bm: bms.length === 1 ? bms[0] : bms.length ? "Varies by fund" : "–" };
   }).filter(r => r.n);
-  $("#tablebox").innerHTML = `<table class="ov"><thead><tr><th class="fund">Sub-category</th><th>Funds</th><th>Median 1Y</th><th>Median 3Y</th><th>Median 5Y</th><th>Median std dev 3Y</th><th>Median Sharpe 3Y</th><th>Median max DD 3Y</th><th style="text-align:left">Best 3Y fund</th><th style="text-align:left">Benchmark</th></tr></thead><tbody>` +
+  $("#tablebox").innerHTML = `<table class="ov"><thead><tr><th class="fund">Sub-category</th><th>Funds</th><th>Median 1Y</th><th>Median 3Y</th><th>Median 5Y</th><th>Median std dev 3Y</th><th>Median Sharpe 3Y</th><th>Median max DD 3Y</th><th>Median TER Direct</th><th>Total AUM (₹ cr)</th><th style="text-align:left">Best 3Y fund</th><th style="text-align:left">Benchmark</th></tr></thead><tbody>` +
     rows.map(r => `<tr><td class="fund"><button type="button" class="fn" data-c="${esc(r.c)}">${esc(r.c)}</button></td><td>${r.n}</td>
       <td class="${signCls(r.r1)}">${pct(r.r1)}</td><td class="${signCls(r.r3)}">${pct(r.r3)}</td><td class="${signCls(r.r5)}">${pct(r.r5)}</td>
-      <td>${pct(r.sd)}</td><td>${num(r.sh)}</td><td class="${signCls(r.dd)}">${pct(r.dd)}</td>
+      <td>${pct(r.sd)}</td><td>${num(r.sh)}</td><td class="${signCls(r.dd)}">${pct(r.dd)}</td><td>${fmt(r.ter, "ter")}</td><td>${r.aum ? fmt(r.aum, "cr") : '<span class="na">–</span>'}</td>
       <td style="text-align:left;font-family:var(--sans)">${r.best ? `<button type="button" class="fn linkf" data-code="${r.best.code}" style="background:none;border:0;padding:0;cursor:pointer;color:var(--accent)">${esc(short(r.best.name))}</button> <span class="na">${pct(r.best.r["3Y"])}</span>` : '<span class="na">–</span>'}</td>
       <td style="text-align:left;font-family:var(--sans);color:var(--ink2)">${esc(r.bm)}</td></tr>`).join("") + `</tbody></table>`;
 }
@@ -428,7 +439,14 @@ function openFund(code) {
   const years = Object.keys(f.cal || {}).sort();
   const facts = [["NAV", `₹${(+f.nav).toLocaleString("en-IN", { maximumFractionDigits: 4 })}`, `as of ${f.navDate}`], ["History from", f.start, `${f.age.toFixed(1)} years`],
     ["3Y CAGR", pct(f.r?.["3Y"]), rankOf(f, g => g.r?.["3Y"]) ? "rank " + rankOf(f, g => g.r?.["3Y"]) : ""], ["Max drawdown", pct(f.mdd), `now ${pct(f.curDD)} from peak`],
-    ["SIP XIRR 3Y / 5Y", `${pct(f.sip3)} / ${pct(f.sip5)}`, "₹10,000 a month"]];
+    ["SIP XIRR 3Y / 5Y", `${pct(f.sip3)} / ${pct(f.sip5)}`, "₹10,000 a month"],
+    ["AUM", f.info?.aum != null ? "₹" + fmt(f.info.aum, "cr") + " cr" : '<span class="na">–</span>', f.info?.aumP ? "quarter avg, " + f.info.aumP : "not disclosed"],
+    ["TER Direct", fmt(f.info?.terD, "ter"), f.info?.terDt != null ? `${fmt(f.info.terDt, "ter")} incl. costs` : ""]];
+  const I = f.info || {};
+  const factRows = [["Fund manager(s)", I.fm], ["Managing since", I.fmSince], ["Lead manager tenure", I.fmYrs != null ? I.fmYrs.toFixed(1) + " years" : null],
+    ["TER Direct: base / incl. costs", I.terD != null ? `${fmt(I.terD, "ter")} / ${fmt(I.terDt, "ter")}` : null],
+    ["TER Regular: base / incl. costs", I.terR != null ? `${fmt(I.terR, "ter")} / ${fmt(I.terRt, "ter")}` : null],
+    ["TER as of", I.terDate], ["Official tier-1 benchmark", I.bm1], ["Riskometer", I.risk], ["Exit load", I.exitLoad]].filter(r => r[1]);
   const html = `<div class="dhead"><div style="min-width:0"><h3>${esc(short(f.name))}</h3><div class="meta">${esc(f.amc)} · ${esc(f.asset)} · ${esc(pl)} · Direct Growth${f.inferred ? " (plan inferred)" : ""} · AMFI code ${f.code}</div><div class="meta">Benchmark: ${esc(f.bm || "none")}</div></div>
       <label class="ctl" style="flex:none"><input type="checkbox" id="dCmp" ${S.cmp.includes(code) ? "checked" : ""} ${!S.cmp.includes(code) && S.cmp.length >= 4 ? "disabled" : ""}> Compare</label>
       <button type="button" class="x" aria-label="Close">×</button></div>
@@ -445,6 +463,7 @@ function openFund(code) {
         <tr><td>Benchmark</td>${years.map(y => `<td class="${signCls(f.bcal?.[y])}">${pct(f.bcal?.[y])}</td>`).join("")}</tr>
         <tr><td>Peer median</td>${years.map(y => { const m = median(ps.map(g => g.cal?.[y])); return `<td class="${signCls(m)}">${pct(m)}</td>`; }).join("")}</tr>
         <tr><td>Rank</td>${years.map(y => `<td class="rk">${rankOf(f, g => g.cal?.[y])}</td>`).join("")}</tr></tbody></table></div><div class="note">* year to date.</div></div>
+      <div class="card"><h4>Fund facts <span class="h">AMFI disclosures</span></h4>${factRows.length ? `<table class="mini"><tbody>${factRows.map(([k, v]) => `<tr><td style="white-space:nowrap;vertical-align:top">${k}</td><td style="text-align:left;font-family:var(--sans);white-space:normal">${typeof v === "string" && !/<span/.test(v) ? esc(v) : v}</td></tr>`).join("")}</tbody></table>` : `<p class="note">AMFI has no summary document matched to this fund yet.</p>`}</div>
       <div class="card"><h4>Consistency</h4>${f.roll3 ? `<table class="mini"><tbody>
         <tr><td>Rolling 3Y CAGR: average / median</td><td>${pct(f.roll3.average)} / ${pct(f.roll3.median)}</td></tr>
         <tr><td>Rolling 3Y CAGR: worst / best</td><td>${pct(f.roll3.min)} / ${pct(f.roll3.max)}</td></tr>

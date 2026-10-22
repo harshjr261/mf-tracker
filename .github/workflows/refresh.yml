@@ -25,13 +25,21 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Fetch AMFI, NAV history and benchmark indices
         run: python pipeline/fetch_data.py
+      - name: Fetch TER, AUM and fund managers (Saturdays, manual runs, or first run)
+        continue-on-error: true
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "$(TZ=Asia/Kolkata date +%u)" = "6" ] || [ ! -f raw/scheme_info.json ]; then
+            python pipeline/fetch_scheme_info.py
+          else
+            echo "Scheme info is refreshed weekly; using the saved copy."
+          fi
       - name: Compute metrics and build app data
-        run: cd engine && python build_app_data.py ../raw/mf_universe_nav.json.gz ../raw/benchmarks_tri.json ../docs/data.json
+        run: cd engine && python build_app_data.py ../raw/mf_universe_nav.json.gz ../raw/benchmarks_tri.json ../docs/data.json ../raw/scheme_info.json
       - name: Commit refreshed data
         run: |
           git config user.name "fund-lens-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add docs/data.json raw/benchmarks_tri.json
+          git add docs/data.json raw/benchmarks_tri.json raw/scheme_info.json 2>/dev/null || git add docs/data.json raw/benchmarks_tri.json
           if git diff --cached --quiet; then echo "No changes"; exit 0; fi
           git commit -m "Data refresh $(date -u +%Y-%m-%d)"
           git push

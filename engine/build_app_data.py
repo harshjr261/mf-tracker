@@ -4,6 +4,7 @@ Usage: python3 build_app_data.py <mf_universe_nav.json.gz> <benchmarks_tri.json>
 """
 import gzip
 import json
+import os
 import re
 import sys
 import warnings
@@ -150,14 +151,44 @@ def bm_label(k):
     return " ".join(words.get(w, w) for w in k.split()) + " TRI"
 
 
+MONTHS = {m: i for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], 1)}
+
+
+def first_date(txt):
+    """First date in a free-text 'managing since' field (24/05/2013, 01-Sep-2025, Since Jan 2017, May 16, 2022)."""
+    if not txt:
+        return None
+    t = txt.lower()
+    pats = [(r"(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})", lambda m: (int(m[3]), int(m[2]), int(m[1]))),
+            (r"(\d{1,2})[\s-]*([a-z]{3})[a-z]*[\s,-]*(\d{4})", lambda m: (int(m[3]), MONTHS.get(m[2]), int(m[1]))),
+            (r"([a-z]{3})[a-z]*\.?\s+(\d{1,2}),?\s+(\d{4})", lambda m: (int(m[3]), MONTHS.get(m[1]), int(m[2]))),
+            (r"([a-z]{3})[a-z]*[\s,'-]+(\d{4})", lambda m: (int(m[2]), MONTHS.get(m[1]), 1))]
+    best = None
+    for rx, f in pats:
+        m = re.search(rx, t)
+        if m:
+            try:
+                y, mo, d = f(m)
+                if mo and 1990 < y < 2100 and 1 <= mo <= 12:
+                    c = (m.start(), pd.Timestamp(y, mo, min(d, 28)))
+                    best = c if best is None or c[0] < best[0] else best
+            except (ValueError, TypeError):
+                pass
+    return best[1] if best else None
+
+
 def base_name(n):
     n = n.replace(" (plan inferred: Direct)", "")
     n = re.split(r" - | -|- ", n)[0]
     return re.sub(r"[^a-z0-9]", "", n.lower().replace("fund", ""))
 
 
-def main(nav_gz, bm_path, out):
+def main(nav_gz, bm_path, out, info_path=None):
     d = json.load(gzip.open(nav_gz))
+    sinfo, sstats = {}, {}
+    if info_path and os.path.exists(info_path):
+        j = json.load(open(info_path))
+        sinfo, sstats = j.get("info", {}), j.get("stats", {})
     bms_raw = json.load(open(bm_path))
     bms = {k: pd.Series([v for _, v in rows], index=pd.to_datetime([dd for dd, _ in rows], format="%d %b %Y"))
            .sort_index()[lambda x: ~x.index.duplicated()] for k, rows in bms_raw.items()}
@@ -236,6 +267,16 @@ def main(nav_gz, bm_path, out):
                    nav=round(nav_last, 4), navDate=d_last.strftime("%Y-%m-%d"),
                    r={k: tr[k] for k in ["1M", "3M", "6M", "1Y", "3Y", "5Y", "10Y", "Since inception"]},
                    cal=cal)
+        si = sinfo.get(str(r.code))
+        if si:
+            ter = si.get("ter") or {}
+            fm_since = first_date(si.get("fmSince"))
+            rec["info"] = {k: v for k, v in dict(
+                aum=(si.get("aum") or {}).get("cr"), aumP=(si.get("aum") or {}).get("period"),
+                terD=ter.get("dBER"), terDt=ter.get("dTER"), terR=ter.get("rBER"), terRt=ter.get("rTER"), terDate=ter.get("date"),
+                fm=si.get("fm"), fmSince=si.get("fmSince"),
+                fmYrs=round((d_last - fm_since).days / 365.25, 1) if fm_since is not None and fm_since <= d_last else None,
+                bm1=si.get("bm1"), exitLoad=si.get("exitLoad"), risk=si.get("risk")).items() if v not in (None, "", "NA", "N.A.")}
         dd = max_drawdown(s)
         rec["mdd"] = dd["max_drawdown"]
         rec["curDD"] = dd["current_drawdown"]
@@ -281,10 +322,11 @@ def main(nav_gz, bm_path, out):
         if isinstance(o, (float, np.floating)):
             return None if np.isnan(o) else round(float(o), 5)
         return o
-    out_obj = dict(asOf=as_of.strftime("%Y-%m-%d"), rf=0.06, funds=[rnd(x) for x in rows],
+    out_obj = dict(asOf=as_of.strftime("%Y-%m-%d"), rf=0.06, infoStats=sstats, funds=[rnd(x) for x in rows],
                    series=series, bench=bench_series,
                    sources=["AMFI NAVAll (scheme list, categories)", "mfapi.in (NAV history)",
-                            "niftyindices.com (Total Return Indices)"])
+                            "niftyindices.com (Total Return Indices)",
+                            "AMFI TER disclosures, scheme AUM and SEBI Scheme Summary Documents"])
     json.dump(out_obj, open(out, "w"), separators=(",", ":"))
     print("funds", len(rows), "as_of", as_of.date())
     print(meta.groupby(["asset", "cat"]).size().to_string())
@@ -292,7 +334,7 @@ def main(nav_gz, bm_path, out):
 
 if __name__ == "__main__":
     try:
-        main(*sys.argv[1:4])
+        main(*sys.argv[1:5])
     except Exception as e:
         import traceback
         tb = traceback.format_exc().strip().splitlines()
