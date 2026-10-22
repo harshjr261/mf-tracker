@@ -155,6 +155,13 @@ td.q1{background:var(--q1)} td.q2{background:var(--q2)} td.q3{background:var(--q
 .method{font-size:12.5px;color:var(--ink2);line-height:1.6}
 .method summary{cursor:pointer;font-weight:600;color:var(--ink)}
 .method ul{margin:8px 0 0;padding-left:18px;max-width:92ch}
+.catinfo summary{cursor:pointer;font-size:12.5px;color:var(--accent);font-weight:600;margin-top:4px;list-style:none}
+.catinfo summary::-webkit-details-marker{display:none}
+.catinfo summary::before{content:"ⓘ ";}
+.catinfo p{margin:6px 0 0;max-width:80ch;font-size:13px;color:var(--ink2);line-height:1.55;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.docs{display:flex;flex-wrap:wrap;gap:8px}
+.docs a{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line2);border-radius:8px;padding:8px 12px;text-decoration:none;font-size:13px;background:var(--surface2)}
+.docs a:hover{border-color:var(--accent)}
 .guide{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 18px}
 .guide summary{cursor:pointer;font-weight:700;font-size:15px;color:var(--ink)}
 .guide ol{margin:12px 0 0;padding-left:0;list-style:none;display:grid;gap:12px;counter-reset:st;max-width:100ch}
@@ -198,7 +205,7 @@ input[type=checkbox]{accent-color:var(--accent);width:15px;height:15px;cursor:po
 <main class="wrap">
   <div class="cats" id="cats"></div>
   <div class="head">
-    <div><h2 id="title">All categories</h2><div class="sub" id="subtitle"></div></div>
+    <div><h2 id="title">All categories</h2><div class="sub" id="subtitle"></div><div class="catinfo" id="catinfo" hidden></div></div>
     <div class="legend" id="legend"></div>
   </div>
   <div class="controls" id="controls">
@@ -349,7 +356,7 @@ function render() {
   $("#views").innerHTML = Object.entries(VIEWS).map(([k, v]) => `<button type="button" role="tab" aria-selected="${k === S.view}" class="${k === S.view ? "on" : ""}" data-v="${k}">${v.label}</button>`).join("");
   $("#views").hidden = !S.cat; $("#minAge").value = S.minAge; $("#amc").value = S.amc;
   S.cat ? renderTable() : renderOverview();
-  renderTray(); renderCatAI();
+  renderTray(); renderCatAI(); renderCatInfo();
 }
 
 function renderOverview() {
@@ -506,6 +513,10 @@ function openFund(code) {
         <tr><td>Peer median</td>${years.map(y => { const m = median(ps.map(g => g.cal?.[y])); return `<td class="${signCls(m)}">${pct(m)}</td>`; }).join("")}</tr>
         <tr><td>Rank</td>${years.map(y => `<td class="rk">${rankOf(f, g => g.cal?.[y])}</td>`).join("")}</tr></tbody></table></div><div class="note">* year to date.</div></div>
       <div class="card"><h4>Fund facts <span class="h">AMFI disclosures</span></h4>${factRows.length ? `<table class="mini"><tbody>${factRows.map(([k, v]) => `<tr><td style="white-space:nowrap;vertical-align:top">${k}</td><td style="text-align:left;font-family:var(--sans);white-space:normal">${typeof v === "string" && !/<span/.test(v) ? esc(v) : v}</td></tr>`).join("")}</tbody></table>` : `<p class="note">AMFI has no summary document matched to this fund yet.</p>`}</div>
+      <div class="card"><h4>Documents <span class="h">official, always the latest version</span></h4>${I.sid ? `<div class="docs">
+        <a href="https://portal.amfiindia.com/spages/SSD_${encodeURIComponent(I.sid)}.pdf" target="_blank" rel="noopener">Fund summary (PDF) ↗</a>
+        <a href="https://portal.amfiindia.com/spages/${encodeURIComponent(I.sid)}.pdf" target="_blank" rel="noopener">Scheme Information Document ↗</a></div>
+        <p class="note" style="margin:8px 0 0">The fund summary is SEBI's one-page Scheme Summary Document for this exact fund, hosted by AMFI. Links to each AMC's latest monthly factsheet are coming next.</p>` : `<p class="note">AMFI has no scheme documents matched to this fund yet.</p>`}</div>
       <div class="card"><h4>Consistency</h4>${f.roll3 ? `<table class="mini"><tbody>
         <tr><td>Rolling 3Y CAGR: average / median</td><td>${pct(f.roll3.average)} / ${pct(f.roll3.median)}</td></tr>
         <tr><td>Rolling 3Y CAGR: worst / best</td><td>${pct(f.roll3.min)} / ${pct(f.roll3.max)}</td></tr>
@@ -547,6 +558,66 @@ function openCompare() {
   d.querySelector("#gp").addEventListener("click", e => { const b = e.target.closest("button[data-p]"); if (!b) return; d.querySelectorAll("#gp button").forEach(x => x.classList.toggle("on", x === b)); draw(b.dataset.p); });
   draw("3Y");
   aiPanel($("#cmpAI"), { title: `${fs.length} funds`, context: () => compareContext(fs), chips: ["Which of these would you pick for a 5-year goal, and why?", "How do their risks differ?", "Is there a reason to hold more than one of these?"] });
+}
+
+
+// ---------------- plain-English category guide (SEBI categorisation)
+const CAT_INFO = {
+  "Large Cap": "Invests at least 80% in the 100 largest listed companies. Usually the least volatile equity category; suits long-term investors who want steadier equity growth. Many active funds struggle to beat the Nifty 100, so check alpha and compare with index funds.",
+  "Mid Cap": "Invests at least 65% in companies ranked 101–250 by market value. Higher growth potential than large caps with sharper falls in bad years. Suits 7+ year horizons.",
+  "Small Cap": "Invests at least 65% in companies ranked 251 and below. The most volatile equity category: big gains in good years, falls of 40–50% in bad ones. Suits investors with 7–10 year horizons who can sit through deep drawdowns.",
+  "Large & Mid Cap": "Holds at least 35% in large caps and at least 35% in mid caps. A middle ground between large-cap stability and mid-cap growth.",
+  "Multi Cap": "Must hold at least 25% each in large, mid and small caps. Fixed minimums keep meaningful small and mid-cap exposure, so it is riskier than flexi cap in falling markets.",
+  "Flexi Cap": "At least 65% in equity, with full freedom to move between large, mid and small caps. Returns depend heavily on the manager's allocation calls. A common core holding.",
+  "Focused": "Holds at most 30 stocks, with at least 65% in equity. Concentrated bets: a few winners or losers move the whole fund, so results vary widely between funds.",
+  "Value": "Follows a value strategy: buying stocks that look cheap against earnings or assets. Can lag for years in growth-led markets, then catch up sharply.",
+  "Contra": "Takes contrarian positions in out-of-favour sectors or stocks. An AMC may offer either a Value or a Contra fund, not both. Patience is essential.",
+  "ELSS": "Equity Linked Savings Scheme: at least 80% in equity, with a 3-year lock-in. Gives a tax deduction under Section 80C in the old tax regime only.",
+  "Sectoral / Thematic": "At least 80% in one sector (e.g. banking, pharma) or theme (e.g. consumption, manufacturing). High risk from concentration; usually best as a small satellite holding, not a core one.",
+  "Overnight": "Lends only for one day (overnight securities). Almost no interest-rate or credit risk; returns close to the RBI repo rate. A parking place for days to weeks.",
+  "Liquid": "Invests in debt maturing within 91 days. Very low risk; used for emergency funds and short-term parking of money for weeks to a few months.",
+  "Money Market": "Invests in money-market instruments maturing within 1 year. Slightly higher return than liquid funds, with slightly more rate risk. Suits 3–12 month horizons.",
+  "Ultra Short Duration": "Portfolio duration of 3–6 months. Suits 3–6 month horizons; a small step up in risk from liquid funds.",
+  "Low Duration": "Portfolio duration of 6–12 months. Suits 6–12 month horizons; check credit quality, as some take more credit risk for yield.",
+  "Short Duration": "Portfolio duration of 1–3 years. Suits 1–3 year horizons; moderately sensitive to interest-rate moves.",
+  "Medium Duration": "Portfolio duration of 3–4 years. More sensitive to rate changes; suits 3–4 year horizons.",
+  "Medium to Long Duration": "Portfolio duration of 4–7 years. Gains when rates fall, loses when they rise. Suits 4+ year horizons.",
+  "Long Duration": "Portfolio duration above 7 years. The most rate-sensitive debt category; can be volatile for a debt fund.",
+  "Dynamic Bond": "Free to change duration with the manager's interest-rate view. Results depend on getting rate calls right.",
+  "Corporate Bond": "At least 80% in the highest-rated (AA+ and above) corporate bonds. Low credit risk; a common core debt holding for 2–3+ years.",
+  "Banking & PSU": "At least 80% in bonds of banks, PSUs, public financial institutions and municipal bonds. Generally high credit quality.",
+  "Credit Risk": "At least 65% in bonds rated below the highest grade (AA and below) for extra yield. Carries real default risk; past defaults have hit investors hard.",
+  "Gilt": "At least 80% in government securities. No credit risk, but can be very sensitive to interest-rate changes.",
+  "Gilt 10Y Constant": "At least 80% in government securities with the portfolio held at about a 10-year maturity. Moves closely with the 10-year G-sec yield.",
+  "Floater": "At least 65% in floating-rate instruments, whose interest resets with market rates. Tends to hold up better when rates are rising.",
+  "Other Debt": "Debt schemes that do not fit a standard SEBI category. Read the scheme documents before investing.",
+  "Arbitrage": "Buys shares in the cash market and sells them in the futures market to earn the price gap. Very low risk, liquid-fund-like returns, but taxed as equity. Suits 3–12 month parking.",
+  "Equity Savings": "Mixes equity, arbitrage and debt, with at least 65% in equity including hedged positions. Lower volatility than pure equity; suits conservative investors with 2–3 year horizons.",
+  "Conservative Hybrid": "75–90% in debt and 10–25% in equity. A debt-like fund with a small equity kicker; suits cautious 2–3 year investors.",
+  "Balanced Hybrid": "40–60% each in equity and debt, with no arbitrage. A true balance; less common today.",
+  "Balanced Advantage / DAA": "Moves between equity and debt based on market valuations, buying more equity when markets look cheap. Aims to cut falls; suits first-time equity investors.",
+  "Multi Asset": "Holds at least 10% each in at least three asset classes (equity, debt, gold or silver). Built-in diversification in one fund.",
+  "Aggressive Hybrid": "65–80% in equity, the rest in debt. Equity-like returns with somewhat smaller falls; suits 5+ year investors who want a cushion.",
+  "Equity Index Fund": "Tracks an index (Nifty 50, Sensex, Nifty Next 50 and so on) instead of picking stocks. Low cost; judge it by low TER and low tracking error, not by returns versus the index.",
+  "Equity ETF": "An index fund traded on the stock exchange like a share. Needs a demat account; check trading volumes so you can buy and sell near the NAV.",
+  "Debt Index Fund": "Tracks a debt index (G-secs, SDLs, PSU bonds), often with a fixed maturity date. Predictable if held to maturity.",
+  "Debt ETF": "Exchange-traded debt funds such as Bharat Bond or liquid ETFs. Needs a demat account.",
+  "Gold ETF": "Tracks the price of physical gold, traded on the exchange. A hedge against inflation and rupee weakness; returns follow gold, not company earnings. Gold fund-of-funds also appear here.",
+  "Silver ETF": "Tracks the price of silver. Much more volatile than gold; usually a small allocation at most.",
+  "Hybrid Index Fund": "Tracks an index that mixes equity and debt.",
+  "FoF Domestic": "A fund that invests in other Indian mutual funds or ETFs (for example gold or multi-asset FoFs). Watch for two layers of costs.",
+  "FoF Overseas": "Invests in foreign funds or ETFs (US, China, global themes). Adds currency risk and diversification; subject to overseas-investment limits.",
+  "Retirement": "Solution-oriented fund with a lock-in of 5 years or until retirement age, whichever comes first. The equity mix varies by plan.",
+  "Children's": "Solution-oriented fund with a lock-in of 5 years or until the child turns 18, whichever comes first.",
+  "Life Cycle": "Shifts gradually from equity to debt as its target year approaches, like a target-date fund."
+};
+function catLabel(c) { return /Fund|ETF|FoF|Index|Gilt|Floater/.test(c) ? c : c + " fund"; }
+function renderCatInfo() {
+  const el = $("#catinfo"); if (!el) return;
+  const t = S.cat && CAT_INFO[S.cat];
+  if (!t) { el.hidden = true; el.innerHTML = ""; return; }
+  el.hidden = false;
+  el.innerHTML = `<details><summary>What is ${/^[AEIOU]/.test(S.cat) ? "an" : "a"} ${esc(catLabel(S.cat))}?</summary><p>${esc(t)}</p></details>`;
 }
 
 // ---------------- Ask AI (Claude, on the viewer's own account; only inside the Claude-hosted page)

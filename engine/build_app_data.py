@@ -276,7 +276,8 @@ def main(nav_gz, bm_path, out, info_path=None):
                 terD=ter.get("dBER"), terDt=ter.get("dTER"), terR=ter.get("rBER"), terRt=ter.get("rTER"), terDate=ter.get("date"),
                 fm=si.get("fm"), fmSince=si.get("fmSince"),
                 fmYrs=round((d_last - fm_since).days / 365.25, 1) if fm_since is not None and fm_since <= d_last else None,
-                bm1=si.get("bm1"), exitLoad=si.get("exitLoad"), risk=si.get("risk")).items() if v not in (None, "", "NA", "N.A.")}
+                bm1=si.get("bm1"), exitLoad=si.get("exitLoad"), risk=si.get("risk"), sid=si.get("sid") if si.get("fm") else None,
+                sid=si.get("sid") if si.get("fm") or si.get("bm1") else None).items() if v not in (None, "", "NA", "N.A.")}
         dd = max_drawdown(s)
         rec["mdd"] = dd["max_drawdown"]
         rec["curDD"] = dd["current_drawdown"]
