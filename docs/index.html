@@ -240,7 +240,7 @@ input[type=checkbox]{accent-color:var(--accent);width:15px;height:15px;cursor:po
       <li>Benchmarks: the AMFI tier-1 index for each equity category, a matching sector index for sectoral and thematic funds, and the tracked index for passive funds where available. Debt, hybrid, FoF and solution funds are compared with the equal-weighted average of their own category, because their CRISIL indices are not freely published.</li>
       <li>Rolling 3Y: CAGR for every daily start date; shown only with at least one year of start dates. Shading marks peer quartile within the funds on screen: darker is better. For risk, lower volatility, lower downside capture and smaller drawdowns count as better; beta is not shaded.</li>
       <li>TER comes from AMFI's daily TER disclosure: "TER Direct" is the base expense ratio (the figure factsheets quote); "incl. costs" adds brokerage, transaction costs and statutory levies. AUM is AMFI's quarterly average AUM across all plans. Fund managers, managing-since dates, the official benchmark, riskometer and exit load come from each scheme's SEBI Scheme Summary Document, refreshed weekly.</li>
-      <li>Not yet included: holdings, and YTM / duration for debt funds. These are only in each AMC's factsheet and portfolio files. Rows tagged "plan inferred" come from AMFI rows with no plan label, where the higher-NAV growth row is taken as Direct.</li>
+      <li>Documents: factsheet and monthly-portfolio links are each AMC's official pages as registered with AMFI, checked monthly by an automated link test. Not yet in the tables: holdings, and YTM / duration for debt funds. Rows tagged "plan inferred" come from AMFI rows with no plan label, where the higher-NAV growth row is taken as Direct.</li>
     </ul>
   </details>
 </main>
@@ -302,6 +302,8 @@ function fmt(v, t) {
   return t === "num" ? num(v) : t === "pct0" ? pct(v, 0) : pct(v); }
 
 // ---------------- data
+let AMC_LINKS = {};
+fetch("amc_factsheets.json").then(r => r.ok ? r.json() : {}).then(j => { AMC_LINKS = j || {}; }).catch(() => {});
 fetch("data.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(init).catch(e => {
   $("#tablebox").innerHTML = `<div class="empty">The fund data did not load (${esc(e.message)}). Reload the page to try again.</div>`;
 });
@@ -513,10 +515,13 @@ function openFund(code) {
         <tr><td>Peer median</td>${years.map(y => { const m = median(ps.map(g => g.cal?.[y])); return `<td class="${signCls(m)}">${pct(m)}</td>`; }).join("")}</tr>
         <tr><td>Rank</td>${years.map(y => `<td class="rk">${rankOf(f, g => g.cal?.[y])}</td>`).join("")}</tr></tbody></table></div><div class="note">* year to date.</div></div>
       <div class="card"><h4>Fund facts <span class="h">AMFI disclosures</span></h4>${factRows.length ? `<table class="mini"><tbody>${factRows.map(([k, v]) => `<tr><td style="white-space:nowrap;vertical-align:top">${k}</td><td style="text-align:left;font-family:var(--sans);white-space:normal">${typeof v === "string" && !/<span/.test(v) ? esc(v) : v}</td></tr>`).join("")}</tbody></table>` : `<p class="note">AMFI has no summary document matched to this fund yet.</p>`}</div>
-      <div class="card"><h4>Documents <span class="h">official, always the latest version</span></h4>${I.sid ? `<div class="docs">
-        <a href="https://portal.amfiindia.com/spages/SSD_${encodeURIComponent(I.sid)}.pdf" target="_blank" rel="noopener">Fund summary (PDF) ↗</a>
-        <a href="https://portal.amfiindia.com/spages/${encodeURIComponent(I.sid)}.pdf" target="_blank" rel="noopener">Scheme Information Document ↗</a></div>
-        <p class="note" style="margin:8px 0 0">The fund summary is SEBI's one-page Scheme Summary Document for this exact fund, hosted by AMFI. Links to each AMC's latest monthly factsheet are coming next.</p>` : `<p class="note">AMFI has no scheme documents matched to this fund yet.</p>`}</div>
+      <div class="card"><h4>Documents <span class="h">official sources, always the latest version</span></h4>${(() => {
+        const L = AMC_LINKS[f.amc] || {}, ln = [];
+        ln.push(`<a href="${esc(L.factsheet || "https://www.amfiindia.com/online-center/download-factsheets")}" target="_blank" rel="noopener">Latest monthly factsheet ↗</a>`);
+        if (L.portfolio) ln.push(`<a href="${esc(L.portfolio)}" target="_blank" rel="noopener">Monthly portfolio (all holdings) ↗</a>`);
+        if (I.sid) { ln.push(`<a href="https://portal.amfiindia.com/spages/SSD_${encodeURIComponent(I.sid)}.pdf" target="_blank" rel="noopener">Fund summary (PDF) ↗</a>`);
+          ln.push(`<a href="https://portal.amfiindia.com/spages/${encodeURIComponent(I.sid)}.pdf" target="_blank" rel="noopener">Scheme Information Document ↗</a>`); }
+        return `<div class="docs">${ln.join("")}</div><p class="note" style="margin:8px 0 0">The factsheet and portfolio links open ${esc(f.amc)}'s official page, as registered with AMFI, where the newest month is listed first. ${esc(f.amc.replace(" Mutual Fund", ""))} publishes one factsheet for all its schemes; look for <b>${esc(short(f.name))}</b> inside it.${I.sid ? " The fund summary is SEBI's one-page document for this exact fund." : ""}</p>`; })()}</div>
       <div class="card"><h4>Consistency</h4>${f.roll3 ? `<table class="mini"><tbody>
         <tr><td>Rolling 3Y CAGR: average / median</td><td>${pct(f.roll3.average)} / ${pct(f.roll3.median)}</td></tr>
         <tr><td>Rolling 3Y CAGR: worst / best</td><td>${pct(f.roll3.min)} / ${pct(f.roll3.max)}</td></tr>

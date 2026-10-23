@@ -1,7 +1,7 @@
 """Check every AMC factsheet link: HTTP status, final URL, page title, and whether the page mentions factsheets."""
 import concurrent.futures as cf, json, os, re, requests
 ROOT = os.path.join(os.path.dirname(__file__), "..")
-links = json.load(open(os.path.join(ROOT, "docs", "amc_factsheets.json")))
+links = {f"{k} | {t}": v[t] for k, v in json.load(open(os.path.join(ROOT, "docs", "amc_factsheets.json"))).items() for t in ("factsheet", "portfolio") if v.get(t)}
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0 Safari/537.36",
       "Accept": "text/html,application/xhtml+xml,*/*;q=0.8", "Accept-Language": "en-IN,en;q=0.9"}
 def check(item):

@@ -1,56 +1,218 @@
 {
-  "360 ONE Mutual Fund": "https://www.360.one/asset-management/mutualfund/downloads/factsheets",
-  "ASK MUTUAL FUND": "https://www.askfinancials.com/mutual-fund",
-  "Abakkus Mutual Fund": "https://www.abakkusmf.com/downloads",
-  "Aditya Birla Sun Life Mutual Fund": "https://mutualfund.adityabirlacapital.com/forms-and-downloads/factsheets",
-  "AlphaGrep Mutual Fund": "https://www.alphagrepmf.com/downloads",
-  "Angel One Mutual Fund": "https://www.angelonemf.com/downloads",
-  "Axis Mutual Fund": "https://www.axismf.com/statutory-disclosures",
-  "Bajaj Finserv Mutual Fund": "https://www.bajajamc.com/downloads",
-  "Bandhan Mutual Fund": "https://bandhanmutual.com/downloads/factsheets",
-  "Bank of India Mutual Fund": "https://www.boimf.in/investor-corner/downloads/factsheets",
-  "Baroda BNP Paribas Mutual Fund": "https://www.barodabnpparibasmf.in/downloads/factsheets",
-  "Canara Robeco Mutual Fund": "https://www.canararobeco.com/documents/statutory-disclosures/factsheets",
-  "Capitalmind Mutual Fund": "https://capitalmindmf.com/downloads",
-  "Choice Mutual Fund": "https://choicemf.com/downloads",
-  "DSP Mutual Fund": "https://www.dspim.com/mandatory-disclosures/factsheets",
-  "Edelweiss Mutual Fund": "https://www.edelweissmf.com/statutory/factsheets",
-  "Franklin Templeton Mutual Fund": "https://www.franklintempletonindia.com/downloads/fund-documents",
-  "Groww Mutual Fund": "https://www.growwmf.in/statutory-disclosure/factsheet",
-  "HDFC Mutual Fund": "https://www.hdfcfund.com/investor-services/factsheets",
-  "HSBC Mutual Fund": "https://www.assetmanagement.hsbc.co.in/en/mutual-funds/investor-resources/information-library",
-  "Helios Mutual Fund": "https://www.heliosmf.in/downloads/",
-  "ICICI Prudential Mutual Fund": "https://www.icicipruamc.com/downloads/others/monthly-fact-sheet",
-  "ITI Mutual Fund": "https://www.itiamc.com/downloads",
-  "Invesco Mutual Fund": "https://invescomutualfund.com/literature-and-form?tab=factsheet",
-  "JM Financial Mutual Fund": "https://www.jmfinancialmf.com/downloads/factsheets",
-  "Jio BlackRock Mutual Fund": "https://www.jioblackrockamc.com/downloads",
-  "Kotak Mahindra Mutual Fund": "https://www.kotakmf.com/Information/fact-sheets",
-  "LIC Mutual Fund": "https://www.licmf.com/downloads/factsheet",
-  "Lakshya Mutual Fund": "https://www.lakshyamf.com",
-  "Mahindra Manulife Mutual Fund": "https://www.mahindramanulife.com/downloads#factsheet",
-  "Mirae Asset Mutual Fund": "https://www.miraeassetmf.co.in/downloads/factsheet",
-  "Monarch Mutual Fund": "https://www.monarchmf.com",
-  "Motilal Oswal Mutual Fund": "https://www.motilaloswalmf.com/download-center/factsheets",
-  "NJ Mutual Fund": "https://www.njmutualfund.com/downloads",
-  "Navi Mutual Fund": "https://navi.com/mutual-fund/downloads/factsheet",
-  "Nippon India Mutual Fund": "https://mf.nipponindiaim.com/investor-service/downloads/factsheet-portfolio-and-other-disclosures",
-  "Old Bridge Mutual Fund": "https://www.oldbridgemf.com/downloads",
-  "PGIM India Mutual Fund": "https://www.pgimindiamf.com/downloads/factsheet",
-  "PPFAS Mutual Fund": "https://amc.ppfas.com/downloads/factsheet/",
-  "Quantum Mutual Fund": "https://www.quantumamc.com/downloads/factsheet",
-  "SBI Mutual Fund": "https://www.sbimf.com/docs/default-source/scheme-factsheets",
-  "Samco Mutual Fund": "https://www.samcomf.com/downloads",
-  "Shriram Mutual Fund": "https://www.shriramamc.in/downloads",
-  "Sundaram Mutual Fund": "https://www.sundarammutual.com/factsheet",
-  "Tata Mutual Fund": "https://www.tatamutualfund.com/downloads/factsheets",
-  "Taurus Mutual Fund": "https://www.taurusmutualfund.com/downloads",
-  "The Wealth Company Mutual Fund": "https://www.thewealthcompanymf.com/downloads",
-  "Trust Mutual Fund": "https://www.trustmf.com/downloads",
-  "UTI Mutual Fund": "https://www.utimf.com/downloads/factsheets",
-  "Unifi Mutual Fund": "https://www.unifimf.com/downloads",
-  "Union Mutual Fund": "https://www.unionmf.com/downloads/factsheets",
-  "WhiteOak Capital Mutual Fund": "https://mf.whiteoakamc.com/downloads/factsheets",
-  "Zerodha Mutual Fund": "https://www.zerodhafundhouse.com/resources/factsheets/",
-  "quant Mutual Fund": "https://quantmutual.com/downloads/factsheets"
+ "360 ONE Mutual Fund": {
+  "factsheet": "https://www.360.one/asset/mutual-funds/downloads/",
+  "portfolio": "https://www.360.one/asset/mutual-funds/downloads/"
+ },
+ "ASK MUTUAL FUND": {
+  "factsheet": "https://www.askmutualfund.com/#/downloads",
+  "portfolio": "https://www.askmutualfund.com/#/downloads"
+ },
+ "Abakkus Mutual Fund": {
+  "factsheet": "https://www.abakkusmf.com/factsheet.html",
+  "portfolio": "https://www.abakkusmf.com/statutory-disclosures.html"
+ },
+ "Aditya Birla Sun Life Mutual Fund": {
+  "factsheet": "https://mutualfund.adityabirlacapital.com/forms-and-downloads/factsheets",
+  "portfolio": "https://mutualfund.adityabirlacapital.com/forms-and-downloads/portfolio"
+ },
+ "AlphaGrep Mutual Fund": {
+  "factsheet": "https://www.alphagrepmf.ai/disclosures",
+  "portfolio": "https://www.alphagrepmf.ai/disclosures"
+ },
+ "Angel One Mutual Fund": {
+  "factsheet": "https://www.angelonemf.com/downloads",
+  "portfolio": "https://www.angelonemf.com/downloads"
+ },
+ "Axis Mutual Fund": {
+  "factsheet": "https://www.axismf.com/downloads",
+  "portfolio": "https://www.axismf.com/statutory-disclosures"
+ },
+ "Bajaj Finserv Mutual Fund": {
+  "factsheet": "https://www.bajajamc.com/downloads?factsheet",
+  "portfolio": "https://www.bajajamc.com/downloads?statutory-disclosures="
+ },
+ "Bandhan Mutual Fund": {
+  "factsheet": "https://bandhanmutual.com/downloads/factsheets",
+  "portfolio": "https://bandhanmutual.com/downloads/disclosures"
+ },
+ "Bank of India Mutual Fund": {
+  "factsheet": "https://www.boimf.in/investor-corner#t1",
+  "portfolio": "https://www.boimf.in/investor-corner#t2"
+ },
+ "Baroda BNP Paribas Mutual Fund": {
+  "factsheet": "https://www.barodabnpparibasmf.in/downloads/monthly-factsheet",
+  "portfolio": "https://www.barodabnpparibasmf.in/downloads/monthly-portfolio-scheme"
+ },
+ "Canara Robeco Mutual Fund": {
+  "factsheet": "https://www.canararobeco.com/documents/forms-downloads/forms-information-documents/information-documents/factsheets/",
+  "portfolio": "https://www.canararobeco.com/documents/statutory-disclosures/scheme-dashboard/scheme-monthly-portfolio/"
+ },
+ "Capitalmind Mutual Fund": {
+  "factsheet": "https://capitalmindmf.com/factsheet.html",
+  "portfolio": "https://capitalmindmf.com/statutory-disclosures.html"
+ },
+ "Choice Mutual Fund": {
+  "factsheet": "https://choicemf.com/disclosures/factsheets",
+  "portfolio": "https://choicemf.com/disclosures/monthly-portfolio"
+ },
+ "DSP Mutual Fund": {
+  "factsheet": "https://www.dspim.com/downloads?category=Information%20Documents&sub_category=Factsheets",
+  "portfolio": "https://www.dspim.com/about-us/mandatory-disclosure/portfolio-disclosures"
+ },
+ "Edelweiss Mutual Fund": {
+  "factsheet": "https://www.edelweissmf.com/downloads/factsheets",
+  "portfolio": "https://www.edelweissmf.com/statutory#Portfolio-of-Schemes"
+ },
+ "Franklin Templeton Mutual Fund": {
+  "factsheet": "https://www.franklintempletonindia.com/downloads/fund-literature",
+  "portfolio": "https://www.franklintempletonindia.com/investor/reports"
+ },
+ "Groww Mutual Fund": {
+  "factsheet": "https://www.growwmf.in/downloads/fact-sheet",
+  "portfolio": "https://growwmf.in/statutory-disclosure/portfolio"
+ },
+ "HDFC Mutual Fund": {
+  "factsheet": "https://www.hdfcfund.com/mutual-funds/factsheets",
+  "portfolio": "https://www.hdfcfund.com/statutory-disclosure/portfolio/monthly-portfolio"
+ },
+ "HSBC Mutual Fund": {
+  "factsheet": "https://www.assetmanagement.hsbc.co.in/en/mutual-funds/investor-resources?Date=&Cap=&Doc=fund-factsheets",
+  "portfolio": "https://www.assetmanagement.hsbc.co.in/en/mutual-funds/investor-resources/information-library"
+ },
+ "Helios Mutual Fund": {
+  "factsheet": "https://www.heliosmf.in/downloads/",
+  "portfolio": "https://www.heliosmf.in/portfolio-disclosure/"
+ },
+ "ICICI Prudential Mutual Fund": {
+  "factsheet": "https://www.icicipruamc.com/news-and-media/downloads?currentTabFilter=Historical%20Factsheets",
+  "portfolio": "https://www.icicipruamc.com/news-and-media/downloads?currentTabFilter=Disclosures&subCatTabFilter=MonthlyPortfolioDisclosures"
+ },
+ "ITI Mutual Fund": {
+  "factsheet": "https://www.itiamc.com/downloads",
+  "portfolio": "https://www.itiamc.com/statuory-disclosure"
+ },
+ "Invesco Mutual Fund": {
+  "factsheet": "https://www.invescomutualfund.com/literature-forms/factsheets",
+  "portfolio": "https://invescomutualfund.com/literature-and-form?tab=Complete"
+ },
+ "JM Financial Mutual Fund": {
+  "factsheet": "https://www.jmfinancialmf.com/downloads/Factsheet",
+  "portfolio": "https://www.jmfinancialmf.com/downloads/Portfolio-Disclosure"
+ },
+ "Jio BlackRock Mutual Fund": {
+  "factsheet": "https://www.jioblackrockamc.com/statutory-disclosure/fund-documents/factsheet",
+  "portfolio": "https://www.jioblackrockamc.com/statutory-disclosure/disclosures/monthly-portfolio-disclosure"
+ },
+ "Kotak Mahindra Mutual Fund": {
+  "factsheet": "https://www.kotakmf.com/Information/forms-and-downloads/Information",
+  "portfolio": "https://www.kotakmf.com/Information/forms-and-downloads"
+ },
+ "LIC Mutual Fund": {
+  "factsheet": "https://www.licmf.com/downloads/factsheet",
+  "portfolio": "https://www.licmf.com/downloads/monthly-portfolio"
+ },
+ "Lakshya Mutual Fund": {
+  "factsheet": null,
+  "portfolio": null
+ },
+ "Mahindra Manulife Mutual Fund": {
+  "factsheet": "https://www.mahindramanulife.com/downloads#investor",
+  "portfolio": "https://www.mahindramanulife.com/downloads#mandatory-disclosures"
+ },
+ "Mirae Asset Mutual Fund": {
+  "factsheet": "https://www.miraeassetmf.co.in/downloads/factsheet",
+  "portfolio": "https://www.miraeassetmf.co.in/downloads/portfolio"
+ },
+ "Monarch Mutual Fund": {
+  "factsheet": null,
+  "portfolio": "https://www.monarchamc.in/forms-downloads/portfolio-holdings/monthly"
+ },
+ "Motilal Oswal Mutual Fund": {
+  "factsheet": "https://www.motilaloswalmf.com/downloads/factsheets",
+  "portfolio": "https://www.motilaloswalmf.com/downloads/scheme-portfolio-details"
+ },
+ "NJ Mutual Fund": {
+  "factsheet": "https://downloads.njmutualfund.com/downloads.php",
+  "portfolio": "https://downloads.njmutualfund.com/downloads.php"
+ },
+ "Navi Mutual Fund": {
+  "factsheet": "https://navi.com/mutual-fund/downloads/factsheet",
+  "portfolio": "https://navi.com/mutual-fund/downloads/portfolio"
+ },
+ "Nippon India Mutual Fund": {
+  "factsheet": "https://mf.nipponindiaim.com/investor-service/downloads/factsheet-portfolio-and-other-disclosures",
+  "portfolio": "https://mf.nipponindiaim.com/investor-service/downloads/factsheet-portfolio-and-other-disclosures"
+ },
+ "Old Bridge Mutual Fund": {
+  "factsheet": "https://oldbridgemf.com/statutory-disclosures.html",
+  "portfolio": "https://oldbridgemf.com/statutory-disclosures.html"
+ },
+ "PGIM India Mutual Fund": {
+  "factsheet": "https://www.pgimindia.com/mutual-funds/forms-and-updates/Fund-Factsheet",
+  "portfolio": "https://www.pgimindia.com/mutual-funds/disclosures/Portfolios/Monthly-Portfolio"
+ },
+ "PPFAS Mutual Fund": {
+  "factsheet": "https://amc.ppfas.com/downloads/factsheet/",
+  "portfolio": "https://amc.ppfas.com/downloads/portfolio-disclosure/"
+ },
+ "Quantum Mutual Fund": {
+  "factsheet": "https://www.quantumamc.com/factsheets/combined/-1/0/0",
+  "portfolio": "https://www.quantumamc.com/portfolio/combined/-1/1/0/0"
+ },
+ "SBI Mutual Fund": {
+  "factsheet": "https://www.sbimf.com/factsheets",
+  "portfolio": "https://www.sbimf.com/portfolios"
+ },
+ "Samco Mutual Fund": {
+  "factsheet": "https://www.samcomf.com/downloads",
+  "portfolio": "https://www.samcomf.com/StatutoryDisclosure"
+ },
+ "Shriram Mutual Fund": {
+  "factsheet": "https://www.shriramamc.in/factsheet",
+  "portfolio": "https://www.shriramamc.in/investor-statutory-disclosures"
+ },
+ "Sundaram Mutual Fund": {
+  "factsheet": "https://www.sundarammutual.com/fundwise-factsheet",
+  "portfolio": "https://www.sundarammutual.com/Monthly-Fortnightly-Adhoc-Portfolios"
+ },
+ "Tata Mutual Fund": {
+  "factsheet": "https://www.tatamutualfund.com/information-documents",
+  "portfolio": "https://www.tatamutualfund.com/schemes-related"
+ },
+ "Taurus Mutual Fund": {
+  "factsheet": "https://www.taurusmutualfund.com/factsheet",
+  "portfolio": "https://taurusmutualfund.com/monthly-portfolio"
+ },
+ "The Wealth Company Mutual Fund": {
+  "factsheet": "https://www.wealthcompanyamc.in/literature-forms/scheme-documents/factsheets/",
+  "portfolio": "https://www.wealthcompanyamc.in/literature-forms/portfolio-documents/monthly/"
+ },
+ "Trust Mutual Fund": {
+  "factsheet": "https://www.trustmf.com/downloads?activeTab=factsheets",
+  "portfolio": "https://www.trustmf.com/disclosures?activeTab=portfolio-disclosures"
+ },
+ "UTI Mutual Fund": {
+  "factsheet": "https://www.utimf.com/downloads/fact-sheet",
+  "portfolio": "https://www.utimf.com/downloads/consolidate-all-portfolio-disclosure"
+ },
+ "Unifi Mutual Fund": {
+  "factsheet": "https://unifimf.com/factsheet/",
+  "portfolio": "https://unifimf.com/statutorydocuments/#monthly-portfolio-disclosure"
+ },
+ "Union Mutual Fund": {
+  "factsheet": "https://www.unionmf.com/about-us/downloads/factsheets",
+  "portfolio": "https://www.unionmf.com/about-us/downloads/monthly-portfolio"
+ },
+ "WhiteOak Capital Mutual Fund": {
+  "factsheet": "https://mf.whiteoakamc.com/download#Factsheet",
+  "portfolio": "https://mf.whiteoakamc.com/regulatory-disclosures/scheme-portfolios"
+ },
+ "Zerodha Mutual Fund": {
+  "factsheet": "https://www.zerodhafundhouse.com/resources/fund-documents",
+  "portfolio": "https://www.zerodhafundhouse.com/resources/disclosures"
+ },
+ "quant Mutual Fund": {
+  "factsheet": "https://quantmutual.com/downloads/factsheet",
+  "portfolio": "https://quantmutual.com/statutory-disclosures"
+ }
 }
