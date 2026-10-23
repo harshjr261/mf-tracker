@@ -50,4 +50,4 @@ jobs:
           git add docs/data.json docs/flows.json raw/benchmarks_tri.json raw/scheme_info.json raw/amfi_monthly 2>/dev/null || git add docs/data.json raw/benchmarks_tri.json
           if git diff --cached --quiet; then echo "No changes"; exit 0; fi
           git commit -m "Data refresh $(date -u +%Y-%m-%d)"
-          git push
+          git pull --rebase && git push

@@ -187,7 +187,7 @@ td.q1{background:var(--q1)} td.q2{background:var(--q2)} td.q3{background:var(--q
 .ai .off{font-size:13px;color:var(--ink2)}
 .ai .disc{font-size:11.5px;color:var(--muted)}
 /* money flows */
-main.fl #cats,main.fl .head,main.fl #controls,main.fl #tablebox,main.fl #catAI,main.fl #guide{display:none}
+main.fl #pulse,main.fl #cats,main.fl .head,main.fl #controls,main.fl #tablebox,main.fl #catAI,main.fl #guide{display:none}
 #flowsView{display:grid;gap:14px;min-width:0}
 .fh h2{margin:0;font-size:20px;font-weight:600}
 .fh .sub{color:var(--muted);font-size:13px;margin-top:2px}
@@ -207,6 +207,16 @@ main.fl #cats,main.fl .head,main.fl #controls,main.fl #tablebox,main.fl #catAI,m
 .flow tr.grp td{background:var(--surface2);font-weight:600;font-family:var(--sans)}
 .flow tr.grp td:first-child{background:var(--surface2)}
 .flow tbody tr:hover td{background:var(--accent-soft)}
+.pulse{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px}
+.pulse h4{margin:0 0 6px;font-size:14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.pulse h4 .h{font-weight:400;color:var(--muted);font-size:12px}
+.pulse ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:13.5px;color:var(--ink2);line-height:1.5;max-width:110ch}
+.pulse b{color:var(--ink);font-weight:600}
+.news{display:grid;gap:2px}
+.news a{display:block;padding:7px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);font-weight:500;font-size:13px;line-height:1.4}
+.news a:hover{color:var(--accent)}
+.news .ns{display:block;font-size:11.5px;color:var(--muted);font-weight:400;margin-top:1px}
+.newsgrp summary{cursor:pointer;font-weight:600;font-size:13px;padding:6px 0}
 .swing{display:grid;gap:6px;font-size:13px}
 .swing div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding-bottom:5px}
 .swing span:last-child{font-family:var(--mono);white-space:nowrap}
@@ -227,6 +237,7 @@ input[type=checkbox]{accent-color:var(--accent);width:15px;height:15px;cursor:po
 </header>
 
 <main class="wrap">
+  <div id="pulse"></div>
   <div class="cats" id="cats"></div>
   <div class="head">
     <div><h2 id="title">All categories</h2><div class="sub" id="subtitle"></div><div class="catinfo" id="catinfo" hidden></div></div>
@@ -329,7 +340,7 @@ function fmt(v, t) {
 
 // ---------------- data
 let AMC_LINKS = {}, FL = null, FL_ERR = "";
-fetch("flows.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(j => { FL = j; if (D && S.asset === FLOWS) render(); }).catch(e => { FL_ERR = e.message; if (D && S.asset === FLOWS) render(); });
+fetch("flows.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(j => { FL = j; if (D) render(); }).catch(e => { FL_ERR = e.message; if (D && S.asset === FLOWS) render(); });
 fetch("amc_factsheets.json").then(r => r.ok ? r.json() : {}).then(j => { AMC_LINKS = j || {}; }).catch(() => {});
 fetch("data.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(init).catch(e => {
   $("#tablebox").innerHTML = `<div class="empty">The fund data did not load (${esc(e.message)}). Reload the page to try again.</div>`;
@@ -388,6 +399,7 @@ function render() {
   $("#views").innerHTML = Object.entries(VIEWS).map(([k, v]) => `<button type="button" role="tab" aria-selected="${k === S.view}" class="${k === S.view ? "on" : ""}" data-v="${k}">${v.label}</button>`).join("");
   $("#views").hidden = !S.cat; $("#minAge").value = S.minAge; $("#amc").value = S.amc;
   S.cat ? renderTable() : renderOverview();
+  renderPulse();
   renderTray(); renderCatAI(); renderCatInfo();
 }
 
@@ -546,6 +558,7 @@ function openFund(code) {
         <tr><td>Rank</td>${years.map(y => `<td class="rk">${rankOf(f, g => g.cal?.[y])}</td>`).join("")}</tr></tbody></table></div><div class="note">* year to date.</div></div>
       <div class="card"><h4>Fund facts <span class="h">AMFI disclosures</span></h4>${factRows.length ? `<table class="mini"><tbody>${factRows.map(([k, v]) => `<tr><td style="white-space:nowrap;vertical-align:top">${k}</td><td style="text-align:left;font-family:var(--sans);white-space:normal">${typeof v === "string" && !/<span/.test(v) ? esc(v) : v}</td></tr>`).join("")}</tbody></table>` : `<p class="note">AMFI has no summary document matched to this fund yet.</p>`}</div>
       ${managerCard(f)}
+      <div id="fundNews"></div>
       <div class="card"><h4>Documents <span class="h">official sources, always the latest version</span></h4>${(() => {
         const L = AMC_LINKS[f.amc] || {}, ln = [];
         ln.push(`<a href="${esc(L.factsheet || "https://www.amfiindia.com/online-center/download-factsheets")}" target="_blank" rel="noopener">Latest monthly factsheet ↗</a>`);
@@ -568,7 +581,8 @@ function openFund(code) {
   d.querySelector("#gp").addEventListener("click", e => { const b = e.target.closest("button[data-p]"); if (!b) return; d.querySelectorAll("#gp button").forEach(x => x.classList.toggle("on", x === b)); draw(b.dataset.p); });
   draw("5Y");
   barChart($("#cchart"), years, years.map(y => f.cal[y]), years.map(y => f.bcal?.[y]));
-  aiPanel($("#fundAI"), { title: short(f.name), context: () => fundContext(f), chips: ["Is this fund good enough to invest in?", "What are its main strengths and weaknesses?", "How risky is it compared with peers?", "Who is this fund suitable for?"] });
+  loadNews().then(() => fillFundNews(f));
+  aiPanel($("#fundAI"), { title: short(f.name), context: () => fundContext(f), chips: ["Summarise the last year's news on this AMC and manager: good or bad?", "Is this fund good enough to invest in?", "What are its main strengths and weaknesses?", "How risky is it compared with peers?", "Who is this fund suitable for?"] });
 }
 
 function openCompare() {
@@ -698,7 +712,28 @@ function openManager(key) {
    </div>`;
   openDrawer(html);
   const d = $("#drawer"); d.querySelector(".x").addEventListener("click", closeDrawer);
+  d.querySelector(".dbody").insertAdjacentHTML("beforeend", `<div class="card" id="mgrNews"><h4>News mentioning ${esc(name)} <span class="h">last 12 months</span></h4><p class="note">Loading…</p></div>`);
+  loadNews().then(() => { const el = $("#mgrNews"); if (el) el.innerHTML = `<h4>News mentioning ${esc(name)} <span class="h">last 12 months · ${esc(amc.replace(/ Mutual Fund$/i, ""))}</span></h4>` + newsList(NEWS?.mgr?.[key], `No headlines in the last 12 months mention ${name} with ${amc.replace(/ Mutual Fund$/i, "")}.`); });
   d.addEventListener("click", e => { const b = e.target.closest("button.fn[data-code]"); if (b) openFund(+b.dataset.code); });
+}
+
+// ---------------- news (weekly search of Google News for every AMC and every fund manager)
+let NEWS = null, NEWS_P = null;
+function loadNews() { return NEWS_P ||= fetch("news.json").then(r => r.ok ? r.json() : null).then(j => { NEWS = j; }).catch(() => {}); }
+function newsList(items, empty, n = 8) {
+  if (!NEWS) return `<p class="note">News is not available right now.</p>`;
+  if (!items?.length) return `<p class="note">${esc(empty)}</p>`;
+  const row = x => `<a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.t)}<span class="ns">${esc(x.s || "")} · ${new Date(x.d + "T00:00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}</span></a>`;
+  return `<div class="news">${items.slice(0, n).map(row).join("")}</div>` + (items.length > n ? `<details class="newsgrp"><summary>${items.length - n} more</summary><div class="news">${items.slice(n).map(row).join("")}</div></details>` : "");
+}
+function fillFundNews(f) {
+  const el = $("#fundNews"); if (!el) return;
+  const amcS = f.amc.replace(/ Mutual Fund$/i, "");
+  const mg = (f.mgr || []).map(m => `<details class="newsgrp"><summary>${esc(m.n)} · ${(NEWS?.mgr?.[mgrKey(m.n, f.amc)] || []).length} headlines</summary>${newsList(NEWS?.mgr?.[mgrKey(m.n, f.amc)], `No headlines mention ${m.n} in the last 12 months.`, 6)}</details>`).join("");
+  el.innerHTML = `<div class="card"><h4>News, last 12 months <span class="h">${NEWS?.asOf ? "searched " + esc(NEWS.asOf) + " · " : ""}headlines link to the original article</span></h4>
+    <div style="font-weight:600;font-size:13px;margin-bottom:2px">${esc(amcS)} (fund house)</div>${newsList(NEWS?.amc?.[f.amc], `No headlines found for ${f.amc}.`, 6)}
+    ${mg ? `<div style="font-weight:600;font-size:13px;margin:12px 0 2px">Fund managers</div>${mg}` : ""}
+    <p class="note" style="margin:8px 0 0">Found by searching Google News for the fund house and each manager's name, refreshed weekly. Not filtered for tone; ask the AI below to judge good vs bad news.</p></div>`;
 }
 
 // ---------------- Ask AI (Claude, on the viewer's own account; only inside the Claude-hosted page)
@@ -710,7 +745,7 @@ else SAMPLE_READY = true;
 
 const RULES = `You are a mutual fund analyst helping an Indian investor understand funds in a screener app called Fund Lens India.
 Rules:
-- Base every claim on the DATA block below; quote specific numbers (returns, ranks, ratios, TER). Do not invent holdings, news or numbers that are not given.
+- Base every claim on the DATA block below; quote specific numbers (returns, ranks, ratios, TER). Do not invent holdings, news or numbers that are not given. Headlines, when given, are search results: judge each as positive, negative or neutral for an investor only from what the headline says, and say that you have not read the articles.
 - Be balanced and direct: say what is strong, what is weak, and the main risks. If the data shows the fund is mediocre, say so plainly.
 - Compare against the category median and the benchmark, not against funds in other categories.
 - Explain jargon in a few words the first time (e.g. "downside capture 80%: fell 20% less than the index in falling months").
@@ -738,6 +773,8 @@ function fundContext(f) {
   L.push(`Cost & size: TER Direct ${I.terD != null ? I.terD + "%" : "n/a"} base (${I.terDt != null ? I.terDt + "%" : "n/a"} incl. costs; peer median ${n2(median(ps.map(g => g.info?.terD)))}%), TER Regular ${I.terR != null ? I.terR + "%" : "n/a"}. AUM ${I.aum != null ? "Rs " + Math.round(I.aum) + " crore" : "n/a"}. Fund manager(s): ${I.fm || "n/a"}; managing since: ${I.fmSince || "n/a"}. Riskometer: ${I.risk || "n/a"}. Exit load: ${I.exitLoad || "n/a"}.`);
   if (f.mgr?.length) L.push("Manager track record on this fund since each took over (fund vs benchmark vs category, annualised if tenure 1y+): " + f.mgr.map(m => m.since ? `${m.n} since ${m.since} (${m.yrs}y): ${p1(m.f)} vs ${p1(m.b)} vs ${p1(m.c)}` : `${m.n}: start date not disclosed`).join("; "));
   L.push(`Risk-free rate used for Sharpe: 6%. Data as of ${D.asOf}.`);
+  if (NEWS) { const a = NEWS.amc?.[f.amc] || []; if (a.length) L.push(`Recent headlines about ${f.amc} (last 12 months, newest first): ` + a.slice(0, 12).map(n => `[${n.d}] ${n.t} (${n.s})`).join(" | "));
+    (f.mgr || []).forEach(m => { const h = NEWS.mgr?.[mgrKey(m.n, f.amc)] || []; if (h.length) L.push(`Recent headlines mentioning ${m.n}: ` + h.slice(0, 6).map(n => `[${n.d}] ${n.t} (${n.s})`).join(" | ")); }); }
   return L.join("\n");
 }
 function compareContext(fs) { return fs.map((f, i) => `--- Fund ${i + 1} ---\n` + fundContext(f)).join("\n\n"); }
@@ -818,6 +855,42 @@ function renderCatAI() {
   aiPanel(el, { title: what, context: categoryContext, chips: S.cat ?
     ["Which 3 funds here look strongest overall, and why?", "Which funds look weak or risky?", "Which fund suits a 5-year SIP with moderate risk?", "What matters most when picking in this category?"] :
     ["Which sub-categories suit a 1–3 year goal?", "How do these sub-categories differ in risk?", "Where should a first-time investor start?"] });
+}
+
+// ---------------- market pulse (explains what happened; does not predict)
+function benchRet(label, k) { const f = F.find(g => g.bm === label && g.br?.[k] != null); return f ? f.br[k] : null; }
+function catMed(asset, cat, get) { return median(F.filter(f => f.asset === asset && f.cat === cat).map(get)); }
+const sp = v => v == null ? "n/a" : (v >= 0 ? "+" : "−") + Math.abs(v * 100).toFixed(1) + "%";
+function pulseLines() {
+  const L = [];
+  const n50 = { m: benchRet("Nifty 50 TRI", "1M"), q: benchRet("Nifty 50 TRI", "3M"), y: benchRet("Nifty 50 TRI", "1Y") };
+  const mid = benchRet("Nifty Midcap 150 TRI", "1M"), sml = benchRet("Nifty Smallcap 250 TRI", "1M");
+  if (n50.m != null) L.push(`<b>Large caps:</b> Nifty 50 (total return) moved ${sp(n50.m)} in the past month, ${sp(n50.q)} over 3 months and ${sp(n50.y)} over a year.`);
+  if (mid != null && sml != null && n50.m != null) { const lag = Math.min(mid, sml) < n50.m;
+    L.push(`<b>Mid and small caps:</b> Midcap 150 ${sp(mid)} and Smallcap 250 ${sp(sml)} over the month — ${lag ? "falling harder than large caps, the usual pattern when risk appetite cools" : "outpacing large caps, a sign investors are still taking risk"}.`); }
+  const n50f = F.filter(f => f.asset === "Index Funds & ETFs" && f.theme === "Nifty 50" && f.curDD != null);
+  const dd = median(n50f.map(f => f.curDD)); if (dd != null) L.push(`<b>Distance from peak:</b> Nifty 50 index funds sit ${Math.abs(dd * 100).toFixed(1)}% below their all-time high${dd > -0.03 ? ", close to record levels" : dd < -0.1 ? " — a correction, not a crash, by historical standards" : ""}.`);
+  const sectors = Object.keys(D.bench).filter(k => / TRI$/.test(k) && !/Nifty (50|100|500|Midcap|Smallcap|LargeMidcap|Total|500 Multicap)/.test(k)).map(k => [k.replace(/^Nifty (India )?/, "").replace(/ TRI$/, ""), benchRet(k, "1M")]).filter(x => x[1] != null).sort((a, b) => b[1] - a[1]);
+  if (sectors.length > 3) L.push(`<b>Sectors (1M):</b> strongest ${sectors.slice(0, 2).map(x => `${x[0]} ${sp(x[1])}`).join(", ")}; weakest ${sectors.slice(-2).reverse().map(x => `${x[0]} ${sp(x[1])}`).join(", ")}.`);
+  const eqc = (CAT_ORDER.Equity || []).map(c => [c, catMed("Equity", c, f => f.r?.["1Y"])]).filter(x => x[1] != null).sort((a, b) => b[1] - a[1]);
+  const beat = F.filter(f => f.asset === "Equity" && f.r?.["1Y"] != null && f.br?.["1Y"] != null && / TRI$/.test(f.bm)); const bp = beat.length ? beat.filter(f => f.r["1Y"] > f.br["1Y"]).length / beat.length : null;
+  if (eqc.length) L.push(`<b>Active equity (1Y median):</b> best ${eqc[0][0]} ${sp(eqc[0][1])}, weakest ${eqc.at(-1)[0]} ${sp(eqc.at(-1)[1])}${bp != null ? `; ${Math.round(bp * 100)}% of active equity funds beat their index over the year` : ""}.`);
+  const gilt = catMed("Debt", "Gilt", f => f.r?.["3M"]), liq = catMed("Debt", "Liquid", f => f.r?.["3M"]), lng = catMed("Debt", "Long Duration", f => f.r?.["3M"]);
+  if (gilt != null && liq != null) L.push(`<b>Debt (3M):</b> Gilt funds ${sp(gilt)}${lng != null ? `, long duration ${sp(lng)}` : ""} vs liquid ${sp(liq)} — ${Math.max(gilt, lng ?? gilt) > liq ? "longer bonds are earning more than cash, so yields have eased or held" : "longer bonds trailing cash means yields have risen; duration has hurt"}.`);
+  const gold = catMed("Index Funds & ETFs", "Gold ETF", f => f.r?.["1M"]), gold1 = catMed("Index Funds & ETFs", "Gold ETF", f => f.r?.["1Y"]);
+  if (gold != null) L.push(`<b>Gold:</b> gold ETFs ${sp(gold)} over the month and ${sp(gold1)} over a year${n50.y != null && gold1 > n50.y ? ", ahead of Indian equities" : ""}.`);
+  if (FL) { const ms = FL.months, M = ms.at(-1), P = ms.at(-2), eq = FL.groups.Equity?.[M]?.net, eqP = FL.groups.Equity?.[P]?.net;
+    const sk = Object.keys(FL.sip), s0 = FL.sip[sk.at(-1)], s1 = FL.sip[sk.at(-2)], rec = s0 && Math.max(...sk.map(k => FL.sip[k].contribution_cr)) === s0.contribution_cr;
+    if (eq != null) L.push(`<b>Flows (${lab(M)}):</b> equity funds took in ₹${Math.round(eq).toLocaleString("en-IN")} cr vs ₹${Math.round(eqP).toLocaleString("en-IN")} cr the month before${s0 ? `; SIPs brought ₹${Math.round(s0.contribution_cr).toLocaleString("en-IN")} cr${rec ? ", the highest in the data" : s1 && s0.contribution_cr < s1.contribution_cr ? ", slightly down" : ""}` : ""}.`);
+    const top = FL.categories.filter(c => c.m[M]?.net != null).sort((a, b) => b.m[M].net - a.m[M].net);
+    if (top.length > 3) L.push(`<b>Where money went:</b> most into ${top.slice(0, 3).map(c => `${c.cat} (₹${Math.round(c.m[M].net).toLocaleString("en-IN")} cr)`).join(", ")}; most out of ${top.slice(-2).reverse().map(c => `${c.cat} (−₹${Math.round(Math.abs(c.m[M].net)).toLocaleString("en-IN")} cr)`).join(", ")}.`); }
+  return L.slice(0, 10);
+}
+function renderPulse() {
+  const el = $("#pulse"); if (S.cat || S.asset === FLOWS) { el.innerHTML = ""; return; }
+  const lines = pulseLines(); if (!lines.length) { el.innerHTML = ""; return; }
+  el.innerHTML = `<div class="pulse"><h4>Market pulse <span class="h">auto-generated from today's data · NAV ${new Date(D.asOf + "T00:00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short" })}${FL ? ` · flows ${lab(FL.months.at(-1))}` : ""}</span></h4><ul>${lines.map(l => `<li>${l}</li>`).join("")}</ul>
+    <p class="note" style="margin:8px 0 0">This explains what has happened, not what will happen next. Returns are total-return index or category medians.</p></div>`;
 }
 
 // ---------------- money flows
