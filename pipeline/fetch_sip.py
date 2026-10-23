@@ -17,10 +17,10 @@ for url in links[:8]:
         text = "\n".join(p.extract_text() or "" for p in pdf.pages)
     except Exception as e:  # noqa: BLE001
         print("skip", url, e); continue
-    head = re.search(r"Contribution\s+((?:[A-Z][a-z]{2}-\d{2}\s*){4,})", text)
+    head = re.search(r"Contribution\s+((?:[A-Z][a-z]{2}(?:-\d{2}|\s\d{4})\s*){4,})", text)
     if not head:
         continue
-    months = re.findall(r"[A-Z][a-z]{2}-\d{2}", head.group(1))
+    months = [m if "-" in m else f"{m[:3]}-{m[-2:]}" for m in re.findall(r"[A-Z][a-z]{2}(?:-\d{2}|\s\d{4})", head.group(1))]
     for key, rx in ROWS.items():
         m = re.search(rx + r"[^\n]*?((?:\s+[\d,]+(?:\.\d+)?){%d})\s*$" % len(months), text, re.M)
         if not m:
