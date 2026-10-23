@@ -54,8 +54,26 @@ def canon(section, name):
     return g, name
 
 
+class Sheet:
+    """xlrd-style access for both old .xls (BIFF) and the .xlsx files AMFI serves under an .xls name for some months."""
+    def __init__(self, path):
+        try:
+            sh = xlrd.open_workbook(path).sheet_by_index(0)
+            self.rows = [[sh.cell_value(r, c) for c in range(sh.ncols)] for r in range(sh.nrows)]
+        except xlrd.biffh.XLRDError:
+            import openpyxl
+            import io
+            ws = openpyxl.load_workbook(io.BytesIO(open(path, "rb").read()), read_only=True, data_only=True).worksheets[0]
+            self.rows = [["" if v is None else v for v in row] for row in ws.iter_rows(values_only=True)]
+        self.nrows = len(self.rows)
+
+    def cell_value(self, r, c):
+        row = self.rows[r]
+        return row[c] if c < len(row) else ""
+
+
 def parse_report(path):
-    s = xlrd.open_workbook(path).sheet_by_index(0)
+    s = Sheet(path)
     section, closed, agg, totals, info = None, False, {}, {}, []
     for r in range(s.nrows):
         sr, name = str(s.cell_value(r, 0)).strip(), re.sub(r"\s+", " ", str(s.cell_value(r, 1))).strip()
@@ -74,7 +92,8 @@ def parse_report(path):
         if re.match(r"^[IVX]+$", sr):
             section = name
             continue
-        if re.match(r"^[ivx]+$", sr) and section:
+        # AMFI's serial column is occasionally wrong (Aug 2025 has "Equity Savings Fund" as Credit Risk's serial), so key on the name and numbers
+        if section and name and not re.match(r"(sub ?total|total)", name, re.I):
             vals = [num(s.cell_value(r, c)) for c in range(2, 9)]
             if vals[4] is None:
                 continue
