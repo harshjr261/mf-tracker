@@ -1,0 +1,20 @@
+name: Check AMC factsheet links
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "30 3 1 * *"   # 1st of every month, 09:00 IST
+permissions:
+  contents: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: { python-version: "3.12" }
+      - run: pip install requests==2.32.3
+      - run: python pipeline/check_links.py
+      - run: |
+          git config user.name "fund-lens-bot"; git config user.email "actions@users.noreply.github.com"
+          git add raw/link_check.json
+          git diff --cached --quiet || (git commit -m "Factsheet link check $(date -u +%Y-%m-%d)" && git pull --rebase -q && git push)
