@@ -1,0 +1,62 @@
+{
+"Dec-25": {
+"accounts_cr": 9.79,
+"contribution_cr": 31002.0,
+"aum_lakh_cr": 16.63,
+"share_pct": 20.7
+},
+"Jan-26": {
+"accounts_cr": 9.92,
+"contribution_cr": 31002.0,
+"aum_lakh_cr": 16.36,
+"share_pct": 20.2
+},
+"Feb-26": {
+"accounts_cr": 9.44,
+"contribution_cr": 29845.0,
+"aum_lakh_cr": 16.64,
+"share_pct": 20.3
+},
+"Mar-26": {
+"accounts_cr": 9.72,
+"contribution_cr": 32087.0,
+"aum_lakh_cr": 15.11,
+"share_pct": 20.5
+},
+"Apr-26": {
+"accounts_cr": 9.65,
+"contribution_cr": 31115.0,
+"aum_lakh_cr": 16.85,
+"share_pct": 20.6
+},
+"May-26": {
+"accounts_cr": 9.64,
+"contribution_cr": 30954.0,
+"aum_lakh_cr": 17.12,
+"share_pct": 21.0
+},
+"Jun-26": {
+"accounts_cr": 9.78,
+"contribution_cr": 31781.0,
+"aum_lakh_cr": 17.7,
+"share_pct": 21.5
+},
+"Jul-26": {
+"accounts_cr": 9.9,
+"contribution_cr": 31961.0,
+"aum_lakh_cr": 18.2,
+"share_pct": 21.2
+},
+"Aug-26": {
+"accounts_cr": 10.02,
+"contribution_cr": 32297.0,
+"aum_lakh_cr": 18.62,
+"share_pct": 21.4
+},
+"Sep-26": {
+"accounts_cr": 10.06,
+"contribution_cr": 32490.0,
+"aum_lakh_cr": 17.86,
+"share_pct": 21.6
+}
+}
