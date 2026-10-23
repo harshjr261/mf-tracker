@@ -187,7 +187,7 @@ td.q1{background:var(--q1)} td.q2{background:var(--q2)} td.q3{background:var(--q
 .ai .off{font-size:13px;color:var(--ink2)}
 .ai .disc{font-size:11.5px;color:var(--muted)}
 /* money flows */
-main.fl #pulse,main.fl #cats,main.fl .head,main.fl #controls,main.fl #tablebox,main.fl #catAI,main.fl #guide{display:none}
+main.fl #pulse,main.fl #cats,main.fl .head,main.fl #controls,main.fl #tablebox,main.fl #catAI,main.fl #catFlows,main.fl #guide{display:none}
 #flowsView{display:grid;gap:14px;min-width:0}
 .fh h2{margin:0;font-size:20px;font-weight:600}
 .fh .sub{color:var(--muted);font-size:13px;margin-top:2px}
@@ -252,6 +252,7 @@ input[type=checkbox]{accent-color:var(--accent);width:15px;height:15px;cursor:po
     <label class="ctl">Filter <input id="f" type="search" placeholder="Name contains…" autocomplete="off"></label>
   </div>
   <div class="tablebox" id="tablebox"></div>
+  <div id="catFlows"></div>
   <div id="catAI"></div>
   <section id="flowsView" hidden></section>
   <details class="guide" open id="guide">
@@ -400,7 +401,7 @@ function render() {
   $("#views").hidden = !S.cat; $("#minAge").value = S.minAge; $("#amc").value = S.amc;
   S.cat ? renderTable() : renderOverview();
   renderPulse();
-  renderTray(); renderCatAI(); renderCatInfo();
+  renderTray(); renderCatAI(); renderCatInfo(); renderCatFlows();
 }
 
 function renderOverview() {
@@ -934,11 +935,11 @@ function renderFlows() {
   ].filter(Boolean);
   // category rows
   const cats = FL.categories.filter(c => !FS.grp || c.group === FS.grp).map(c => {
-    const net = c.m[L]?.net, prev = c.m[P]?.net, aum = c.m[L]?.aum, aumP = c.m[P]?.aum, aum12 = c.m[ms[0]]?.aum;
+    const net = c.m[L]?.net, prev = c.m[P]?.net, aum = c.m[L]?.aum, aumP = c.m[P]?.aum, aum12 = c.m[ms.at(-13) || ms[0]]?.aum;
     const k3 = ms.slice(-3).map(k => c.m[k]?.net).filter(v => v != null);
     return { ...c, net, prev, d: net != null && prev != null ? net - prev : null, avg3: k3.length ? k3.reduce((a, b) => a + b, 0) / k3.length : null,
       t12: last12.reduce((a, k) => a + (c.m[k]?.net || 0), 0), aum, aumM: chg(aum, aumP), share: aum / ind[L].aum,
-      shareD: aum12 != null && ind[ms[0]] ? aum / ind[L].aum - aum12 / ind[ms[0]].aum : null, folios: c.m[L]?.folios };
+      shareD: aum12 != null && ind[ms.at(-13) || ms[0]] ? aum / ind[L].aum - aum12 / ind[ms.at(-13) || ms[0]].aum : null, folios: c.m[L]?.folios };
   });
   const sorters = { net: r => r.net, d: r => r.d, avg3: r => r.avg3, t12: r => r.t12, aum: r => r.aum, aumM: r => r.aumM, shareD: r => r.shareD };
   cats.sort((a, b) => (sorters[FS.sort](b) ?? -Infinity) - (sorters[FS.sort](a) ?? -Infinity));
@@ -976,7 +977,7 @@ function renderFlows() {
   <div class="card"><h4>Sub-category flows, ${lab(L)} <span class="h">tap a column to sort</span></h4>
     <div class="seg" id="flGrp" style="margin-bottom:10px;flex-wrap:wrap">${["", ...GORDER].map(g => `<button type="button" class="${FS.grp === g ? "on" : ""}" data-g="${esc(g)}">${g || "All"}</button>`).join("")}</div>
     <div class="scroll" style="max-height:560px"><table class="mini flow" id="flCats"><thead><tr><th>Sub-category</th>${th("net", "Net flow")}<th>Prev. month</th>${th("d", "Change")}${th("avg3", "3M avg")}${th("t12", "12M total")}${th("aum", "AUM")}${th("aumM", "AUM MoM")}<th>Share of AUM</th>${th("shareD", "Share Δ 12M")}<th>Folios</th></tr></thead><tbody>
-    ${cats.map(r => `<tr><td>${esc(r.cat)}${FS.grp ? "" : ` <span class="na">· ${esc(r.group)}</span>`}</td><td style="${heat(r.net, maxNet)}">${crs(r.net)}</td><td>${crs(r.prev)}</td><td>${crs(r.d)}</td><td>${crs(r.avg3)}</td><td>${crs(r.t12)}</td><td>${crs(r.aum)}</td>
+    ${cats.map(r => `<tr><td><button type="button" class="fn" data-fc="${esc(r.group + "|" + r.cat)}" style="background:none;border:0;padding:0;cursor:pointer;color:var(--accent);font-weight:600;text-align:left">${esc(r.cat)}</button>${FS.grp ? "" : ` <span class="na">· ${esc(r.group)}</span>`}</td><td style="${heat(r.net, maxNet)}">${crs(r.net)}</td><td>${crs(r.prev)}</td><td>${crs(r.d)}</td><td>${crs(r.avg3)}</td><td>${crs(r.t12)}</td><td>${crs(r.aum)}</td>
       <td class="${r.aumM < 0 ? "neg" : ""}">${sgnp(r.aumM)}</td><td>${r.share ? (r.share * 100).toFixed(2) + "%" : "–"}</td><td class="${r.shareD < 0 ? "neg" : ""}">${r.shareD == null ? "–" : (r.shareD >= 0 ? "+" : "−") + Math.abs(r.shareD * 100).toFixed(2) + " pp"}</td><td>${r.folios ? Math.round(r.folios).toLocaleString("en-IN") : "–"}</td></tr>`).join("")}
     </tbody></table></div>
     <p class="note">AUM change mixes new money with market moves; net flow is new money only. From Aug 2026 AMFI reports SEBI's revised categories; rows that were split (Value vs Contra, Sectoral vs Thematic, index and ETF sub-types) are added back together so the 13-month history stays comparable. Debt Sectoral, Life Cycle and Silver ETF exist only from Aug 2026.</p></div>
@@ -991,10 +992,87 @@ function renderFlows() {
   vbars($("#sipChart"), sipK, sipVals, "var(--s1)");
   vbars($("#eqChart"), last12, last12.map(k => gNet("Equity", k)), "var(--s3)");
   $("#flGrp").onclick = e => { const b = e.target.closest("[data-g]"); if (!b) return; FS.grp = b.dataset.g; store.set("flgrp", FS.grp); renderFlows(); };
-  $("#flCats").onclick = e => { const b = e.target.closest("[data-fs]"); if (!b) return; FS.sort = b.dataset.fs; renderFlows(); };
+  $("#flCats").onclick = e => { const c = e.target.closest("[data-fc]"); if (c) { openCatFlows(c.dataset.fc); return; } const b = e.target.closest("[data-fs]"); if (!b) return; FS.sort = b.dataset.fs; renderFlows(); };
   const af = $("#amcF"); if (af) { const run = () => { FS.amcQ = af.value; const t = af.value.trim().toLowerCase(); el.querySelectorAll("#amcT tbody tr").forEach(tr => tr.hidden = t && !tr.dataset.amc.includes(t)); }; af.oninput = run; run(); }
   const ai = $("#flAI"); if (ai && ai.dataset.k !== L) { ai.dataset.k = L;
     aiPanel(ai, { title: "money flows", context: flowsContext, chips: ["What do this month's flows say about investor mood?", "Which categories are gaining or losing favour, and why might that be?", "Is SIP money still growing? What should I read into it?", "Which fund houses are gaining market share?"] }); }
+}
+
+// ---------------- sub-category flow history, as % of opening AUM
+const APP2FLOW = { "Equity|Value": "Equity|Value / Contra", "Equity|Contra": "Equity|Value / Contra",
+  "Hybrid|Balanced Hybrid": "Hybrid|Aggressive / Balanced Hybrid", "Hybrid|Aggressive Hybrid": "Hybrid|Aggressive / Balanced Hybrid",
+  "Index Funds & ETFs|Equity Index Fund": "Passive & FoF|Index Funds", "Index Funds & ETFs|Debt Index Fund": "Passive & FoF|Index Funds",
+  "Index Funds & ETFs|Equity ETF": "Passive & FoF|Other ETFs", "Index Funds & ETFs|Debt ETF": "Passive & FoF|Other ETFs",
+  "Index Funds & ETFs|Gold ETF": "Passive & FoF|Gold ETF", "Index Funds & ETFs|Silver ETF": "Passive & FoF|Silver ETF",
+  "Fund of Funds|FoF Overseas": "Passive & FoF|FoF Overseas", "Fund of Funds|FoF Domestic": "Passive & FoF|FoF Domestic" };
+const MERGED = { "Value / Contra": "AMFI reported Value and Contra funds as one line until Jul 2026, so this is the combined Value + Contra pool.",
+  "Aggressive / Balanced Hybrid": "AMFI reported Aggressive and Balanced Hybrid as one line until Jul 2026, so this is the combined pool.",
+  "Index Funds": "AMFI reported all index funds (equity, debt, hybrid) as one line until Jul 2026, so this is the whole index-fund pool.",
+  "Other ETFs": "AMFI reported all ETFs except gold as one line until Jul 2026 (equity, debt, silver, others), so this is that whole pool.",
+  "Silver ETF": "AMFI shows Silver ETFs separately only from Aug 2026; before that they sit inside Other ETFs.",
+  "FoF Domestic": "AMFI lists domestic Fund of Funds below the main table, for information; their money is also counted in the funds they invest in." };
+function flowKey(asset, cat) { const k = asset + "|" + cat; if (APP2FLOW[k]) return APP2FLOW[k];
+  const g = { Equity: "Equity", Debt: "Debt", Hybrid: "Hybrid", "Solution Oriented": "Solution Oriented" }[asset]; return g ? g + "|" + cat : null; }
+function catFlowRows(key) {
+  const c = FL?.categories.find(x => x.group + "|" + x.cat === key); if (!c) return null;
+  const ms = FL.months, out = [];
+  for (let i = 1; i < ms.length; i++) { const a = c.m[ms[i - 1]], b = c.m[ms[i]]; if (!a || !b || !a.aum) continue;
+    const o = a.aum, chgA = b.aum / o - 1, net = b.net / o;
+    out.push({ k: ms[i], inf: b.inflow / o, red: b.outflow / o, net, chg: chgA, mkt: chgA - net, folio: a.folios ? b.folios / a.folios - 1 : null }); }
+  return { c, rows: out.slice(-18) };
+}
+const pp = (v, d = 2) => v == null || !isFinite(v) ? '<span class="na">–</span>' : `<span class="${v < 0 ? "neg" : ""}">${v < 0 ? "−" : v > 0 ? "+" : ""}${Math.abs(v * 100).toFixed(d)}%</span>`;
+function catFlowHTML(key, title) {
+  const d = catFlowRows(key); if (!d || !d.rows.length) return "";
+  const R = d.rows, n = R.length, cat = d.c.cat;
+  const first = d.c.m[FL.months[FL.months.indexOf(R[0].k) - 1]]?.aum, totNet = R.reduce((a, r) => a + d.c.m[r.k].net, 0);
+  const avg = f => R.reduce((a, r) => a + f(r), 0) / n, outM = R.filter(r => r.net < 0).length;
+  const growth = d.c.m[R.at(-1).k].aum / first - 1, newMoney = totNet / first;
+  return `<div class="card"><h4>${esc(title || cat)}: money in and out, last ${n} months <span class="h">% of the sub-category's AUM at the start of each month · AMFI</span></h4>
+    <div class="facts" style="margin-bottom:12px">
+      <div><div class="k">Net new money, ${n}M</div><div class="v">${pp(newMoney, 1)}</div><div class="note">of AUM ${n} months ago</div></div>
+      <div><div class="k">AUM growth, ${n}M</div><div class="v">${pp(growth, 1)}</div><div class="note">${pp(growth - newMoney, 1)} from markets & compounding</div></div>
+      <div><div class="k">Avg monthly inflow</div><div class="v">${pp(avg(r => r.inf))}</div></div>
+      <div><div class="k">Avg monthly redemption</div><div class="v">${pp(-avg(r => r.red))}</div></div>
+      <div><div class="k">Months with net outflow</div><div class="v">${outM} of ${n}</div></div></div>
+    <div class="key"><span><i class="box" style="background:var(--s1)"></i>Inflow</span><span><i class="box" style="background:var(--neg);opacity:.75"></i>Redemption</span><span><i style="background:var(--ink)"></i>Net flow</span></div>
+    <div class="chart cfchart"></div>
+    <div class="scroll" style="margin-top:10px"><table class="mini flow"><thead><tr><th>Month</th><th>Inflow</th><th>Redemption</th><th>Net flow</th><th>Market move</th><th>AUM change</th><th>Folios change</th></tr></thead><tbody>
+    ${R.slice().reverse().map(r => `<tr><td>${lab(r.k)}</td><td>${pp(r.inf)}</td><td>${pp(-r.red)}</td><td style="${heat(r.net, Math.max(...R.map(x => Math.abs(x.net))))}"><b>${pp(r.net)}</b></td><td>${pp(r.mkt)}</td><td>${pp(r.chg)}</td><td>${pp(r.folio)}</td></tr>`).join("")}
+    </tbody></table></div>
+    <p class="note" style="margin:8px 0 0">Inflow = money invested (incl. SIPs, switches in, NFOs); redemption = money taken out (incl. switches out); net = the difference. Market move = AUM change minus net flow, i.e. price movement. ${MERGED[cat] ? esc(MERGED[cat]) : ""}</p></div>`;
+}
+function drawCatFlow(root, key) {
+  const el = root.querySelector(".cfchart"); const d = catFlowRows(key); if (!el || !d) return;
+  const R = d.rows, sm = el.clientWidth && el.clientWidth < 520, W = sm ? 440 : 760, H = 240, P = { l: 44, r: 6, t: 10, b: 24 };
+  const ticks = niceTicks(Math.min(0, ...R.map(r => -r.red)), Math.max(0, ...R.map(r => r.inf)), 5), lo = ticks[0], hi = ticks.at(-1);
+  const y = v => P.t + (1 - (v - lo) / (hi - lo)) * (H - P.t - P.b), gw = (W - P.l - P.r) / R.length, bw = Math.min(26, gw * .6), cx = i => P.l + gw * i + gw / 2;
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Monthly inflow, redemption and net flow as % of AUM">
+    <g class="grid">${ticks.map(t => `<line x1="${P.l}" x2="${W - P.r}" y1="${y(t)}" y2="${y(t)}"/>`).join("")}</g>
+    <g class="axis">${ticks.map(t => `<text x="${P.l - 6}" y="${y(t) + 3.5}" text-anchor="end">${+(t * 100).toFixed(1)}%</text>`).join("")}
+      ${R.map((r, i) => (sm && i % 2) ? "" : `<text x="${cx(i)}" y="${H - 6}" text-anchor="middle">${MON[+r.k.slice(5) - 1]}${i === 0 || r.k.endsWith("-01") ? " ’" + r.k.slice(2, 4) : ""}</text>`).join("")}</g>
+    ${R.map((r, i) => `<rect x="${cx(i) - bw / 2}" y="${y(r.inf)}" width="${bw}" height="${Math.max(1, y(0) - y(r.inf))}" rx="2" fill="var(--s1)"/><rect x="${cx(i) - bw / 2}" y="${y(0)}" width="${bw}" height="${Math.max(1, y(-r.red) - y(0))}" rx="2" fill="var(--neg)" fill-opacity=".75"/>`).join("")}
+    <line class="base" x1="${P.l}" x2="${W - P.r}" y1="${y(0)}" y2="${y(0)}"/>
+    <path d="${R.map((r, i) => (i ? "L" : "M") + cx(i).toFixed(1) + " " + y(r.net).toFixed(1)).join("")}" fill="none" stroke="var(--ink)" stroke-width="2"/>
+    ${R.map((r, i) => `<circle cx="${cx(i)}" cy="${y(r.net)}" r="3.5" fill="var(--ink)" stroke="var(--surface)" stroke-width="1.5"/><rect x="${P.l + gw * i}" y="${P.t}" width="${gw}" height="${H - P.t - P.b}" fill="transparent" data-i="${i}"/>`).join("")}
+  </svg>`;
+  const tip = $("#tip");
+  el.querySelectorAll("rect[data-i]").forEach(b => { const r = R[+b.dataset.i];
+    const show = ev => { const pt = ev.touches ? ev.touches[0] : ev; tip.innerHTML = `<div class="t">${lab(r.k)}</div><div class="r"><span>Inflow</span><span>${(r.inf * 100).toFixed(2)}%</span></div><div class="r"><span>Redemption</span><span>−${(r.red * 100).toFixed(2)}%</span></div><div class="r"><span>Net flow</span><span>${(r.net * 100).toFixed(2)}%</span></div><div class="r"><span>Market move</span><span>${(r.mkt * 100).toFixed(2)}%</span></div>`;
+      tip.hidden = false; tip.style.left = Math.min(window.innerWidth - tip.offsetWidth - 8, pt.clientX + 14) + "px"; tip.style.top = (pt.clientY + 14) + "px"; };
+    b.addEventListener("mousemove", show); b.addEventListener("touchstart", show, { passive: true }); b.addEventListener("mouseleave", () => tip.hidden = true); });
+}
+function renderCatFlows() {
+  const el = $("#catFlows"); if (!el) return;
+  const key = S.cat && S.asset !== FLOWS ? flowKey(S.asset, S.cat) : null;
+  if (!key || !FL) { el.innerHTML = ""; return; }
+  if (el.dataset.k === key && el.innerHTML) return; el.dataset.k = key;
+  el.innerHTML = catFlowHTML(key, S.cat); drawCatFlow(el, key);
+}
+function openCatFlows(key) {
+  const cat = key.split("|")[1];
+  openDrawer(`<div class="dhead"><div style="min-width:0"><h3>${esc(cat)}</h3><div class="meta">${esc(key.split("|")[0])} · industry money flows</div></div><button type="button" class="x" aria-label="Close">×</button></div><div class="dbody">${catFlowHTML(key) || '<p class="note">Not enough history for this sub-category yet.</p>'}</div>`);
+  const d = $("#drawer"); d.querySelector(".x").addEventListener("click", closeDrawer); drawCatFlow(d, key);
 }
 
 function vbars(el, keys, vals, color) {

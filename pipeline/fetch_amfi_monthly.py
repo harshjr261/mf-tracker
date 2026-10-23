@@ -1,10 +1,10 @@
-"""Download AMFI's monthly industry reports (category-wise flows, AUM, folios) for the last 14 months.
+"""Download AMFI's monthly industry reports (category-wise flows, AUM, folios) for the last 20 months.
 Files: raw/amfi_monthly/am<mon><yyyy>repo.xls — only missing ones are fetched."""
 import datetime as dt, os, requests
 OUT = os.path.join(os.path.dirname(__file__), "..", "raw", "amfi_monthly"); os.makedirs(OUT, exist_ok=True)
 H = {"User-Agent": "Mozilla/5.0 (fund-lens monthly)", "Referer": "https://www.amfiindia.com/"}
 d = dt.date.today().replace(day=1); got = 0
-for _ in range(14):
+for _ in range(20):
     d = (d - dt.timedelta(days=1)).replace(day=1)
     name = f"am{d.strftime('%b').lower()}{d.year}repo.xls"; path = os.path.join(OUT, name)
     if os.path.exists(path) and os.path.getsize(path) > 10000: continue

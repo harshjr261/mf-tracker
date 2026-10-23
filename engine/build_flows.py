@@ -45,7 +45,7 @@ def canon(section, name):
         table = [("life cycle", "Life Cycle"), ("retire", "Retirement"), ("child", "Children's")]
     else:
         g = "Passive & FoF"
-        table = [("gold", "Gold ETF"), ("silver", "Silver ETF"), ("overseas", "FoF Overseas"), ("index", "Index Funds"), ("etf", "Other ETFs")]
+        table = [("gold", "Gold ETF"), ("silver", "Other ETFs"), ("overseas", "FoF Overseas"), ("index", "Index Funds"), ("etf", "Other ETFs")]
         if "index" in s:
             return g, "Index Funds"
     for k, v in table:
@@ -56,13 +56,18 @@ def canon(section, name):
 
 def parse_report(path):
     s = xlrd.open_workbook(path).sheet_by_index(0)
-    section, closed, agg, totals = None, False, {}, {}
+    section, closed, agg, totals, info = None, False, {}, {}, []
     for r in range(s.nrows):
         sr, name = str(s.cell_value(r, 0)).strip(), re.sub(r"\s+", " ", str(s.cell_value(r, 1))).strip()
         if sr == "B" or sr == "C":
             closed = True
         if name.lower().startswith("grand total"):
             totals["grand"] = [num(s.cell_value(r, c)) for c in range(2, 9)]
+            continue
+        if name.lower().startswith("fund of funds scheme (domestic)"):
+            vals = [num(s.cell_value(r, c)) for c in range(2, 9)]
+            if vals[4] is not None:  # shown by AMFI for information only, outside the grand total
+                info.append(dict(group="Passive & FoF", cat="FoF Domestic", info=True, **dict(zip(("schemes", "folios", "inflow", "outflow", "net", "aum", "aaum"), [v or 0 for v in vals]))))
             continue
         if closed:
             continue
@@ -74,10 +79,12 @@ def parse_report(path):
             if vals[4] is None:
                 continue
             g, label = canon(section, name)
+            if "silver" in name.lower():  # separate from Aug 2026 only; old layouts fold silver into Other ETFs
+                info.append(dict(group=g, cat="Silver ETF", info=True, **dict(zip(("schemes", "folios", "inflow", "outflow", "net", "aum", "aaum"), [v or 0 for v in vals]))))
             a = agg.setdefault((g, label), dict(group=g, cat=label, schemes=0, folios=0, inflow=0, outflow=0, net=0, aum=0, aaum=0))
             for k, v in zip(("schemes", "folios", "inflow", "outflow", "net", "aum", "aaum"), vals):
                 a[k] += v or 0
-    return list(agg.values()), totals
+    return list(agg.values()) + info, totals
 
 
 def main(src, out):
@@ -90,17 +97,17 @@ def main(src, out):
         if rows:
             months.append((dt.date(int(m.group(2)), MON.index(m.group(1)) + 1, 1), rows, totals))
     months.sort(key=lambda x: x[0])
-    months = months[-13:]
+    months = months[-19:]  # 18 months shown + 1 for the opening AUM of the first
     cats = {}
     for d, rows, _ in months:
         key = d.strftime("%Y-%m")
         for r in rows:
-            c = cats.setdefault(f"{r['group']}|{r['cat']}", {"group": r["group"], "cat": r["cat"], "m": {}})
+            c = cats.setdefault(f"{r['group']}|{r['cat']}", {"group": r["group"], "cat": r["cat"], "m": {}, **({"info": True} if r.get("info") else {})})
             c["m"][key] = {k: (round(r[k], 2) if r[k] is not None else None) for k in ("net", "aum", "folios", "schemes", "inflow", "outflow")}
     groups = {}
     for d, rows, totals in months:
         key = d.strftime("%Y-%m")
-        for r in rows:
+        for r in [x for x in rows if not x.get("info")]:
             g = groups.setdefault(r["group"], {}).setdefault(key, {"net": 0.0, "aum": 0.0, "folios": 0.0})
             g["net"] += r["net"] or 0; g["aum"] += r["aum"] or 0; g["folios"] += r["folios"] or 0
     industry = {d.strftime("%Y-%m"): {"net": round(t["grand"][4], 2), "aum": round(t["grand"][5], 2), "folios": t["grand"][1]}
