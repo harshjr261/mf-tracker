@@ -1,26 +1,53 @@
 {
- "360 ONE Mutual Fund": {
-  "url": "https://www.360.one/asset-management/mutualfund/downloads/factsheets",
-  "status": 404,
-  "final": "https://www.360.one/asset/mutual-funds/home/downloads/factsheets/",
+ "360 ONE Mutual Fund | factsheet": {
+  "url": "https://www.360.one/asset/mutual-funds/downloads/",
+  "status": 200,
+  "final": "https://www.360.one/asset/mutual-funds/downloads/",
   "title": "360 ONE Asset",
   "mentions": true,
-  "bytes": 91310
+  "bytes": 732361
  },
- "ASK MUTUAL FUND": {
-  "url": "https://www.askfinancials.com/mutual-fund",
+ "360 ONE Mutual Fund | portfolio": {
+  "url": "https://www.360.one/asset/mutual-funds/downloads/",
   "status": 200,
-  "final": "https://www.askfinancials.com/mutual-fund",
-  "title": "ASK Asset & Wealth Management Group",
+  "final": "https://www.360.one/asset/mutual-funds/downloads/",
+  "title": "360 ONE Asset",
+  "mentions": true,
+  "bytes": 732361
+ },
+ "ASK MUTUAL FUND | factsheet": {
+  "url": "https://www.askmutualfund.com/#/downloads",
+  "status": 200,
+  "final": "https://www.askmutualfund.com/#/downloads",
+  "title": "ASK Asset Management India",
   "mentions": false,
-  "bytes": 9427
+  "bytes": 5329
  },
- "Abakkus Mutual Fund": {
-  "url": "https://www.abakkusmf.com/downloads",
-  "status": null,
-  "error": "ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+ "ASK MUTUAL FUND | portfolio": {
+  "url": "https://www.askmutualfund.com/#/downloads",
+  "status": 200,
+  "final": "https://www.askmutualfund.com/#/downloads",
+  "title": "ASK Asset Management India",
+  "mentions": false,
+  "bytes": 5329
  },
- "Aditya Birla Sun Life Mutual Fund": {
+ "Abakkus Mutual Fund | factsheet": {
+  "url": "https://www.abakkusmf.com/factsheet.html",
+  "status": 200,
+  "final": "https://www.abakkusmf.com/factsheet.html",
+  "title": "Factsheet | Abakkus Mutual Fund",
+  "mentions": true,
+  "bytes": 45687
+ },
+ "Abakkus Mutual Fund | portfolio": {
+  "url": "https://www.abakkusmf.com/statutory-disclosures.html",
+  "status": 200,
+  "final": "https://www.abakkusmf.com/statutory-disclosures.html",
+  "title": "Statutory Disclosures | Abakkus Mutual Fund",
+  "mentions": false,
+  "bytes": 651901
+ },
+ "Aditya Birla Sun Life Mutual Fund | factsheet": {
   "url": "https://mutualfund.adityabirlacapital.com/forms-and-downloads/factsheets",
   "status": 200,
   "final": "https://mutualfund.adityabirlacapital.com/forms-and-downloads/factsheets",
@@ -28,15 +55,31 @@
   "mentions": true,
   "bytes": 276106
  },
- "AlphaGrep Mutual Fund": {
-  "url": "https://www.alphagrepmf.com/downloads",
+ "Aditya Birla Sun Life Mutual Fund | portfolio": {
+  "url": "https://mutualfund.adityabirlacapital.com/forms-and-downloads/portfolio",
   "status": 200,
-  "final": "https://www.alphagrepmf.com/downloads",
-  "title": "Domain",
-  "mentions": false,
-  "bytes": 7741
+  "final": "https://mutualfund.adityabirlacapital.com/forms-and-downloads/portfolio",
+  "title": "Portfolio - Aditya Birla Sun Life Mutual Fund",
+  "mentions": true,
+  "bytes": 269834
  },
- "Angel One Mutual Fund": {
+ "AlphaGrep Mutual Fund | factsheet": {
+  "url": "https://www.alphagrepmf.ai/disclosures",
+  "status": 200,
+  "final": "https://www.alphagrepmf.ai/disclosures",
+  "title": "",
+  "mentions": false,
+  "bytes": 59089
+ },
+ "AlphaGrep Mutual Fund | portfolio": {
+  "url": "https://www.alphagrepmf.ai/disclosures",
+  "status": 200,
+  "final": "https://www.alphagrepmf.ai/disclosures",
+  "title": "",
+  "mentions": false,
+  "bytes": 59089
+ },
+ "Angel One Mutual Fund | factsheet": {
   "url": "https://www.angelonemf.com/downloads",
   "status": 403,
   "final": "https://www.angelonemf.com/downloads",
@@ -44,23 +87,47 @@
   "mentions": false,
   "bytes": 520
  },
- "Axis Mutual Fund": {
+ "Angel One Mutual Fund | portfolio": {
+  "url": "https://www.angelonemf.com/downloads",
+  "status": 403,
+  "final": "https://www.angelonemf.com/downloads",
+  "title": "403 Forbidden",
+  "mentions": false,
+  "bytes": 520
+ },
+ "Axis Mutual Fund | factsheet": {
+  "url": "https://www.axismf.com/downloads",
+  "status": 200,
+  "final": "https://www.axismf.com/downloads",
+  "title": "Axis Mutual Fund Downloads | Fund Factsheets, Brochures &amp; More",
+  "mentions": true,
+  "bytes": 263350
+ },
+ "Axis Mutual Fund | portfolio": {
   "url": "https://www.axismf.com/statutory-disclosures",
   "status": 200,
   "final": "https://www.axismf.com/statutory-disclosures",
   "title": "Statutory Disclosures &amp; Policies | Axis MF",
   "mentions": false,
-  "bytes": 313518
+  "bytes": 313530
  },
- "Bajaj Finserv Mutual Fund": {
-  "url": "https://www.bajajamc.com/downloads",
+ "Bajaj Finserv Mutual Fund | factsheet": {
+  "url": "https://www.bajajamc.com/downloads?factsheet",
   "status": 403,
-  "final": "https://www.bajajamc.com/downloads",
+  "final": "https://www.bajajamc.com/downloads?factsheet",
   "title": "ERROR: The request could not be satisfied",
   "mentions": false,
   "bytes": 919
  },
- "Bandhan Mutual Fund": {
+ "Bajaj Finserv Mutual Fund | portfolio": {
+  "url": "https://www.bajajamc.com/downloads?statutory-disclosures=",
+  "status": 403,
+  "final": "https://www.bajajamc.com/downloads?statutory-disclosures=",
+  "title": "ERROR: The request could not be satisfied",
+  "mentions": false,
+  "bytes": 919
+ },
+ "Bandhan Mutual Fund | factsheet": {
   "url": "https://bandhanmutual.com/downloads/factsheets",
   "status": 200,
   "final": "https://bandhanmutual.com/downloads/factsheets",
@@ -68,92 +135,191 @@
   "mentions": false,
   "bytes": 3225
  },
- "Bank of India Mutual Fund": {
-  "url": "https://www.boimf.in/investor-corner/downloads/factsheets",
+ "Bandhan Mutual Fund | portfolio": {
+  "url": "https://bandhanmutual.com/downloads/disclosures",
   "status": 200,
-  "final": "https://www.boimf.in/error-404?initialRequestUrl=https%3a%2f%2fwww.boimf.in%2finvestor-corner%2fdownloads%2ffactsheets",
-  "title": "Error 404",
+  "final": "https://bandhanmutual.com/downloads/disclosures",
+  "title": "Bandhan Mutual Fund - Leading Online Mutual Fund Services in India",
   "mentions": false,
-  "bytes": 28164
+  "bytes": 3225
  },
- "Baroda BNP Paribas Mutual Fund": {
-  "url": "https://www.barodabnpparibasmf.in/downloads/factsheets",
+ "Bank of India Mutual Fund | factsheet": {
+  "url": "https://www.boimf.in/investor-corner#t1",
   "status": 200,
-  "final": "https://www.barodabnpparibasmf.in/downloads/factsheets",
-  "title": "Invest easily in Mutual Funds| Baroda BNP Paribas Mutual Fund",
+  "final": "https://www.boimf.in/investor-corner#t1",
+  "title": "Investor Corner| Bank of India Mutual Fund",
   "mentions": true,
-  "bytes": 86699
+  "bytes": 69135
  },
- "Canara Robeco Mutual Fund": {
-  "url": "https://www.canararobeco.com/documents/statutory-disclosures/factsheets",
+ "Bank of India Mutual Fund | portfolio": {
+  "url": "https://www.boimf.in/investor-corner#t2",
   "status": 200,
-  "final": "https://www.canararobeco.com/documents/statutory-disclosures/factsheets/",
+  "final": "https://www.boimf.in/investor-corner#t2",
+  "title": "Investor Corner| Bank of India Mutual Fund",
+  "mentions": true,
+  "bytes": 69135
+ },
+ "Baroda BNP Paribas Mutual Fund | factsheet": {
+  "url": "https://www.barodabnpparibasmf.in/downloads/monthly-factsheet",
+  "status": 200,
+  "final": "https://www.barodabnpparibasmf.in/downloads/monthly-factsheet",
+  "title": "Baroda BNP | Monthly Factsheet | MF India | SIP Investment",
+  "mentions": true,
+  "bytes": 135558
+ },
+ "Baroda BNP Paribas Mutual Fund | portfolio": {
+  "url": "https://www.barodabnpparibasmf.in/downloads/monthly-portfolio-scheme",
+  "status": 200,
+  "final": "https://www.barodabnpparibasmf.in/downloads/monthly-portfolio-scheme",
+  "title": "Baroda BNP | Monthly Portfolio of Scheme | MF India | SIP Investment",
+  "mentions": true,
+  "bytes": 115641
+ },
+ "Canara Robeco Mutual Fund | factsheet": {
+  "url": "https://www.canararobeco.com/documents/forms-downloads/forms-information-documents/information-documents/factsheets/",
+  "status": 200,
+  "final": "https://www.canararobeco.com/documents/forms-downloads/forms-information-documents/information-documents/factsheets/",
   "title": "Factsheets | Canara Robeco Mutual Fund",
   "mentions": true,
-  "bytes": 223224
+  "bytes": 223516
  },
- "Capitalmind Mutual Fund": {
-  "url": "https://capitalmindmf.com/downloads",
-  "status": 404,
-  "final": "https://capitalmindmf.com/downloads",
-  "title": "",
+ "Canara Robeco Mutual Fund | portfolio": {
+  "url": "https://www.canararobeco.com/documents/statutory-disclosures/scheme-dashboard/scheme-monthly-portfolio/",
+  "status": 200,
+  "final": "https://www.canararobeco.com/documents/statutory-disclosures/scheme-dashboard/scheme-monthly-portfolio/",
+  "title": "Scheme Monthly Portfolio - Canara Robeco",
   "mentions": false,
-  "bytes": 94
+  "bytes": 216789
  },
- "Choice Mutual Fund": {
-  "url": "https://choicemf.com/downloads",
-  "status": 404,
-  "final": "https://choicemf.com/downloads",
-  "title": "",
-  "mentions": false,
-  "bytes": 44224
- },
- "DSP Mutual Fund": {
-  "url": "https://www.dspim.com/mandatory-disclosures/factsheets",
-  "status": 404,
-  "final": "https://www.dspim.com/mandatory-disclosures/factsheets",
-  "title": "Error",
+ "Capitalmind Mutual Fund | factsheet": {
+  "url": "https://capitalmindmf.com/factsheet.html",
+  "status": 200,
+  "final": "https://capitalmindmf.com/factsheet.html",
+  "title": "Factsheet | Capitalmind Mutual Fund",
   "mentions": true,
-  "bytes": 297318
+  "bytes": 46015
  },
- "Edelweiss Mutual Fund": {
-  "url": "https://www.edelweissmf.com/statutory/factsheets",
+ "Capitalmind Mutual Fund | portfolio": {
+  "url": "https://capitalmindmf.com/statutory-disclosures.html",
+  "status": 200,
+  "final": "https://capitalmindmf.com/statutory-disclosures.html",
+  "title": "Statutory Disclosures | Capitalmind Mutual Fund",
+  "mentions": true,
+  "bytes": 567070
+ },
+ "Choice Mutual Fund | factsheet": {
+  "url": "https://choicemf.com/disclosures/factsheets",
+  "status": 200,
+  "final": "https://choicemf.com/disclosures/factsheets",
+  "title": "Disclosures | Choice Mutual Fund",
+  "mentions": true,
+  "bytes": 45332
+ },
+ "Choice Mutual Fund | portfolio": {
+  "url": "https://choicemf.com/disclosures/monthly-portfolio",
+  "status": 200,
+  "final": "https://choicemf.com/disclosures/monthly-portfolio",
+  "title": "Disclosures | Choice Mutual Fund",
+  "mentions": false,
+  "bytes": 45372
+ },
+ "DSP Mutual Fund | factsheet": {
+  "url": "https://www.dspim.com/downloads?category=Information%20Documents&sub_category=Factsheets",
+  "status": 200,
+  "final": "https://www.dspim.com/downloads?category=Information%20Documents&sub_category=Factsheets",
+  "title": "Downloads",
+  "mentions": true,
+  "bytes": 399813
+ },
+ "DSP Mutual Fund | portfolio": {
+  "url": "https://www.dspim.com/about-us/mandatory-disclosure/portfolio-disclosures",
+  "status": 200,
+  "final": "https://www.dspim.com/mandatory-disclosures/portfolio-disclosures",
+  "title": "Portfolio Disclosures - DSP Mutual Funds",
+  "mentions": true,
+  "bytes": 406435
+ },
+ "Edelweiss Mutual Fund | factsheet": {
+  "url": "https://www.edelweissmf.com/downloads/factsheets",
   "status": 403,
-  "final": "https://www.edelweissmf.com/statutory/factsheets",
+  "final": "https://www.edelweissmf.com/downloads/factsheets",
   "title": "Access Denied",
   "mentions": true,
   "bytes": 395
  },
- "Franklin Templeton Mutual Fund": {
-  "url": "https://www.franklintempletonindia.com/downloads/fund-documents",
+ "Edelweiss Mutual Fund | portfolio": {
+  "url": "https://www.edelweissmf.com/statutory#Portfolio-of-Schemes",
+  "status": 403,
+  "final": "https://www.edelweissmf.com/statutory#Portfolio-of-Schemes",
+  "title": "Access Denied",
+  "mentions": false,
+  "bytes": 380
+ },
+ "Franklin Templeton Mutual Fund | factsheet": {
+  "url": "https://www.franklintempletonindia.com/downloads/fund-literature",
   "status": 200,
-  "final": "https://www.franklintempletonindia.com/downloads/fund-documents",
+  "final": "https://www.franklintempletonindia.com/downloads/fund-literature",
   "title": "",
   "mentions": false,
   "bytes": 4708
  },
- "Groww Mutual Fund": {
-  "url": "https://www.growwmf.in/statutory-disclosure/factsheet",
+ "Franklin Templeton Mutual Fund | portfolio": {
+  "url": "https://www.franklintempletonindia.com/investor/reports",
   "status": 200,
-  "final": "https://www.growwmf.in/statutory-disclosure/factsheet",
-  "title": "Statutory Disclosures - Groww Mutual Funds",
-  "mentions": true,
-  "bytes": 394580
+  "final": "https://www.franklintempletonindia.com/reports",
+  "title": "",
+  "mentions": false,
+  "bytes": 4708
  },
- "HDFC Mutual Fund": {
-  "url": "https://www.hdfcfund.com/investor-services/factsheets",
+ "Groww Mutual Fund | factsheet": {
+  "url": "https://www.growwmf.in/downloads/fact-sheet",
+  "status": 200,
+  "final": "https://www.growwmf.in/downloads/fact-sheet",
+  "title": "Downloads - Groww Mutual Funds",
+  "mentions": true,
+  "bytes": 591444
+ },
+ "Groww Mutual Fund | portfolio": {
+  "url": "https://growwmf.in/statutory-disclosure/portfolio",
+  "status": 200,
+  "final": "https://growwmf.in/statutory-disclosure/portfolio",
+  "title": "Statutory Disclosures - Groww Mutual Funds",
+  "mentions": false,
+  "bytes": 408618
+ },
+ "HDFC Mutual Fund | factsheet": {
+  "url": "https://www.hdfcfund.com/mutual-funds/factsheets",
   "status": 403,
-  "final": "https://www.hdfcfund.com/investor-services/factsheets",
+  "final": "https://www.hdfcfund.com/mutual-funds/factsheets",
   "title": "Access Denied",
   "mentions": true,
-  "bytes": 404
+  "bytes": 399
  },
- "HSBC Mutual Fund": {
+ "HDFC Mutual Fund | portfolio": {
+  "url": "https://www.hdfcfund.com/statutory-disclosure/portfolio/monthly-portfolio",
+  "status": 403,
+  "final": "https://www.hdfcfund.com/statutory-disclosure/portfolio/monthly-portfolio",
+  "title": "Access Denied",
+  "mentions": false,
+  "bytes": 432
+ },
+ "HSBC Mutual Fund | factsheet": {
+  "url": "https://www.assetmanagement.hsbc.co.in/en/mutual-funds/investor-resources?Date=&Cap=&Doc=fund-factsheets",
+  "status": 200,
+  "final": "https://www.assetmanagement.hsbc.co.in/en/mutual-funds/investor-resources?Date=&Cap=&Doc=fund-factsheets",
+  "title": "Download investor resources - Mutual Fund India | HSBC Asset Management",
+  "mentions": true,
+  "bytes": 12508093
+ },
+ "HSBC Mutual Fund | portfolio": {
   "url": "https://www.assetmanagement.hsbc.co.in/en/mutual-funds/investor-resources/information-library",
-  "status": null,
-  "error": "ReadTimeout: HTTPSConnectionPool(host='www.assetmanagement.hsbc.co.in', port=443): Read timed out. (read timeout=30)"
+  "status": 200,
+  "final": "https://www.assetmanagement.hsbc.co.in/en/mutual-funds/investor-resources/information-library",
+  "title": "Information library - HSBC Mutual Fund India | HSBC Asset Management",
+  "mentions": false,
+  "bytes": 4430402
  },
- "Helios Mutual Fund": {
+ "Helios Mutual Fund | factsheet": {
   "url": "https://www.heliosmf.in/downloads/",
   "status": 200,
   "final": "https://www.heliosmf.in/downloads",
@@ -161,52 +327,111 @@
   "mentions": true,
   "bytes": 1072769
  },
- "ICICI Prudential Mutual Fund": {
-  "url": "https://www.icicipruamc.com/downloads/others/monthly-fact-sheet",
-  "status": null,
-  "error": "ConnectionError: HTTPSConnectionPool(host='archive.icicipruamc.com', port=443): Max retries exceeded with url: /downloads/others/monthly-"
+ "Helios Mutual Fund | portfolio": {
+  "url": "https://www.heliosmf.in/portfolio-disclosure/",
+  "status": 200,
+  "final": "https://www.heliosmf.in/portfolio-disclosure",
+  "title": "Portfolio Disclosure | Helios MF",
+  "mentions": false,
+  "bytes": 237407
  },
- "ITI Mutual Fund": {
+ "ICICI Prudential Mutual Fund | factsheet": {
+  "url": "https://www.icicipruamc.com/news-and-media/downloads?currentTabFilter=Historical%20Factsheets",
+  "status": 200,
+  "final": "https://www.icicipruamc.com/news-and-media/downloads?currentTabFilter=Historical%20Factsheets",
+  "title": "ICICI Pru",
+  "mentions": false,
+  "bytes": 22123
+ },
+ "ICICI Prudential Mutual Fund | portfolio": {
+  "url": "https://www.icicipruamc.com/news-and-media/downloads?currentTabFilter=Disclosures&subCatTabFilter=MonthlyPortfolioDisclosures",
+  "status": 200,
+  "final": "https://www.icicipruamc.com/news-and-media/downloads?currentTabFilter=Disclosures&subCatTabFilter=MonthlyPortfolioDisclosures",
+  "title": "ICICI Pru",
+  "mentions": false,
+  "bytes": 22123
+ },
+ "ITI Mutual Fund | factsheet": {
   "url": "https://www.itiamc.com/downloads",
   "status": 200,
   "final": "https://www.itiamc.com/downloads",
   "title": "Downloads - ITI Mutual Fund",
   "mentions": true,
-  "bytes": 280443
+  "bytes": 280394
  },
- "Invesco Mutual Fund": {
-  "url": "https://invescomutualfund.com/literature-and-form?tab=factsheet",
+ "ITI Mutual Fund | portfolio": {
+  "url": "https://www.itiamc.com/statuory-disclosure",
   "status": 200,
-  "final": "https://www.invescomutualfund.com/literature-forms/forms/application",
-  "title": "Forms | Invesco Mutual Fund",
+  "final": "https://www.itiamc.com/statuory-disclosure",
+  "title": "ITI Mutual Fund",
   "mentions": true,
-  "bytes": 438214
+  "bytes": 275637
  },
- "JM Financial Mutual Fund": {
-  "url": "https://www.jmfinancialmf.com/downloads/factsheets",
+ "Invesco Mutual Fund | factsheet": {
+  "url": "https://www.invescomutualfund.com/literature-forms/factsheets",
   "status": 200,
-  "final": "https://www.jmfinancialmf.com/downloads/factsheets",
+  "final": "https://www.invescomutualfund.com/literature-forms/factsheets",
+  "title": "Invesco Mutual Fund Factsheets",
+  "mentions": true,
+  "bytes": 437216
+ },
+ "Invesco Mutual Fund | portfolio": {
+  "url": "https://invescomutualfund.com/literature-and-form?tab=Complete",
+  "status": 200,
+  "final": "https://www.invescomutualfund.com/literature-forms/monthly-holdings/equity",
+  "title": "Monthly Holdings | Invesco Mutual Fund",
+  "mentions": true,
+  "bytes": 438349
+ },
+ "JM Financial Mutual Fund | factsheet": {
+  "url": "https://www.jmfinancialmf.com/downloads/Factsheet",
+  "status": 200,
+  "final": "https://www.jmfinancialmf.com/downloads/Factsheet",
   "title": "JM Financial - Mutual Fund",
   "mentions": false,
   "bytes": 3089
  },
- "Jio BlackRock Mutual Fund": {
-  "url": "https://www.jioblackrockamc.com/downloads",
+ "JM Financial Mutual Fund | portfolio": {
+  "url": "https://www.jmfinancialmf.com/downloads/Portfolio-Disclosure",
   "status": 200,
-  "final": "https://www.jioblackrockamc.com/notfound",
-  "title": "Page Not Found | JioBlackRock Mutual Fund | JioBlackRock Mutual Fund",
+  "final": "https://www.jmfinancialmf.com/downloads/Portfolio-Disclosure",
+  "title": "JM Financial - Mutual Fund",
   "mentions": false,
-  "bytes": 224364
+  "bytes": 3089
  },
- "Kotak Mahindra Mutual Fund": {
-  "url": "https://www.kotakmf.com/Information/fact-sheets",
+ "Jio BlackRock Mutual Fund | factsheet": {
+  "url": "https://www.jioblackrockamc.com/statutory-disclosure/fund-documents/factsheet",
   "status": 200,
-  "final": "https://validate.perfdrive.com/?ssa=8586d7b5-e791-44fd-ae24-8ad6ac6c3bdf&ssb=12772273453&ssc=https%3A%2F%2Fwww.kotakmf.com%2FInformation%2Ffact-sheets&ssi=fec53a7b-cslf-41a6-92dd-55ebfcf9c662&ssk=botmanager_support@radware.com&ssm=24664019907081883109441183073729&ssn=ff8fe1a04ff112f490ae9d422b6a13a37ad9379997ae-107c-4d49-b3e82a&sso=e92fcf2f-1ac77f49ad97d1c91fc6b5b8a9dcb38c3f125c6c5a97c15b&ssp=45261212781792715887179272892984093&ssq=54815073821445328080738214573120194509308&ssr=MjAuMTAyLjk1LjUw&sst=Mozilla/5.0%20(Windows%20NT%2010.0;%20Win64;%20x64)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/141.0%20Safari/537.36&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjkwMDAzNzk5OTdhZS0xMDdjLTRkNDktYmYyZi0xYWM3N2Y0OWFkOTcxLTE3OTI3MzgyMTQ1MTQwLTAwNWJiZjg0MzY0MjI3YWQyODQxMCIsInV6bXgiOiI3ZmMwMDBlZTMzODg3Zi1kZTUzLTQ0NjQtOTQzMy04MWZlMTk1YmNmZTkxLTE3OTI3MzgyMTQ1MTQwLTAwYWY2MGRhMmM2MDNmYzlkMGIxMCIsInJkIjoia290YWttZi5jb20ifQ==",
-  "title": "Radware Captcha Page",
+  "final": "https://www.jioblackrockamc.com/statutory-disclosure/fund-documents/factsheet",
+  "title": "JioBlackRock Mutual Fund",
   "mentions": true,
-  "bytes": 15058
+  "bytes": 296319
  },
- "LIC Mutual Fund": {
+ "Jio BlackRock Mutual Fund | portfolio": {
+  "url": "https://www.jioblackrockamc.com/statutory-disclosure/disclosures/monthly-portfolio-disclosure",
+  "status": 200,
+  "final": "https://www.jioblackrockamc.com/statutory-disclosure/disclosures/monthly-portfolio-disclosure",
+  "title": "JioBlackRock Mutual Fund",
+  "mentions": false,
+  "bytes": 297131
+ },
+ "Kotak Mahindra Mutual Fund | factsheet": {
+  "url": "https://www.kotakmf.com/Information/forms-and-downloads/Information",
+  "status": 200,
+  "final": "https://validate.perfdrive.com/?ssa=d65583bf-ffc9-4a97-a683-8fd2494bbcd9&ssb=13170229078&ssc=https%3A%2F%2Fwww.kotakmf.com%2FInformation%2Fforms-and-downloads%2FInformation&ssi=1332cb4a-cslf-4e2e-8b20-98ab8b76ff40&ssk=botmanager_support@radware.com&ssm=97249974618401976108434075722167&ssn=3cf2a591f9a9b4a4565abb77295445038037b18caf94-bd40-4cce-9d786a&sso=371f36ee-c7be2b5068fae002430e956b83bfbd13359f9efbe1440a21&ssp=21350282731792720367179275501577939&ssq=04089773863496067557838634291233717738870&ssr=NC4xNTQuMTM1LjE0NA==&sst=Mozilla/5.0%20(Windows%20NT%2010.0;%20Win64;%20x64)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/141.0%20Safari/537.36&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjkwMDBiMThjYWY5NC1iZDQwLTRjY2UtOTZlZS1jN2JlMmI1MDY4ZmExLTE3OTI3Mzg2MzQzNzgwLTAwNTY4YWM2ODFkNWZlNWMxZTExMCIsInJkIjoia290YWttZi5jb20iLCJ1em14IjoiN2ZjMDAwNWUzZmM3MTgtYWJkYy00N2VmLTkwODMtOTRjNmU5MjYyMzZlMS0xNzkyNzM4NjM0Mzc4MC0wMGE1MDEyNjcwNzFhZGQ0YzMyMTAifQ==",
+  "title": "Radware Captcha Page",
+  "mentions": false,
+  "bytes": 15079
+ },
+ "Kotak Mahindra Mutual Fund | portfolio": {
+  "url": "https://www.kotakmf.com/Information/forms-and-downloads",
+  "status": 200,
+  "final": "https://validate.perfdrive.com/?ssa=2f078169-10cb-4dea-bbf2-1c5d3b9f25e6&ssb=13170229078&ssc=https%3A%2F%2Fwww.kotakmf.com%2FInformation%2Fforms-and-downloads&ssi=fd681436-cslf-41e4-9784-02abfd295668&ssk=botmanager_support@radware.com&ssm=97249974618401976108434075722167&ssn=3cf2a5913ce4ed347f3ce11016454503803784a648fd-6c99-49b7-bd786a&sso=371f36c2-5dfd27512fb1e002430eeb45fb14f45696296932e1440a21&ssp=21350282731792720367179275501577939&ssq=04089773863496067557838634291233717738870&ssr=NC4xNTQuMTM1LjE0NA==&sst=Mozilla/5.0%20(Windows%20NT%2010.0;%20Win64;%20x64)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/141.0%20Safari/537.36&ssu=&ssv=&ssw=&ssx=eyJfX3V6bWYiOiI3ZjkwMDA4NGE2NDhmZC02Yzk5LTQ5YjctYjZjMi01ZGZkMjc1MTJmYjExLTE3OTI3Mzg2MzQ0MTEwLTAwNWI0MmY1OGY0YWQ4Yjk1YjQxMCIsInJkIjoia290YWttZi5jb20iLCJ1em14IjoiN2ZjMDAwZjUwY2FlNzUtZmRmOC00M2U1LTg5NDEtNDY1YzYxZmJhNmJjMS0xNzkyNzM4NjM0NDExMC0wMGE2MWM4ZmQxMTZlYzVlOWU3MTAifQ==",
+  "title": "Radware Captcha Page",
+  "mentions": false,
+  "bytes": 15067
+ },
+ "LIC Mutual Fund | factsheet": {
   "url": "https://www.licmf.com/downloads/factsheet",
   "status": 200,
   "final": "https://www.licmf.com/downloads/factsheet",
@@ -214,20 +439,31 @@
   "mentions": true,
   "bytes": 96975
  },
- "Lakshya Mutual Fund": {
-  "url": "https://www.lakshyamf.com",
-  "status": null,
-  "error": "ConnectionError: HTTPSConnectionPool(host='www.lakshyamf.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError"
- },
- "Mahindra Manulife Mutual Fund": {
-  "url": "https://www.mahindramanulife.com/downloads#factsheet",
+ "LIC Mutual Fund | portfolio": {
+  "url": "https://www.licmf.com/downloads/monthly-portfolio",
   "status": 200,
-  "final": "https://www.mahindramanulife.com/downloads#factsheet",
+  "final": "https://www.licmf.com/downloads/monthly-portfolio",
+  "title": "Monthly Portfolio / Fortnightly Portfolio - LIC Mutual Fund",
+  "mentions": true,
+  "bytes": 96487
+ },
+ "Mahindra Manulife Mutual Fund | factsheet": {
+  "url": "https://www.mahindramanulife.com/downloads#investor",
+  "status": 200,
+  "final": "https://www.mahindramanulife.com/downloads#investor",
   "title": "Mahindra Manulife Mutual Fund - Invest in Mutual Funds Online in India 2026",
   "mentions": false,
   "bytes": 8986
  },
- "Mirae Asset Mutual Fund": {
+ "Mahindra Manulife Mutual Fund | portfolio": {
+  "url": "https://www.mahindramanulife.com/downloads#mandatory-disclosures",
+  "status": 200,
+  "final": "https://www.mahindramanulife.com/downloads#mandatory-disclosures",
+  "title": "Mahindra Manulife Mutual Fund - Invest in Mutual Funds Online in India 2026",
+  "mentions": false,
+  "bytes": 8986
+ },
+ "Mirae Asset Mutual Fund | factsheet": {
   "url": "https://www.miraeassetmf.co.in/downloads/factsheet",
   "status": 200,
   "final": "https://www.miraeassetmf.co.in/downloads/factsheet",
@@ -235,39 +471,71 @@
   "mentions": true,
   "bytes": 146804
  },
- "Monarch Mutual Fund": {
-  "url": "https://www.monarchmf.com",
+ "Mirae Asset Mutual Fund | portfolio": {
+  "url": "https://www.miraeassetmf.co.in/downloads/portfolio",
   "status": 200,
-  "final": "https://www.monarchmf.com/",
-  "title": "Domain",
-  "mentions": false,
-  "bytes": 7741
+  "final": "https://www.miraeassetmf.co.in/downloads/portfolio",
+  "title": "Get Mutual Fund Portfolio Details Online | Mirae Asset",
+  "mentions": true,
+  "bytes": 146792
  },
- "Motilal Oswal Mutual Fund": {
-  "url": "https://www.motilaloswalmf.com/download-center/factsheets",
-  "status": 404,
-  "final": "https://www.motilaloswalmf.com/download-center/factsheets",
-  "title": "404 Page",
-  "mentions": false,
-  "bytes": 11100
- },
- "NJ Mutual Fund": {
-  "url": "https://www.njmutualfund.com/downloads",
+ "Monarch Mutual Fund | portfolio": {
+  "url": "https://www.monarchamc.in/forms-downloads/portfolio-holdings/monthly",
   "status": 200,
-  "final": "https://www.njmutualfund.com/downloads",
-  "title": "",
-  "mentions": false,
-  "bytes": 1253
+  "final": "https://www.monarchamc.in/forms-downloads/portfolio-holdings/monthly",
+  "title": "Download Mutual Fund Forms &amp; Documents | Monarch Mutual Fund",
+  "mentions": true,
+  "bytes": 100383
  },
- "Navi Mutual Fund": {
+ "Motilal Oswal Mutual Fund | factsheet": {
+  "url": "https://www.motilaloswalmf.com/downloads/factsheets",
+  "status": 200,
+  "final": "https://www.motilaloswalmf.com/downloads/factsheets",
+  "title": "Mutual Funds Investment- Buy and Invest in Mutual Fund Online",
+  "mentions": true,
+  "bytes": 40542
+ },
+ "Motilal Oswal Mutual Fund | portfolio": {
+  "url": "https://www.motilaloswalmf.com/downloads/scheme-portfolio-details",
+  "status": 200,
+  "final": "https://www.motilaloswalmf.com/downloads/scheme-portfolio-details",
+  "title": "Mutual Funds Investment- Buy and Invest in Mutual Fund Online",
+  "mentions": true,
+  "bytes": 40618
+ },
+ "NJ Mutual Fund | factsheet": {
+  "url": "https://downloads.njmutualfund.com/downloads.php",
+  "status": 200,
+  "final": "https://downloads.njmutualfund.com/downloads.php",
+  "title": "Download regulatory and marketing resources",
+  "mentions": true,
+  "bytes": 216932
+ },
+ "NJ Mutual Fund | portfolio": {
+  "url": "https://downloads.njmutualfund.com/downloads.php",
+  "status": 200,
+  "final": "https://downloads.njmutualfund.com/downloads.php",
+  "title": "Download regulatory and marketing resources",
+  "mentions": true,
+  "bytes": 216932
+ },
+ "Navi Mutual Fund | factsheet": {
   "url": "https://navi.com/mutual-fund/downloads/factsheet",
   "status": 403,
   "final": "https://navi.com/mutual-fund/downloads/factsheet",
   "title": "Just a moment...",
   "mentions": true,
+  "bytes": 5822
+ },
+ "Navi Mutual Fund | portfolio": {
+  "url": "https://navi.com/mutual-fund/downloads/portfolio",
+  "status": 403,
+  "final": "https://navi.com/mutual-fund/downloads/portfolio",
+  "title": "Just a moment...",
+  "mentions": false,
   "bytes": 5801
  },
- "Nippon India Mutual Fund": {
+ "Nippon India Mutual Fund | factsheet": {
   "url": "https://mf.nipponindiaim.com/investor-service/downloads/factsheet-portfolio-and-other-disclosures",
   "status": 200,
   "final": "https://mf.nipponindiaim.com/investor-service/downloads/factsheet-portfolio-and-other-disclosures",
@@ -275,23 +543,47 @@
   "mentions": true,
   "bytes": 413440
  },
- "Old Bridge Mutual Fund": {
-  "url": "https://www.oldbridgemf.com/downloads",
-  "status": 404,
-  "final": "https://www.oldbridgemf.com/downloads",
-  "title": "",
-  "mentions": false,
-  "bytes": 94
+ "Nippon India Mutual Fund | portfolio": {
+  "url": "https://mf.nipponindiaim.com/investor-service/downloads/factsheet-portfolio-and-other-disclosures",
+  "status": 200,
+  "final": "https://mf.nipponindiaim.com/investor-service/downloads/factsheet-portfolio-and-other-disclosures",
+  "title": "MF Factsheets | Fundamentals &amp; Monthly Portfolios - Nippon India Mutual Fund",
+  "mentions": true,
+  "bytes": 413440
  },
- "PGIM India Mutual Fund": {
-  "url": "https://www.pgimindiamf.com/downloads/factsheet",
-  "status": 403,
-  "final": "https://www.pgimindiamf.com/downloads/factsheet",
-  "title": "403 Forbidden",
-  "mentions": false,
-  "bytes": 520
+ "Old Bridge Mutual Fund | factsheet": {
+  "url": "https://oldbridgemf.com/statutory-disclosures.html",
+  "status": 200,
+  "final": "https://oldbridgemf.com/statutory-disclosures.html",
+  "title": "Statutory Disclosures | Oldbridgemf",
+  "mentions": true,
+  "bytes": 805582
  },
- "PPFAS Mutual Fund": {
+ "Old Bridge Mutual Fund | portfolio": {
+  "url": "https://oldbridgemf.com/statutory-disclosures.html",
+  "status": 200,
+  "final": "https://oldbridgemf.com/statutory-disclosures.html",
+  "title": "Statutory Disclosures | Oldbridgemf",
+  "mentions": true,
+  "bytes": 805582
+ },
+ "PGIM India Mutual Fund | factsheet": {
+  "url": "https://www.pgimindia.com/mutual-funds/forms-and-updates/Fund-Factsheet",
+  "status": 200,
+  "final": "https://www.pgimindia.com/mutual-funds/forms-and-updates/Fund-Factsheet",
+  "title": "PGIM India Mutual Fund: Invest in Mutual Funds Online",
+  "mentions": true,
+  "bytes": 406469
+ },
+ "PGIM India Mutual Fund | portfolio": {
+  "url": "https://www.pgimindia.com/mutual-funds/disclosures/Portfolios/Monthly-Portfolio",
+  "status": 200,
+  "final": "https://www.pgimindia.com/mutual-funds/disclosures/Portfolios/Monthly-Portfolio",
+  "title": "PGIM India Mutual Fund: Invest in Mutual Funds Online",
+  "mentions": true,
+  "bytes": 186491
+ },
+ "PPFAS Mutual Fund | factsheet": {
   "url": "https://amc.ppfas.com/downloads/factsheet/",
   "status": 200,
   "final": "https://amc.ppfas.com/downloads/factsheet/",
@@ -299,23 +591,47 @@
   "mentions": true,
   "bytes": 660838
  },
- "Quantum Mutual Fund": {
-  "url": "https://www.quantumamc.com/downloads/factsheet",
-  "status": 403,
-  "final": "https://www.quantumamc.com/downloads/factsheet/",
-  "title": "403 - Forbidden: Access is denied.",
-  "mentions": false,
-  "bytes": 1233
- },
- "SBI Mutual Fund": {
-  "url": "https://www.sbimf.com/docs/default-source/scheme-factsheets",
+ "PPFAS Mutual Fund | portfolio": {
+  "url": "https://amc.ppfas.com/downloads/portfolio-disclosure/",
   "status": 200,
-  "final": "https://www.sbimf.com/error?aspxerrorpath=/docs/default-source/scheme-factsheets",
-  "title": "SBI MF-Error Page",
+  "final": "https://amc.ppfas.com/downloads/portfolio-disclosure/",
+  "title": "PPFAS Mutual Fund : Portfolio Disclosure",
   "mentions": true,
-  "bytes": 39675
+  "bytes": 435218
  },
- "Samco Mutual Fund": {
+ "Quantum Mutual Fund | factsheet": {
+  "url": "https://www.quantumamc.com/factsheets/combined/-1/0/0",
+  "status": 200,
+  "final": "https://www.quantumamc.com/factsheets/combined/-1/0/0",
+  "title": "Download Monthly Mutual Fund Factsheets - Quantum Mutual Fund",
+  "mentions": true,
+  "bytes": 143124
+ },
+ "Quantum Mutual Fund | portfolio": {
+  "url": "https://www.quantumamc.com/portfolio/combined/-1/1/0/0",
+  "status": 200,
+  "final": "https://www.quantumamc.com/portfolio/combined/-1/1/0/0",
+  "title": "Fund Portfolio Combined Portfolio - Quantum Mutual Fund",
+  "mentions": true,
+  "bytes": 149090
+ },
+ "SBI Mutual Fund | factsheet": {
+  "url": "https://www.sbimf.com/factsheets",
+  "status": 200,
+  "final": "https://www.sbimf.com/factsheets",
+  "title": "SBI Mutual Fund Factsheets | Latest Scheme Performance & Portfolio Details",
+  "mentions": true,
+  "bytes": 43651
+ },
+ "SBI Mutual Fund | portfolio": {
+  "url": "https://www.sbimf.com/portfolios",
+  "status": 200,
+  "final": "https://www.sbimf.com/portfolios",
+  "title": "SBI Mutual Fund Portfolios | NAV, Market Values & Scheme Performance",
+  "mentions": true,
+  "bytes": 44935
+ },
+ "Samco Mutual Fund | factsheet": {
   "url": "https://www.samcomf.com/downloads",
   "status": 200,
   "final": "https://www.samcomf.com/downloads",
@@ -323,94 +639,198 @@
   "mentions": true,
   "bytes": 979030
  },
- "Shriram Mutual Fund": {
-  "url": "https://www.shriramamc.in/downloads",
-  "status": 404,
-  "final": "https://www.shriramamc.in/downloads",
-  "title": "Shriram AMC",
-  "mentions": true,
-  "bytes": 57439
- },
- "Sundaram Mutual Fund": {
-  "url": "https://www.sundarammutual.com/factsheet",
+ "Samco Mutual Fund | portfolio": {
+  "url": "https://www.samcomf.com/StatutoryDisclosure",
   "status": 200,
-  "final": "https://www.sundarammutual.com/",
-  "title": "Mutual Funds - Buy &amp; Invest in Mutual Fund Online | Sundaram Mutual Fund",
-  "mentions": true,
-  "bytes": 356348
+  "final": "https://www.samcomf.com/StatutoryDisclosure",
+  "title": "Statutory Disclosure - Samco Mutual Fund",
+  "mentions": false,
+  "bytes": 4194846
  },
- "Tata Mutual Fund": {
-  "url": "https://www.tatamutualfund.com/downloads/factsheets",
-  "status": 404,
-  "final": "https://www.tatamutualfund.com/downloads/factsheets",
-  "title": "\ud835\udc13\ud835\udc1a\ud835\udc2d\ud835\udc1a \ud835\udc0c\ud835\udc2e\ud835\udc2d\ud835\udc2e\ud835\udc1a\ud835\udc25 \ud835\udc05\ud835\udc2e\ud835\udc27\ud835\udc1d - Invest in \ud835\uddd5\ud835\uddf2\ud835\ude00\ud835\ude01 \ud835\udde0\ud835\ude02\ud835\ude01\ud835\ude02\ud835\uddee\ud835\uddf9 \ud835\uddd9\ud835\ude02\ud835\uddfb\ud835\uddf1\ud835\ude00 Schemes Online in India",
-  "mentions": true,
-  "bytes": 260226
- },
- "Taurus Mutual Fund": {
-  "url": "https://www.taurusmutualfund.com/downloads",
-  "status": 404,
-  "final": "https://www.taurusmutualfund.com/downloads",
-  "title": "Page not found | Taurus",
-  "mentions": true,
-  "bytes": 67575
- },
- "The Wealth Company Mutual Fund": {
-  "url": "https://www.thewealthcompanymf.com/downloads",
-  "status": null,
-  "error": "ConnectionError: HTTPSConnectionPool(host='www.thewealthcompanymf.com', port=443): Max retries exceeded with url: /downloads (Caused by N"
- },
- "Trust Mutual Fund": {
-  "url": "https://www.trustmf.com/downloads",
+ "Shriram Mutual Fund | factsheet": {
+  "url": "https://www.shriramamc.in/factsheet",
   "status": 200,
-  "final": "https://www.trustmf.com/downloads",
+  "final": "https://www.shriramamc.in/factsheet",
+  "title": "Mutual Fund Fact Sheets | Shriram Mutual Funds",
+  "mentions": true,
+  "bytes": 265218
+ },
+ "Shriram Mutual Fund | portfolio": {
+  "url": "https://www.shriramamc.in/investor-statutory-disclosures",
+  "status": 200,
+  "final": "https://www.shriramamc.in/investor-statutory-disclosures",
+  "title": "Statutory Disclosures | Shriram Mutual Funds",
+  "mentions": true,
+  "bytes": 1304343
+ },
+ "Sundaram Mutual Fund | factsheet": {
+  "url": "https://www.sundarammutual.com/fundwise-factsheet",
+  "status": 200,
+  "final": "https://www.sundarammutual.com/fundwise-factsheet",
+  "title": "Sundaram Mutual Fund - Mutual Fund India, Mutual Funds Investment Online",
+  "mentions": true,
+  "bytes": 364917
+ },
+ "Sundaram Mutual Fund | portfolio": {
+  "url": "https://www.sundarammutual.com/Monthly-Fortnightly-Adhoc-Portfolios",
+  "status": 200,
+  "final": "https://www.sundarammutual.com/Monthly-Fortnightly-Adhoc-Portfolios",
+  "title": "Sundaram Mutual Fund - Mutual Fund India, Mutual Funds Investment Online",
+  "mentions": true,
+  "bytes": 280511
+ },
+ "Tata Mutual Fund | factsheet": {
+  "url": "https://www.tatamutualfund.com/information-documents",
+  "status": 200,
+  "final": "https://www.tatamutualfund.com/information-documents/factsheets",
+  "title": "Mutual Fund Factsheets - Tata Mutual Fund",
+  "mentions": true,
+  "bytes": 274992
+ },
+ "Tata Mutual Fund | portfolio": {
+  "url": "https://www.tatamutualfund.com/schemes-related",
+  "status": 200,
+  "final": "https://www.tatamutualfund.com/schemes-related/scheme-factsheet",
+  "title": "Scheme Factsheet Search - Tata Mutual Fund",
+  "mentions": true,
+  "bytes": 389256
+ },
+ "Taurus Mutual Fund | factsheet": {
+  "url": "https://www.taurusmutualfund.com/factsheet",
+  "status": 200,
+  "final": "https://www.taurusmutualfund.com/factsheet",
+  "title": "Factsheet | Taurus",
+  "mentions": true,
+  "bytes": 74582
+ },
+ "Taurus Mutual Fund | portfolio": {
+  "url": "https://taurusmutualfund.com/monthly-portfolio",
+  "status": 200,
+  "final": "https://taurusmutualfund.com/monthly-portfolio",
+  "title": "Monthly Portfolio | Taurus",
+  "mentions": true,
+  "bytes": 76107
+ },
+ "The Wealth Company Mutual Fund | factsheet": {
+  "url": "https://www.wealthcompanyamc.in/literature-forms/scheme-documents/factsheets/",
+  "status": 200,
+  "final": "https://www.wealthcompanyamc.in/literature-forms/scheme-documents/factsheets/",
+  "title": "Download Mutual Fund Forms &amp; Documents | Wealth Company AMC",
+  "mentions": true,
+  "bytes": 134762
+ },
+ "The Wealth Company Mutual Fund | portfolio": {
+  "url": "https://www.wealthcompanyamc.in/literature-forms/portfolio-documents/monthly/",
+  "status": 200,
+  "final": "https://www.wealthcompanyamc.in/literature-forms/portfolio-documents/monthly/",
+  "title": "Download Mutual Fund Forms &amp; Documents | Wealth Company AMC",
+  "mentions": true,
+  "bytes": 172559
+ },
+ "Trust Mutual Fund | factsheet": {
+  "url": "https://www.trustmf.com/downloads?activeTab=factsheets",
+  "status": 200,
+  "final": "https://www.trustmf.com/downloads?activeTab=factsheets",
   "title": "TRUST Mutual Fund | Invest in Mutual Funds Online",
   "mentions": false,
   "bytes": 949
  },
- "UTI Mutual Fund": {
-  "url": "https://www.utimf.com/downloads/factsheets",
+ "Trust Mutual Fund | portfolio": {
+  "url": "https://www.trustmf.com/disclosures?activeTab=portfolio-disclosures",
   "status": 200,
-  "final": "https://www.utimf.com/downloads/factsheets",
+  "final": "https://www.trustmf.com/disclosures?activeTab=portfolio-disclosures",
+  "title": "TRUST Mutual Fund | Invest in Mutual Funds Online",
+  "mentions": false,
+  "bytes": 949
+ },
+ "UTI Mutual Fund | factsheet": {
+  "url": "https://www.utimf.com/downloads/fact-sheet",
+  "status": 200,
+  "final": "https://www.utimf.com/downloads/fact-sheet",
   "title": "UTI Mutual Fund Invest Online",
   "mentions": false,
   "bytes": 25606
  },
- "Unifi Mutual Fund": {
-  "url": "https://www.unifimf.com/downloads",
-  "status": 404,
-  "final": "https://unifimf.com/downloads",
-  "title": "Page not found - UNIFI Mutual Fund",
+ "UTI Mutual Fund | portfolio": {
+  "url": "https://www.utimf.com/downloads/consolidate-all-portfolio-disclosure",
+  "status": 200,
+  "final": "https://www.utimf.com/downloads/consolidate-all-portfolio-disclosure",
+  "title": "UTI Mutual Fund Invest Online",
+  "mentions": false,
+  "bytes": 25606
+ },
+ "Unifi Mutual Fund | factsheet": {
+  "url": "https://unifimf.com/factsheet/",
+  "status": 200,
+  "final": "https://unifimf.com/factsheet/",
+  "title": "Unifi MF Factsheet | Portfolio &amp; Key Metrics",
   "mentions": true,
-  "bytes": 194650
+  "bytes": 223697
  },
- "Union Mutual Fund": {
-  "url": "https://www.unionmf.com/downloads/factsheets",
+ "Unifi Mutual Fund | portfolio": {
+  "url": "https://unifimf.com/statutorydocuments/#monthly-portfolio-disclosure",
+  "status": 200,
+  "final": "https://unifimf.com/statutorydocuments/#monthly-portfolio-disclosure",
+  "title": "Statutory Documents | Unifi Mutual Fund",
+  "mentions": true,
+  "bytes": 579941
+ },
+ "Union Mutual Fund | factsheet": {
+  "url": "https://www.unionmf.com/about-us/downloads/factsheets",
   "status": null,
-  "error": "ConnectionError: HTTPSConnectionPool(host='www.unionmf.com', port=443): Max retries exceeded with url: /downloads/factsheets (Caused by N"
+  "error": "ConnectionError: HTTPSConnectionPool(host='www.unionmf.com', port=443): Max retries exceeded with url: /about-us/downloads/factsheets (Ca"
  },
- "WhiteOak Capital Mutual Fund": {
-  "url": "https://mf.whiteoakamc.com/downloads/factsheets",
+ "Union Mutual Fund | portfolio": {
+  "url": "https://www.unionmf.com/about-us/downloads/monthly-portfolio",
+  "status": null,
+  "error": "ConnectionError: HTTPSConnectionPool(host='www.unionmf.com', port=443): Max retries exceeded with url: /about-us/downloads/monthly-portfo"
+ },
+ "WhiteOak Capital Mutual Fund | factsheet": {
+  "url": "https://mf.whiteoakamc.com/download#Factsheet",
   "status": 403,
-  "final": "https://mf.whiteoakamc.com/downloads/factsheets",
+  "final": "https://mf.whiteoakamc.com/download#Factsheet",
   "title": "ERROR: The request could not be satisfied",
   "mentions": false,
   "bytes": 919
  },
- "Zerodha Mutual Fund": {
-  "url": "https://www.zerodhafundhouse.com/resources/factsheets/",
-  "status": 404,
-  "final": "https://www.zerodhafundhouse.com/resources/factsheets",
-  "title": "404 - Zerodha Fund House",
+ "WhiteOak Capital Mutual Fund | portfolio": {
+  "url": "https://mf.whiteoakamc.com/regulatory-disclosures/scheme-portfolios",
+  "status": 403,
+  "final": "https://mf.whiteoakamc.com/regulatory-disclosures/scheme-portfolios",
+  "title": "ERROR: The request could not be satisfied",
   "mentions": false,
-  "bytes": 52300
+  "bytes": 919
  },
- "quant Mutual Fund": {
-  "url": "https://quantmutual.com/downloads/factsheets",
-  "status": 404,
-  "final": "https://quantmutual.com/downloads/factsheets",
-  "title": "The resource cannot be found.",
+ "Zerodha Mutual Fund | factsheet": {
+  "url": "https://www.zerodhafundhouse.com/resources/fund-documents",
+  "status": 200,
+  "final": "https://www.zerodhafundhouse.com/resources/fund-documents",
+  "title": "Fund Documents - Zerodha Fund House",
   "mentions": true,
-  "bytes": 3901
+  "bytes": 246204
+ },
+ "Zerodha Mutual Fund | portfolio": {
+  "url": "https://www.zerodhafundhouse.com/resources/disclosures",
+  "status": 200,
+  "final": "https://www.zerodhafundhouse.com/resources/disclosures",
+  "title": "Disclosures - Zerodha Fund House",
+  "mentions": false,
+  "bytes": 759118
+ },
+ "quant Mutual Fund | factsheet": {
+  "url": "https://quantmutual.com/downloads/factsheet",
+  "status": 200,
+  "final": "https://quantmutual.com/downloads/factsheet",
+  "title": "Mutual Funds India - Quant Fund, Quant Investments, Quant AMC",
+  "mentions": true,
+  "bytes": 80927
+ },
+ "quant Mutual Fund | portfolio": {
+  "url": "https://quantmutual.com/statutory-disclosures",
+  "status": 200,
+  "final": "https://quantmutual.com/statutory-disclosures",
+  "title": "Mutual Funds India - Quant Fund, Quant Investments, Quant AMC",
+  "mentions": true,
+  "bytes": 121515
  }
 }
