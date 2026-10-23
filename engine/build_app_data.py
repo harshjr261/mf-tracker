@@ -177,6 +177,116 @@ def first_date(txt):
     return best[1] if best else None
 
 
+TITLE_RX = re.compile(r"^(?:mr|ms|mrs|dr|ca|shri|smt)\.?\s+", re.I)
+
+
+def split_managers(fm):
+    """'Mr. Rajeev Thakkar, Ms. Mansi Kariya and Mr Tejas Soman' -> ['Rajeev Thakkar', 'Mansi Kariya', 'Tejas Soman']"""
+    if not fm:
+        return []
+    import html as _html
+    fm = _html.unescape(_html.unescape(fm)).replace("\u2019", "'").replace('"', " ")
+    fm = re.sub(r"Fund\s*Manager\s*\d+\s*[-:]", ",", fm, flags=re.I)          # 'Fund Manager 1 -'
+    fm = re.sub(r"\s+-\s*(?:Primary|Secondary|Co-?\s*Fund\s*Manager|Co-?manager)\b.*?(?=,|$)", ",", fm, flags=re.I)
+    fm = re.sub(r"\([^)]*\)?", ",", fm)                                     # '(w.e.f ...)', '(Assistant ...' 
+    fm = re.sub(r"\bFor\s+[A-Za-z ]+?:", ",", fm, flags=re.I)                # 'For Equity :'
+    fm = re.sub(r"\b(?:Equity|Debt|Arbitrage|Overseas|Gold|Commodit\w*)\s*[-:]\s*", ",", fm, flags=re.I)  # 'Equity - Mr. X; Debt - Mr. Y'
+    fm = re.sub(r"FM\s*-?\s*\d+\s*[-:]?", ",", fm)                         # 'FM 1 -', 'FM-2', 'MattaFM-2'
+    fm = re.sub(r"\b(?:Assistant\s+)?Fund\s*manager.*?(?=,|$)", ",", fm, flags=re.I)
+    fm = re.sub(r"(?:^|,)\s*\d+\.\s*", ",", fm)                            # '1. Name , 2. Name'
+    fm = re.sub(r"\bNot Applicable\b|\bN\.?A\.?\b", ",", fm, flags=re.I)
+    fm = re.sub(r"\b(Mr|Ms|Mrs|Dr)\.(?=\S)", r"\1. ", fm)                  # 'Mr.Ihab' -> 'Mr. Ihab'
+    parts = re.split(r",|;|\n|\band\b|&|/|\s{2,}|(?<=[a-z])\s+(?=(?:Mr|Ms|Mrs|Dr)\.?\s)", fm)
+    out = []
+    for p in parts:
+        p = re.sub(r"\(.*?\)", "", p).strip(" .-:")
+        p = TITLE_RX.sub("", p).strip(" .")
+        p = re.sub(r"\s+", " ", p)
+        if p.lower() in ("associate", "foreign", "dedicated", "overseas"):
+            continue
+        if 3 <= len(p) <= 40 and re.match(r"^[A-Za-z][A-Za-z .'-]+$", p) and len(p.split()) <= 5 and not re.search(r"\b(fund|manager|since|equity|debt|overseas|primary|co)\b", p, re.I):
+            out.append(p.title())
+    return list(dict.fromkeys(out))
+
+
+def all_dates(t):
+    """Every date in free text, in order of appearance: [(pos, Timestamp)]."""
+    t = t.lower()
+    t = re.sub(r"fm\s*-?\s*\d+", lambda m: " " * len(m.group(0)), t)  # hide 'FM 2' labels so '2' is never read as a day
+    pats = [r"(\d{1,2})[/.-](\d{1,2})[/.-](\d{4}|\d{2})(?!\d)", r"(\d{1,2})(?:st|nd|rd|th)?[\s-]*([a-z]{3})[a-z]*[\s,-]*(\d{4}|\d{2})(?!\d)(?!,?\s*\d{4})",
+            r"([a-z]{3})[a-z]*\.?\s*(\d{1,2}),?\s*(\d{4})", r"([a-z]{3})[a-z]*[\s,'-]+(\d{4})"]
+    found, taken = [], []
+    for k, rx in enumerate(pats):
+        for m in re.finditer(rx, t):
+            if any(m.start() < e and m.end() > st for st, e in taken):
+                continue
+            try:
+                if k == 0:
+                    y, mo, d = int(m[3]), int(m[2]), int(m[1])
+                elif k == 1:
+                    y, mo, d = int(m[3]), MONTHS.get(m[2]), int(m[1])
+                elif k == 2:
+                    y, mo, d = int(m[3]), MONTHS.get(m[1]), int(m[2])
+                else:
+                    y, mo, d = int(m[2]), MONTHS.get(m[1]), 1
+                if y < 100:
+                    y += 2000 if y <= 40 else 1900
+                if mo and 1990 < y < 2100:
+                    found.append((m.start(), pd.Timestamp(y, mo, min(max(d, 1), 28))))
+                    taken.append((m.start(), m.end()))
+            except (ValueError, TypeError):
+                pass
+    return sorted(found)
+
+
+def manager_since(name, fm_since, idx=0, count=1, inception=None):
+    """Start date for one manager from AMFI's free-text 'managing since' field.
+    Handles per-name dates, 'FM 1 / FM 2' positional labels, ordered date lists and 'since inception'."""
+    if not fm_since:
+        return None
+    import html as _html
+    t = _html.unescape(_html.unescape(fm_since))
+    if re.fullmatch(r"\s*[3-5]\d{4}(?:\.0)?\s*", t):  # Excel serial date, e.g. '46020'
+        return pd.Timestamp("1899-12-30") + pd.Timedelta(days=int(float(t)))
+    t = re.sub(r"Fund\s*Manager\s*-?\s*(\d)", r"FM \1", t, flags=re.I)
+    t = re.sub(r"FM\s*-?\s*(\d+)\s*(?:&|and|,)\s*(\d+)", r"FM \1 FM \2", t, flags=re.I)
+    tl = t.lower()
+    last = name.split()[-1].lower()
+    i = tl.find(last)
+    if i >= 0:
+        seg = t[i:i + 90]
+        if re.search(r"since\s+inception", seg, re.I) and inception is not None:
+            return inception
+        ds = all_dates(seg)
+        if ds:
+            return ds[0][1]
+    if count == 1 and re.search(r"since\s+inception", t, re.I) and not all_dates(t) and inception is not None:
+        return inception
+    dates = all_dates(t)
+    labels = [(m.start(), int(m.group(1))) for m in re.finditer(r"FM\s*-?\s*(\d+)", t, re.I)]
+    if labels and not dates and re.search(r"inception", t, re.I) and inception is not None:
+        return inception
+    if labels and dates:
+        label_first = labels[0][0] < dates[0][0]
+        for j, (pos, k) in enumerate(labels):
+            if k != idx + 1:
+                continue
+            if label_first:
+                nxt = labels[j + 1][0] if j + 1 < len(labels) else len(t) + 1
+                if re.search(r"inception", t[pos:nxt], re.I) and inception is not None:
+                    return inception
+                cand = [d for p_, d in dates if pos < p_ < nxt]
+            else:
+                cand = [d for p_, d in dates if p_ < pos][-1:]
+            return cand[0] if cand else None
+        return None
+    if len(dates) == 1:
+        return dates[0][1]
+    if count > 1 and len(dates) == count:
+        return dates[idx][1]
+    return None
+
+
 def base_name(n):
     n = n.replace(" (plan inferred: Direct)", "")
     n = re.split(r" - | -|- ", n)[0]
@@ -250,7 +360,7 @@ def main(nav_gz, bm_path, out, info_path=None):
         if idx is not None:
             cat_idx[f"{asset}|{cat}"] = idx
 
-    rows, series = [], {}
+    rows, series, mgr_book = [], {}, {}
     for _, r in meta.iterrows():
         s = navs[r.code]
         bml, bm = None, None
@@ -276,8 +386,28 @@ def main(nav_gz, bm_path, out, info_path=None):
                 terD=ter.get("dBER"), terDt=ter.get("dTER"), terR=ter.get("rBER"), terRt=ter.get("rTER"), terDate=ter.get("date"),
                 fm=si.get("fm"), fmSince=si.get("fmSince"),
                 fmYrs=round((d_last - fm_since).days / 365.25, 1) if fm_since is not None and fm_since <= d_last else None,
-                bm1=si.get("bm1"), exitLoad=si.get("exitLoad"), risk=si.get("risk"), sid=si.get("sid") if si.get("fm") else None,
+                bm1=si.get("bm1"), exitLoad=si.get("exitLoad"), risk=si.get("risk"),
                 sid=si.get("sid") if si.get("fm") or si.get("bm1") else None).items() if v not in (None, "", "NA", "N.A.")}
+        mgrs = []
+        names = split_managers((si or {}).get("fm"))
+        for k_, nm in enumerate(names):
+            since = manager_since(nm, (si or {}).get("fmSince"), k_, len(names), s.index[0])
+            if since is None or since > d_last:
+                mgrs.append({"n": nm}); continue
+            start = max(since, s.index[0])
+            yrs = (d_last - start).days / 365.25
+            ann = yrs >= 1
+            rec_m = {"n": nm, "since": since.strftime("%Y-%m-%d"), "yrs": round((d_last - since).days / 365.25, 1),
+                     "f": period_return(s, start, d_last, ann), "ann": ann}
+            if bm is not None:
+                rec_m["b"] = period_return(bm, start, d_last, ann)
+            ci = cat_idx.get(f"{r.asset}|{r['cat']}")
+            if ci is not None:
+                rec_m["c"] = period_return(ci, start, d_last, ann)
+            mgrs.append(rec_m)
+            mgr_book.setdefault(f"{nm}|{r.amc}", []).append(int(r.code))
+        if mgrs:
+            rec["mgr"] = mgrs
         dd = max_drawdown(s)
         rec["mdd"] = dd["max_drawdown"]
         rec["curDD"] = dd["current_drawdown"]
@@ -323,7 +453,7 @@ def main(nav_gz, bm_path, out, info_path=None):
         if isinstance(o, (float, np.floating)):
             return None if np.isnan(o) else round(float(o), 5)
         return o
-    out_obj = dict(asOf=as_of.strftime("%Y-%m-%d"), rf=0.06, infoStats=sstats, funds=[rnd(x) for x in rows],
+    out_obj = dict(asOf=as_of.strftime("%Y-%m-%d"), rf=0.06, infoStats=sstats, funds=[rnd(x) for x in rows], managers={k: v for k, v in mgr_book.items()},
                    series=series, bench=bench_series,
                    sources=["AMFI NAVAll (scheme list, categories)", "mfapi.in (NAV history)",
                             "niftyindices.com (Total Return Indices)",

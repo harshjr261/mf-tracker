@@ -14,3 +14,20 @@ for _ in range(14):
     else:
         print("not available yet", name, r.status_code)
 print(f"::notice title=AMFI monthly::{got} new report(s)")
+
+# ---- AMC-wise quarterly average AUM (AMFI "Average AUM - fund-wise"), last 6 quarters
+import json
+API = "https://www.amfiindia.com/api/average-aum-fundwise"
+out, years = [], requests.get(API, headers=H, timeout=60).json().get("data", [])
+for fy in years[:3]:
+    per = requests.get(f"{API}?fyId={fy['id']}", headers=H, timeout=60).json().get("data", {}).get("periods", [])
+    for p in per:
+        j = requests.get(f"{API}?fyId={fy['id']}&periodId={p['id']}", headers=H, timeout=60).json()
+        rows = j.get("data") or []
+        if rows:
+            out.append({"fy": fy["financial_year"], "period": p["period"],
+                        "amcs": {r["MutualFundName"]: round(sum(v or 0 for v in r["averageAUM"].values()) / 100, 2) for r in rows}})
+    if len(out) >= 6:
+        break
+json.dump(out[:6], open(os.path.join(OUT, "amc_aaum_quarterly.json"), "w"), indent=0)
+print(f"::notice title=AMC AAUM::{len(out[:6])} quarters, {len(out[0]['amcs']) if out else 0} AMCs (Rs crore)")

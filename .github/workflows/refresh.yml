@@ -35,7 +35,9 @@ jobs:
           fi
       - name: Fetch AMFI monthly industry reports (flows, SIP, AUM)
         continue-on-error: true
-        run: python pipeline/fetch_amfi_monthly.py
+        run: |
+          python pipeline/fetch_amfi_monthly.py
+          python pipeline/fetch_sip.py
       - name: Compute metrics and build app data
         run: cd engine && python build_app_data.py ../raw/mf_universe_nav.json.gz ../raw/benchmarks_tri.json ../docs/data.json ../raw/scheme_info.json
       - name: Commit refreshed data
