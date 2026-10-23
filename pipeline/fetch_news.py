@@ -10,6 +10,8 @@ OUT = os.path.join(ROOT, "docs", "news.json")
 H = {"User-Agent": "Mozilla/5.0 (fund-lens news)"}
 CUT = dt.datetime.utcnow() - dt.timedelta(days=365)
 PER = 25
+# fund-tracker SEO pages, not news
+JUNK = re.compile(r"Review 20\d\d|NAV,? Returns|NAV Today|Should You Invest|NAV & |Direct (Plan|Growth)( - Growth)?$|Fund Details|Portfolio & S|SIP Calculator", re.I)
 
 
 def short_amc(a):
@@ -50,7 +52,7 @@ def merge(old, new):
     seen, out = set(), []
     for it in sorted((new or []) + (old or []), key=lambda x: x["d"], reverse=True):
         k = re.sub(r"\W+", "", it["t"].lower())[:80]
-        if k in seen or it["d"] < CUT.strftime("%Y-%m-%d"):
+        if k in seen or it["d"] < CUT.strftime("%Y-%m-%d") or JUNK.search(it["t"]):
             continue
         seen.add(k); out.append(it)
     return out[:PER]
