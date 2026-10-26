@@ -1,0 +1,78 @@
+{
+ "ctx": [
+  "]=(0,r.useState)(!1),[$,Z]=(0,r.useState)(!1),[ee,et]=(0,r.useState)(!1),ea=(0,l.A)(),eo=t.map(e=>({label:e.TER_Year,value:e.TER_Year})),er=y.map(e=>({label:e.MonthYear,value:e.MonthYear})),el=\"1\"===k||\"-1\"===k?[{label:\"All\",value:\"-1\"},...B.map(e=>({label:e.SchemeCat_Desc,value:e.SchemeCat_Desc}))]:B.map(e=>({label:e.SchemeCat_Desc,value:e.SchemeCat_Desc})),ei=[{label:\"All\",value:\"-1\"},...E.map(e=>({label:e.SubCat_Desc,value:e.SubCat_Desc}))],ec=[{label:\"All\",value:\"-1\"},...a.map(e=>({label:e.SIF_Name,value:e.SIF_Id}))];(0,r.useEffect)(()=>{let e=async()=>{try{J(!0);let e=await (0,s.A)(\"/api/sif-populate-ter-month?year=\".concat(n));A(e[0].data||[]),w(\"\")}catch(e){console.error(\"Error fetching months:\",e),A([])}finally{J(!1)}};n?e():(A([]),w(\"\"),J(!1))},[n]),(0,r.useEffect)(()=>{(async()=>{if(!k){j([]),C(\"\"),I([]),H(\"\"),Z(!1);return}try{Z(!0);let e=await (0,s.A)(\"/api/sif-populate-sub-category?type=\".concat(k));j(Array.isArray(e[0].data)?e[0].data:[]),C(\"\"),I([]),H(\"\")}catch(e){console.error(\"Error fetching categories:\",e),j([]),C(\"\"),I([]),H(\"\")}finally{Z(!1)}})()},[k]),(0,r.useEffect)(()=>{(async()=>{if(!R){I([]),H(\"\"),et(!1);return}try{et(!0);let e=await (0,s.A)(\"/api/sif-populate-sub-category",
+  "e.SubCat_Desc===_);return e?e.SchemeCat_Id:\"\"}{if(\"-1\"===R)return\"-1\";if(!R)return\"\";let e=B.find(e=>e.SchemeCat_Desc===R);return e?e.SchemeCat_Id:\"\"}},[k,_,R,E,B]),ed=(0,r.useCallback)(()=>\"-1\"===k?\"-1\":\"1\"===k?\"1\":\"3\"===k?\"3\":\"2\"===k?\"2\":\"\",[k]),es=(0,r.useCallback)(async function(){let e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:W,t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:Y;L(!0),F(\"\");try{let a=\"-1\"===T?\"All\":T,o=y.find(e=>e.MonthYear===v),r=(null==o?void 0:o.MonthNumber)||\"\",l=en(),i=ed();if(!a||!r||!l||!i)throw Error(\"Missing required parameters\");let c=\"/api/sif-populate-te-rdata-revised?SIF_Id=\".concat(a,\"&Month=\").concat(r,\"&strCat=\").concat(l,\"&strType=\").concat(i,\"&page=\").concat(e+1,\"&pageSize=\").concat(t),n=await (0,s.A)(c),d=[],p=null;n[0]&&\"object\"==typeof n[0]&&n[0].data&&\"object\"==typeof n[0].data&&(d=Array.isArray(n[0].data.data)?n[0].data.data:[],p=\"meta\"in n[0].data?n[0].data.meta:null),P(d),K(p)}catch(e){F(e instanceof Error?e.message:\"Failed to fetch data\"),P([]),K(null)}L(!1)},[T,y,v,en,ed,W,Y]),ep=()=>{P([]),K(null),F(\"\"),U(!1)},eh=()=>{if(!v)return!1;let e=y.find(e=>e.MonthYear===v);if(!e)return!1;let t=e.MonthNumber.split(\"-\"),a=parseInt(t[0])",
+  ".data?n[0].data.meta:null),P(d),K(p)}catch(e){F(e instanceof Error?e.message:\"Failed to fetch data\"),P([]),K(null)}L(!1)},[T,y,v,en,ed,W,Y]),ep=()=>{P([]),K(null),F(\"\"),U(!1)},eh=()=>{if(!v)return!1;let e=y.find(e=>e.MonthYear===v);if(!e)return!1;let t=e.MonthNumber.split(\"-\"),a=parseInt(t[0]),o=parseInt(t[1]);return o>2026||2026===o&&a>=4};(0,r.useEffect)(()=>{G&&es(W,Y)},[W,Y,G,es]);let ex=async()=>{try{let e=\"-1\"===T?\"All\":T,t=y.find(e=>e.MonthYear===v),a=(null==t?void 0:t.MonthNumber)||\"\",o=en(),r=ed();if(!e||!a||!o||!r)throw Error(\"Missing required parameters\");let l=\"\".concat(b.QU,\"/api/sif-populate-te-rdata-revised?SIF_Id=\").concat(e,\"&Month=\").concat(a,\"&strCat=\").concat(o,\"&strType=\").concat(r,\"&excel=true\"),i=await fetch(l);if(!i.ok)throw Error(\"Failed to download Excel file\");let c=await i.blob(),n=document.createElement(\"a\");n.href=window.URL.createObjectURL(c),n.download=\"ter-of-mf-schemes.xlsx\",document.body.appendChild(n),n.click(),n.remove()}catch(e){alert(\"Failed to download Excel file.\")}};return(0,o.jsxs)(i.A,{className:\"maxWidth\",sx:{padding:{xs:2,md:\"8px 40px\",lg:1}},children:[(0,o.jsx)(x.A,{title:\"TER of MF Schemes\"}),(0,o.jsxs)(i.A,{sx:{display:\"flex\",alignItems:\"center\",ga"
+ ],
+ "ids": [
+  "13",
+  "17",
+  "20",
+  "22",
+  "25",
+  "27",
+  "3",
+  "37",
+  "42",
+  "45",
+  "47",
+  "48",
+  "61",
+  "62",
+  "70",
+  "82",
+  "83"
+ ],
+ "tries": {
+  "": [
+   200,
+   10,
+   [
+    "47"
+   ]
+  ],
+  "?sifId=47": [
+   200,
+   10,
+   [
+    "47"
+   ]
+  ],
+  "?sif_id=47": [
+   200,
+   10,
+   [
+    "47"
+   ]
+  ],
+  "?SIF_Id=47": [
+   200,
+   10,
+   [
+    "47"
+   ]
+  ],
+  "?month=2026-10": [
+   200,
+   10,
+   [
+    "47"
+   ]
+  ],
+  "?year=2026-2027": [
+   200,
+   10,
+   [
+    "47"
+   ]
+  ],
+  "?finYear=2026-2027&month=10": [
+   200,
+   10,
+   [
+    "47"
+   ]
+  ]
+ },
+ "months": "[]"
+}
