@@ -1,0 +1,48 @@
+{
+ "pages": {
+  "/sif": 200,
+  "/sif/latest-nav": 200,
+  "/sif/nav-download": 404,
+  "/sif/nav-history": 404,
+  "/sif/ter-of-sif": 200,
+  "/sif/investment-strategy-details": 404,
+  "/sif/disclosure-of-risk-parameters": 404
+ },
+ "js": 35,
+ "apis": [
+  "/api/download-excel/sif-latest-nav",
+  "/api/search/google",
+  "/api/search/trending",
+  "/api/sif-latest-nav",
+  "/api/sif-latest-nav-category",
+  "/api/sif-populate-sub-category",
+  "/api/sif-populate-te-rdata-revised",
+  "/api/sif-populate-ter-month"
+ ],
+ "tries": {
+  "/api/download-excel/sif-latest-nav": {
+   "status": 200,
+   "head": "PK\u0003\u0004\n\u0000\u0000\u0000\b\u0000\ufffdVZ]\ufffd\ufffd\ufffd\tY\u0001\u0000\u0000\ufffd\u0004\u0000\u0000\u0013\u0000\u0000\u0000[Content_Types].xml\ufffd\ufffdMn\ufffd0\u0010\ufffd\ufffd=E\ufffd-J\f]TUE\u00a2\ufffd\ufffd\u0016\ufffd\ufffd\u0000\ufffdxB,\u001c\ufffd\ufffd\ufffdw\u0012(\ufffd* \ufffd`\u0013+\ufffd7\ufffd{\ufffd\ufffd\u0019O\ufffd\ufffdI\ufffd\u0018H;\ufffd\ufffdQ6\u0014\t\ufffd\ufffd)m\u0017\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\"\ufffd\bV\ufffdq\u0016s\ufffdC\u0012\ufffd\ufffdn<\ufffdy\ufffd\ufffd\ufffd-\u588e\ufffd?IIe\ufffd\rP\ufffd<Z\ufffdT.4\u0010\ufffd6,\ufffd\ufffdr\t\u000b\ufffd\ufffd\ufffd\ufffd,\ufffd\ufffdhc\u001a[\u000fQ\ufffd\ufffdX\ufffd\ufffd\ufffd\ufffde\u02cf\ufffdA\u0002\u001a\u0012\ufffd\ufffd^\u0632r\u0001\ufffd\u001b]B\ufffd\\[\ufffd\ufffd\ufffd\u001e\b\u0019wv\u001a\ufffd\ufffd\ufffd\u0001\u000b\ufffd<Ih+\ufffd\u0001\ufffd\ufffdw\ufffdL\ufffd\n\ufffd\u0019\ufffd\ufffd\u0006\r\ufffd\ufffd\ufffd\u020d\u000b\ufffd/\ufffd\ufffde\ufffd\u0013)]U\ufffd\u0012\ufffd+W\r\ufffdd\ufffd\u0003\ufffd\ufffd\u001a16&\ufffd\u05ac\u0001m\u0007\ufffd\ufffdNL\ufffd[F7\u000er\ufffd\ufffd\ufffd\u0011\ufffd}\ufffd\ufffdz}\ufffd\u03a6\u0007Hqg\ufffdn=\ufffd\u03b4\ufffd\\C@\ufffd\u0011\u0003\u001f\ufffd\ufffd\u0007\ufffd\ufffd}\ufffd]_I\ufffd\ufffdi\ufffd\rS\ufffdm\ufffd\ufffd\ufffd\ufffd<\ufffd\u0011\r\ufffd\ufffd]\ufffd\ufffd\ufffd\ufffd;\ufffdl\ufffd!\ufffd\u02e3=\u0012\ufffd\ufffd\ufffdb;+\ufffd\ufffd\u0004[v?\ufffd\ufffd\u001bPK\u0003\u0004\n\u0000\u0000\u0000\u0000\u0000\ufffdVZ]\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0006\u0000\u0000\u0000_rels/PK\u0003\u0004\n\u0000\u0000\u0000\b\u0000\ufffdVZ]\ufffdI\ufffd\ufffd\u0000\u0000\u0000K\u0002\u0000\u0000\u000b\u0000\u0000\u0000_rels/.rels\ufffd\ufffd\ufffdN\ufffd0\f@\ufffd|E\ufffd\ufffd\ufffdnH\b\ufffd\ufffd\ufffd \ufffd\ufffd&4>\ufffd$n\u001b\ufffd\ufffd\ufffd\u0103\ufffd\uf250@\f\ufffdi\u0007\ufffdq\ufffd\ufffdg\ufffd\ufffd\ufffd<\ufffd\ufffdR\ufffd\u001c\f,\ufffd\u001a\u0014\u0005\ufffd\u0387\ufffd\ufffd\ufffd\ufffdiq\u000f*\u000b\u0006\ufffd#\u00072p\ufffd\f\ufffd\ufffdf\ufffdL#J\ufffd\u027d\ufffdY\u0015H\ufffd\u0006z\ufffd\ufffd\ufffdu\ufffd=M\ufffd+\ufffd\u0014\ufffdO\ufffdiB)\ufffd\ufffd\ufffdv\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdt\ufffd\u0240\u6129\ufffd\ufffd@\u06ba%\ufffd\ufffd1\ufffd5ln[o\ufffd\ufffda\ufffd g"
+  },
+  "/api/sif-latest-nav": {
+   "status": 200,
+   "head": "{\"data\":[{\"type\":\"Open Ended Scheme\",\"categories\":[{\"type\":\"Open Ended Scheme\",\"category\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"groups\":[{\"SIFName\":\"Altiva SIF\",\"schemes\":[{\"SIFName\":\"Altiva SIF\",\"sifId\":\"47\",\"type\":\"Open Ended\",\"category\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"Sd_Id\":\"SIF-120\",\"ISINPO\":\"INF754K30094\",\"ISINRI\":\"\",\"NavName\":\"Altiva Equity Ex- Top 100 Long - Short Fund - Direct Plan - Growth\",\"Date\":\"23-Oct-2026\",\"NetAssetValue\":9.9778,\"Plan\":\"Direct Plan\",\"Option\":\"Growth\"},{\"SIFName\":\"Altiva SIF\",\"sif"
+  },
+  "/api/sif-latest-nav-category": {
+   "status": 404,
+   "head": "{\"message\":\"sifid query is required.\"}"
+  },
+  "/api/sif-populate-sub-category": {
+   "status": 200,
+   "head": "[]"
+  },
+  "/api/sif-populate-te-rdata-revised": {
+   "status": 200,
+   "head": "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.000Z\",\"R_BER\":\"1.8100\",\"R_BrokerageCost\":\"0.3100\",\"R_TransactionCost\":\"0.0200\",\"R_StatutoryLevies\":\"1.0300\",\"R_TER\":\"3.1700\",\"D_BER\":\"0.5500\",\"D_BrokerageCost\":\"0.3100\",\"D_TransactionCost\":\"0.0200\",\"D_StatutoryLevies\":\"0.8100\",\"D_TER\":\"1.6900\",\"SIF_Id\":\"47\"},{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002"
+  },
+  "/api/sif-populate-ter-month": {
+   "status": 200,
+   "head": "[]"
+  }
+ }
+}

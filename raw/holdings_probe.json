@@ -43,7 +43,7 @@
  "Aditya Birla Sun Life Mutual Fund": {
   "url": "https://mutualfund.adityabirlacapital.com/forms-and-downloads/portfolio",
   "status": 200,
-  "bytes": 270990,
+  "bytes": 269657,
   "files": 0,
   "sample": [],
   "apiHints": [
@@ -76,7 +76,7 @@
  "Axis Mutual Fund": {
   "url": "https://www.axismf.com/statutory-disclosures",
   "status": 200,
-  "bytes": 313606,
+  "bytes": 313090,
   "files": 0,
   "sample": [],
   "apiHints": [
@@ -95,7 +95,7 @@
  "Bandhan Mutual Fund": {
   "url": "https://bandhanmutual.com/downloads/disclosures",
   "status": 200,
-  "bytes": 10493,
+  "bytes": 10492,
   "files": 0,
   "sample": [],
   "apiHints": [
@@ -113,7 +113,7 @@
  "Baroda BNP Paribas Mutual Fund": {
   "url": "https://www.barodabnpparibasmf.in/downloads/monthly-portfolio-scheme",
   "status": 200,
-  "bytes": 115640,
+  "bytes": 115642,
   "files": 6,
   "sample": [
    "https://www.barodabnpparibasmf.in/assets/download_documents/BOBBNPMF_Monthly_Portfolio_30-09-2026_20376.xls",
@@ -171,7 +171,7 @@
  "Choice Mutual Fund": {
   "url": "https://choicemf.com/disclosures/monthly-portfolio",
   "status": 200,
-  "bytes": 46903,
+  "bytes": 46075,
   "files": 1,
   "sample": [
    "https://choicemf.com/CAMS-Branches.xlsx"
@@ -208,7 +208,7 @@
  "Edelweiss Mutual Fund": {
   "url": "https://www.edelweissmf.com/statutory#Portfolio-of-Schemes",
   "status": 403,
-  "bytes": 380,
+  "bytes": 382,
   "files": 0,
   "sample": [],
   "apiHints": []
@@ -296,7 +296,7 @@
  "Invesco Mutual Fund": {
   "url": "https://invescomutualfund.com/literature-and-form?tab=Complete",
   "status": 200,
-  "bytes": 509640,
+  "bytes": 509969,
   "files": 0,
   "sample": [],
   "apiHints": []
@@ -320,7 +320,7 @@
  "Kotak Mahindra Mutual Fund": {
   "url": "https://www.kotakmf.com/Information/forms-and-downloads",
   "status": 200,
-  "bytes": 15073,
+  "bytes": 15067,
   "files": 0,
   "sample": [],
   "apiHints": [
@@ -557,7 +557,7 @@
  "Sundaram Mutual Fund": {
   "url": "https://www.sundarammutual.com/Monthly-Fortnightly-Adhoc-Portfolios",
   "status": "error",
-  "bytes": 287499,
+  "bytes": 288339,
   "files": 1,
   "sample": [
    "https://www.sundarammutual.com/pdf2/2024/LIVE_BANK_LIST_UPDATED_Aug_2024.xlsx"
@@ -571,7 +571,7 @@
  "Tata Mutual Fund": {
   "url": "https://www.tatamutualfund.com/schemes-related",
   "status": 200,
-  "bytes": 388854,
+  "bytes": 387481,
   "files": 2,
   "sample": [
    "https://www.tatamutualfund.com/system/files/2026-10/Revised%20format%20Disclosure%20of%20scheme%20category-wise-%20AAUM%20data%20%20on%20quarterly%20basis_TATA_JUL%2726-SEP%2726.xlsx",
@@ -582,8 +582,8 @@
    "https://betacms.tatamutualfund.com/system/files/2026-10/Tata%20Nifty%20Capital%20Markets%20Index%20Fund_0.pdf",
    "https://www.tatacapital.com/",
    "https://www.tatacapital.com/\\",
-   "https://betacms.tatamutualfund.com/system/files/2026-10/Tata%20Nifty%20Capital%20Markets%20Index%20Fund_0.pdf\\",
-   "https://dist-api.tatamfdev.com\\"
+   "https://dist-api.tatamfdev.com\\",
+   "https://betacms.tatamutualfund.com/system/files/2026-10/Tata%20Nifty%20Capital%20Markets%20Index%20Fund_0.pdf\\"
   ],
   "fileStatus": 200,
   "fileBytes": 13649,
@@ -664,7 +664,7 @@
  "Zerodha Mutual Fund": {
   "url": "https://www.zerodhafundhouse.com/resources/disclosures",
   "status": 200,
-  "bytes": 759105,
+  "bytes": 759106,
   "files": 3,
   "sample": [
    "https://assets.zerodhafundhouse.com/statutory-reports/nav-after-1st-may/NAV_29.04.2026.xlsx",
