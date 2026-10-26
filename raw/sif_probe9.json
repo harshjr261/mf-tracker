@@ -1,0 +1,110 @@
+{
+ "-1|-1|-1": [
+  200,
+  "{\"data\":[],\"meta\":{\"page\":1,\"pageSize\":100,\"total\":0,\"pageCount\":0}}"
+ ],
+ "-1|-1|1": [
+  200,
+  "{\"data\":[],\"meta\":{\"page\":1,\"pageSize\":100,\"total\":0,\"pageCount\":0}}"
+ ],
+ "-1|-1|": [
+  200,
+  "{\"data\":[],\"meta\":{\"page\":1,\"pageSize\":100,\"total\":0,\"pageCount\":0}}"
+ ],
+ "-1|Equity Oriented Investment Strategies|-1": [
+  200,
+  "{\"data\":[],\"meta\":{\"page\":1,\"pageSize\":100,\"total\":0,\"pageCount\":0}}"
+ ],
+ "-1|Equity Oriented Investment Strategies|1": [
+  200,
+  "{\"data\":[],\"meta\":{\"page\":1,\"pageSize\":100,\"total\":0,\"pageCount\":0}}"
+ ],
+ "-1|Equity Oriented Investment Strategies|": [
+  200,
+  "{\"data\":[],\"meta\":{\"page\":1,\"pageSize\":100,\"total\":0,\"pageCount\":0}}"
+ ],
+ "-1||-1": [
+  200,
+  "{\"data\":[],\"meta\":{\"page\":1,\"pageSize\":100,\"total\":0,\"pageCount\":0}}"
+ ],
+ "-1||1": [
+  200,
+  "{\"data\":[],\"meta\":{\"page\":1,\"pageSize\":100,\"total\":0,\"pageCount\":0}}"
+ ],
+ "-1||": [
+  200,
+  "{\"data\":[],\"meta\":{\"page\":1,\"pageSize\":100,\"total\":0,\"pageCount\":0}}"
+ ],
+ "47|-1|-1": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ],
+ "47|-1|1": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ],
+ "47|-1|": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ],
+ "47|Equity Oriented Investment Strategies|-1": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ],
+ "47|Equity Oriented Investment Strategies|1": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ],
+ "47|Equity Oriented Investment Strategies|": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ],
+ "47||-1": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ],
+ "47||1": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ],
+ "47||": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ],
+ "|-1|-1": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ],
+ "|-1|1": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ],
+ "|-1|": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ],
+ "|Equity Oriented Investment Strategies|-1": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ],
+ "|Equity Oriented Investment Strategies|1": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ],
+ "|Equity Oriented Investment Strategies|": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ],
+ "||-1": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ],
+ "||1": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ],
+ "||": [
+  200,
+  "{\"data\":[{\"NSDLSchemeCode\":\"ALTV/O/E/EELS/26/03/0002/EDEL\",\"Scheme_Name\":\"Altiva Equity Ex- Top 100 Long - Short Fund\",\"SchemeType_Desc\":\"Open Ended\",\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund\",\"TER_Year\":\"2026-2027\",\"TER_Date\":\"2026-10-01T00:00:00.00"
+ ]
+}
