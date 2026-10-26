@@ -1,0 +1,79 @@
+{
+ "ctx": {
+  "nav-history": [
+   "[ek,e_]=(0,l.useState)(null),[eS,eC]=(0,l.useState)(!1),[eN,eL]=(0,l.useState)(!1),[eD,ez]=(0,l.useState)(\"\"),[eP,eW]=(0,l.useState)(null),[eI,eM]=(0,l.useState)(null),[eR,eV]=(0,l.useState)(null),[eO,eT]=(0,l.useState)(null),eU=\"dark\"===M.palette.mode?\"invert(1)\":\"none\";(0,l.useEffect)(()=>{O&&\"all\"!==O?(X(!0),J(\"\"),fetch(\"\".concat(k.QU,\"/api/get-nav-history/navs?mf_id=\").concat(O)).then(e=>e.json()).then(e=>Q(e.data)).catch(()=>Q([])).finally(()=>X(!1))):(Q([]),J(\"\"),X(!1))},[O]);let eB=async()=>{if(!U||U<\"2010-01-01\")return void ez(\"Nav data is available from 2010-01-01\");Z(!0),ez(\"\"),$([]);try{let e=await fetch(\"\".concat(k.QU,\"/api/nav-history?query_type=all_for_date&from_date=\").concat(U)),t=await",
+   "&&\"all\"!==O?(X(!0),J(\"\"),fetch(\"\".concat(k.QU,\"/api/get-nav-history/navs?mf_id=\").concat(O)).then(e=>e.json()).then(e=>Q(e.data)).catch(()=>Q([])).finally(()=>X(!1))):(Q([]),J(\"\"),X(!1))},[O]);let eB=async()=>{if(!U||U<\"2010-01-01\")return void ez(\"Nav data is available from 2010-01-01\");Z(!0),ez(\"\"),$([]);try{let e=await fetch(\"\".concat(k.QU,\"/api/nav-history?query_type=all_for_date&from_date=\").concat(U)),t=await e.json();t&&t.message?(ez(t.message),$([])):$(t.data||[])}catch(e){$([])}finally{Z(!1)}},eF=async e=>{if(U)try{eT(e);let t=\"\".concat(k.QU,\"/api/nav-history?query_type=all_for_date&from_date=\").concat(U,\"&export_type=\").concat(e),o=await fetch(t),a=await o.blob(),l=window.URL.createObjectURL(a",
+   "(!U||U<\"2010-01-01\")return void ez(\"Nav data is available from 2010-01-01\");Z(!0),ez(\"\"),$([]);try{let e=await fetch(\"\".concat(k.QU,\"/api/nav-history?query_type=all_for_date&from_date=\").concat(U)),t=await e.json();t&&t.message?(ez(t.message),$([])):$(t.data||[])}catch(e){$([])}finally{Z(!1)}},eF=async e=>{if(U)try{eT(e);let t=\"\".concat(k.QU,\"/api/nav-history?query_type=all_for_date&from_date=\").concat(U,\"&export_type=\").concat(e),o=await fetch(t),a=await o.blob(),l=window.URL.createObjectURL(a),n=document.createElement(\"a\"),r=(o.headers.get(\"content-disposition\")||\"\").match(/filename=\"?([^\";]+)\"?/i);n.download=r?r[1]:\"excel\"===e?\"nav_history.xlsx\":\"nav_history.docx\",n.href=l,document.body.appendChild(",
+   "),n=document.createElement(\"a\"),r=(o.headers.get(\"content-disposition\")||\"\").match(/filename=\"?([^\";]+)\"?/i);n.download=r?r[1]:\"excel\"===e?\"nav_history.xlsx\":\"nav_history.docx\",n.href=l,document.body.appendChild(n),n.click(),n.remove(),window.URL.revokeObjectURL(l)}catch(e){}finally{eT(null)}},eE=async e=>{if(U)try{eW(e);let t=\"\".concat(k.QU,\"/api/nav-history?query_type=historical_period&from_date=\").concat(U,\"&to_date=\").concat(F,\"&sd_id=\").concat(q,\"&export_type=\").concat(e),o=await fetch(t),a=await o.blob(),l=window.URL.createObjectURL(a),n=document.createElement(\"a\"),r=(o.headers.get(\"content-disposition\")||\"\").match(/filename=\"?([^\";]+)\"?/i);n.download=r?r[1]:\"excel\"===e?\"nav_history.xlsx\":\"nav_hi"
+  ],
+  "get-nav-history": [
+   "\"\"),[ek,e_]=(0,l.useState)(null),[eS,eC]=(0,l.useState)(!1),[eN,eL]=(0,l.useState)(!1),[eD,ez]=(0,l.useState)(\"\"),[eP,eW]=(0,l.useState)(null),[eI,eM]=(0,l.useState)(null),[eR,eV]=(0,l.useState)(null),[eO,eT]=(0,l.useState)(null),eU=\"dark\"===M.palette.mode?\"invert(1)\":\"none\";(0,l.useEffect)(()=>{O&&\"all\"!==O?(X(!0),J(\"\"),fetch(\"\".concat(k.QU,\"/api/get-nav-history/navs?mf_id=\").concat(O)).then(e=>e.json()).then(e=>Q(e.data)).catch(()=>Q([])).finally(()=>X(!1))):(Q([]),J(\"\"),X(!1))},[O]);let eB=async()=>{if(!U||U<\"2010-01-01\")return void ez(\"Nav data is available from 2010-01-01\");Z(!0),ez(\"\"),$([]);try{let e=await fetch(\"\".concat(k.QU,\"/api/nav-history?query_type=all_for_date&from_date=\").concat(U)),t=await",
+   " period selection.\");eC(!0);try{let e=await fetch(\"\".concat(k.QU,\"/api/nav-history?query_type=compare_dates&from_date=\").concat(ej,\"&to_date=\").concat(ev,\"&sd_id=\").concat(ef)),t=await e.json();t&&t.message?(ez(t.message),e_(null)):e_(t.data||null)}catch(e){e_(null)}finally{eC(!1)}};(0,l.useEffect)(()=>{ex?(eg(!0),eb(\"\"),fetch(\"\".concat(k.QU,\"/api/get-nav-history/navs?mf_id=\").concat(ex)).then(e=>e.json()).then(e=>eu(e.data)).catch(()=>eu([])).finally(()=>eg(!1))):(eu([]),eb(\"\"),eg(!1))},[ex]),(0,l.useEffect)(()=>{T(\"\"),J(\"\"),B(\"\"),E(\"\"),Q([]),$([]),et({}),en({}),eh(\"\"),eu([]),eb(\"\"),ey(\"\"),ew(\"\"),e_(null),ez(\"\"),\"nav-as-on-31-jan-2018\"===R&&B(\"2018-01-31\")},[R]);let eX=e=>{let t=new Date(e);if(isNaN(t.get"
+  ],
+  "sif-latest-nav": [
+   "useSearchParams)(),ei=null==ea?void 0:ea.get(\"amc\"),ed=null==ea?void 0:ea.get(\"sifid\"),ec=null==ea?void 0:ea.get(\"category\"),ep=null==ea?void 0:ea.get(\"type\"),ex=(0,k.A)(),eu=(0,I.useRouter)(),eh=((null==g?void 0:g.map(e=>e.SIF_Name))||[]).filter(e=>e.toLowerCase().includes(O.toLowerCase())),em=async(e,t,o,n)=>{Q(!0);try{let r=\"\".concat(w.QU,\"/api/sif-latest-nav?type=\").concat(encodeURIComponent(e));t&&(r+=\"&sifid=\".concat(t)),o&&(r+=\"&category=\".concat(encodeURIComponent(o))),n&&(r+=\"&search=\".concat(encodeURIComponent(n)));let s=await fetch(r),l=await s.json();H(l)}catch(e){H({data:[]})}Q(!1)},ef=async(e,t)=>{K(!0);try{let o=await fetch(\"\".concat(w.QU,\"/api/sif-latest-nav-category?sifid=\").concat(e,\"&ty",
+   ";try{let r=\"\".concat(w.QU,\"/api/sif-latest-nav?type=\").concat(encodeURIComponent(e));t&&(r+=\"&sifid=\".concat(t)),o&&(r+=\"&category=\".concat(encodeURIComponent(o))),n&&(r+=\"&search=\".concat(encodeURIComponent(n)));let s=await fetch(r),l=await s.json();H(l)}catch(e){H({data:[]})}Q(!1)},ef=async(e,t)=>{K(!0);try{let o=await fetch(\"\".concat(w.QU,\"/api/sif-latest-nav-category?sifid=\").concat(e,\"&type=\").concat(encodeURIComponent(t))),n=await o.json();$(Array.isArray(n)?n:[])}catch(e){$([])}K(!1)},eg=async()=>{el(!0);let e=R[W],t=\"\".concat(w.QU,\"/api/download-excel/sif-latest-nav?type=\").concat(encodeURIComponent(e),\"&sifid=\").concat(encodeURIComponent(X),\"&category=\").concat(encodeURIComponent(L));try{let e=aw",
+   " s=await fetch(r),l=await s.json();H(l)}catch(e){H({data:[]})}Q(!1)},ef=async(e,t)=>{K(!0);try{let o=await fetch(\"\".concat(w.QU,\"/api/sif-latest-nav-category?sifid=\").concat(e,\"&type=\").concat(encodeURIComponent(t))),n=await o.json();$(Array.isArray(n)?n:[])}catch(e){$([])}K(!1)},eg=async()=>{el(!0);let e=R[W],t=\"\".concat(w.QU,\"/api/download-excel/sif-latest-nav?type=\").concat(encodeURIComponent(e),\"&sifid=\").concat(encodeURIComponent(X),\"&category=\").concat(encodeURIComponent(L));try{let e=await fetch(t);if(!e.ok)throw Error(\"Download failed\");let o=await e.blob(),n=URL.createObjectURL(o),r=document.createElement(\"a\");r.href=n,r.download=\"latest-nav.xlsx\",document.body.appendChild(r),r.click(),document.b"
+  ],
+  "Sd_Id": [
+   "\",{colSpan:8,style:{background:\"#b0e4da\",color:\"#004739\",fontWeight:600,padding:10,fontSize:\"14px\",lineHeight:\"150%\"},children:e.SIFName})}),null==(s=e.schemes)?void 0:s.map(e=>{var t,o,r,s,l,a,i,d;return(0,n.jsxs)(\"tr\",{style:{borderBottom:\"0.5px dashed #C7D3D0\",color:ex.palette.common.black},children:[(0,n.jsx)(\"td\",{style:ej,children:null!=(t=e.Sd_Id)?t:\"\"}),(0,n.jsx)(\"td\",{style:ej,children:null!=(o=e.NavName)?o:\"\"}),(0,n.jsx)(\"td\",{style:ej,children:null!=(r=e.Plan)?r:\"\"}),(0,n.jsx)(\"td\",{style:ej,children:null!=(s=e.Option)?s:\"\"}),(0,n.jsx)(\"td\",{style:ej,children:null!=(l=e.ISINPO)?l:\" \"}),(0,n.jsx)(\"td\",{style:ej,children:null!=(a=e.ISINRI)?a:\" \"}),(0,n.jsx)(\"td\",{style:ej,children:null!=",
+   ":\"\"}),(0,n.jsx)(\"td\",{style:{padding:8,borderBottom:\"0.5px dashed #C7D3D0\"},children:null!=(d=e.Date)?d:\"\"})]},e.id)})]},\"\".concat(t,\"-\").concat(r,\"-\").concat(o))})]},\"\".concat(t,\"-\").concat(r))})}):T.data.map(e=>(0,n.jsxs)(\"tr\",{style:{borderBottom:\"0.5px dashed #C7D3D0\",color:ex.palette.common.black},children:[(0,n.jsx)(\"td\",{style:ej,children:e.Sd_Id}),(0,n.jsx)(\"td\",{style:ej,children:e.NavName}),(0,n.jsx)(\"td\",{style:ej,children:e.ISINPO||\" \"}),(0,n.jsx)(\"td\",{style:ej,children:e.ISINRI||\" \"}),(0,n.jsx)(\"td\",{style:ej,children:e.NetAssetValue}),(0,n.jsx)(\"td\",{style:{padding:8,borderBottom:\"0.5px dashed #C7D3D0\"},children:e.Date})]},e.id)):(0,n.jsx)(\"tr\",{children:(0,n.jsx)(\"td\",{colSpan:6,s"
+  ]
+ },
+ "tries": {
+  "/api/nav-history?query_type=historical_period&from_date=2025-10-01&to_date=2026-10-20&sd_id=SIF-120": [
+   400,
+   "{\"error\":\"Invalid parameter\",\"details\":\"sd_id must be a numeric id\"}"
+  ],
+  "/api/nav-history?query_type=historical_period&from_date=2025-10-01&to_date=2026-10-20&sdId=SIF-120": [
+   400,
+   "{\"error\":\"sd_id and to_date are required\"}"
+  ],
+  "/api/nav-history?sd_id=SIF-120&from_date=2025-10-01&to_date=2026-10-20": [
+   400,
+   "{\"error\":\"query_type is required\"}"
+  ],
+  "/api/nav-history?mfId=47&from_date=2025-10-01&to_date=2026-10-20&isSif=true": [
+   400,
+   "{\"error\":\"query_type is required\"}"
+  ],
+  "/api/nav-history?sifId=47&sdId=SIF-120&from_date=2025-10-01&to_date=2026-10-20": [
+   400,
+   "{\"error\":\"query_type is required\"}"
+  ],
+  "/api/get-nav-history/navs?query_type=historical_period&from_date=2025-10-01&to_date=2026-10-20&sd_id=SIF-120": [
+   400,
+   "{\"error\":\"mf_id is required\"}"
+  ],
+  "/api/get-nav-history/navs?query_type=historical_period&from_date=2025-10-01&to_date=2026-10-20&sdId=SIF-120": [
+   400,
+   "{\"error\":\"mf_id is required\"}"
+  ],
+  "/api/get-nav-history/navs?sd_id=SIF-120&from_date=2025-10-01&to_date=2026-10-20": [
+   400,
+   "{\"error\":\"mf_id is required\"}"
+  ],
+  "/api/get-nav-history/navs?mfId=47&from_date=2025-10-01&to_date=2026-10-20&isSif=true": [
+   400,
+   "{\"error\":\"mf_id is required\"}"
+  ],
+  "/api/get-nav-history/navs?sifId=47&sdId=SIF-120&from_date=2025-10-01&to_date=2026-10-20": [
+   400,
+   "{\"error\":\"mf_id is required\"}"
+  ]
+ },
+ "s0": {
+  "SIFName": "Altiva SIF",
+  "sifId": "47",
+  "type": "Open Ended",
+  "category": "Equity Oriented Investment Strategies - Equity Ex-Top 100 Long-Short Fund",
+  "Sd_Id": "SIF-120",
+  "ISINPO": "INF754K30094",
+  "ISINRI": "",
+  "NavName": "Altiva Equity Ex- Top 100 Long - Short Fund - Direct Plan - Growth",
+  "Date": "23-Oct-2026",
+  "NetAssetValue": 9.9778,
+  "Plan": "Direct Plan",
+  "Option": "Growth"
+ }
+}
