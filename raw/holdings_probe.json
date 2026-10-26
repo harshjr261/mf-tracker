@@ -1,0 +1,698 @@
+{
+ "360 ONE Mutual Fund": {
+  "url": "https://www.360.one/asset/mutual-funds/downloads/",
+  "status": 200,
+  "bytes": 732653,
+  "files": 0,
+  "sample": [],
+  "apiHints": [
+   "https://s3.ap-south-1.amazonaws.com/x-web-s3.360.one/IIFLMF_Merger_of_IIFL_Capital_Enhancer_Fund_Series1_110919_987c6cdd4a.pdf\\"
+  ]
+ },
+ "ASK MUTUAL FUND": {
+  "url": "https://www.askmutualfund.com/#/downloads",
+  "status": 200,
+  "bytes": 5329,
+  "files": 0,
+  "sample": [],
+  "apiHints": [
+   "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap",
+   "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+  ]
+ },
+ "Abakkus Mutual Fund": {
+  "url": "https://www.abakkusmf.com/statutory-disclosures.html",
+  "status": 200,
+  "bytes": 658907,
+  "files": 729,
+  "sample": [
+   "https://www.abakkusmf.com/uploads/Half_Yearly_Portfolio_March_26_Final_dbce7a92f6.xls",
+   "https://www.abakkusmf.com/uploads/Portfolio_Overlap_31_Aug_2026_AOD_All_8dbdc7fa3a.xlsx",
+   "https://www.abakkusmf.com/uploads/Portfolio_Overlap_30_Sep_2026_AOD_All_496c47f7ea.xlsx",
+   "https://www.abakkusmf.com/uploads/Abakkus_Half_yearly_financials_v1_March26_33e42cd82d.xlsx",
+   "https://www.abakkusmf.com/uploads/Abakkus_Flexi_Cap_Fund_4455224a29.xlsx"
+  ],
+  "apiHints": [
+   "https://fonts.googleapis.com",
+   "https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700|Lato:400,700"
+  ],
+  "fileStatus": 200,
+  "fileBytes": 233350,
+  "fileMagic": "504b0304"
+ },
+ "Aditya Birla Sun Life Mutual Fund": {
+  "url": "https://mutualfund.adityabirlacapital.com/forms-and-downloads/portfolio",
+  "status": 200,
+  "bytes": 270990,
+  "files": 0,
+  "sample": [],
+  "apiHints": [
+   "https://mutualfund.adityabirlacapital.com",
+   "https://mutualfund.adityabirlacapital.com/-/media/bsl/images/logo/birla_600x315.webp",
+   "https://mutualfund.adityabirlacapital.com/forms-and-downloads/portfolio",
+   "https://mutualfund.adityabirlacapital.com/",
+   "https://mutualfund.adityabirlacapital.com/-/media/192x65.png",
+   "https://mutualfund.adityabirlacapital.com/-/media/BSL/Images/Others/new-icon-gif"
+  ]
+ },
+ "AlphaGrep Mutual Fund": {
+  "url": "https://www.alphagrepmf.ai/disclosures",
+  "status": 200,
+  "bytes": 59089,
+  "files": 0,
+  "sample": [],
+  "apiHints": [
+   "https://fonts.googleapis.com"
+  ]
+ },
+ "Angel One Mutual Fund": {
+  "url": "https://www.angelonemf.com/downloads",
+  "status": 403,
+  "bytes": 520,
+  "files": 0,
+  "sample": [],
+  "apiHints": []
+ },
+ "Axis Mutual Fund": {
+  "url": "https://www.axismf.com/statutory-disclosures",
+  "status": 200,
+  "bytes": 313606,
+  "files": 0,
+  "sample": [],
+  "apiHints": [
+   "https://ext-api.notifyvisitors.com/ext/v1/settings\\",
+   "https://www.axismf.com/1/2/685/2385/capitalGains.svg\\"
+  ]
+ },
+ "Bajaj Finserv Mutual Fund": {
+  "url": "https://www.bajajamc.com/downloads?statutory-disclosures=",
+  "status": 403,
+  "bytes": 919,
+  "files": 0,
+  "sample": [],
+  "apiHints": []
+ },
+ "Bandhan Mutual Fund": {
+  "url": "https://bandhanmutual.com/downloads/disclosures",
+  "status": 200,
+  "bytes": 10493,
+  "files": 0,
+  "sample": [],
+  "apiHints": [
+   "https://fonts.googleapis.com"
+  ]
+ },
+ "Bank of India Mutual Fund": {
+  "url": "https://www.boimf.in/investor-corner#t2",
+  "status": 200,
+  "bytes": 69135,
+  "files": 0,
+  "sample": [],
+  "apiHints": []
+ },
+ "Baroda BNP Paribas Mutual Fund": {
+  "url": "https://www.barodabnpparibasmf.in/downloads/monthly-portfolio-scheme",
+  "status": 200,
+  "bytes": 115640,
+  "files": 6,
+  "sample": [
+   "https://www.barodabnpparibasmf.in/assets/download_documents/BOBBNPMF_Monthly_Portfolio_30-09-2026_20376.xls",
+   "https://www.barodabnpparibasmf.in/assets/download_documents/YR56_20375.xlsx",
+   "https://www.barodabnpparibasmf.in/assets/download_documents/YR54_20374.xlsx",
+   "https://www.barodabnpparibasmf.in/assets/download_documents/YR53_20373.xlsx",
+   "https://www.barodabnpparibasmf.in/assets/download_documents/YR52_20372.xlsx"
+  ],
+  "apiHints": [
+   "https://ext-api.notifyvisitors.com/ext/v1/settings",
+   "https://api.whatsapp.com/send?text=Check%20this%20out!%20https://www.barodabnpparibasmf.in",
+   "https://www.google.com/recaptcha/api.js"
+  ],
+  "fileStatus": 200,
+  "fileBytes": 17865179,
+  "fileMagic": "504b0304"
+ },
+ "Canara Robeco Mutual Fund": {
+  "url": "https://www.canararobeco.com/documents/statutory-disclosures/scheme-dashboard/scheme-monthly-portfolio/",
+  "status": 200,
+  "bytes": 216789,
+  "files": 0,
+  "sample": [],
+  "apiHints": [
+   "https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap",
+   "https://api.w.org/",
+   "https://www.canararobeco.com/wp-content/themes/crmf/js/custom-api-fetch.js",
+   "https://www.google.com/recaptcha/api.js?render=6Ld_V_8qAAAAANmL_z72cH6Gp3ikyz8Y435HUXos&#038;ver=3.0"
+  ]
+ },
+ "Capitalmind Mutual Fund": {
+  "url": "https://capitalmindmf.com/statutory-disclosures.html",
+  "status": 200,
+  "bytes": 568012,
+  "files": 703,
+  "sample": [
+   "https://capitalmindmf.com/uploads/Product_Dashboard_Sept_2026_1_6b657b9873.xlsx",
+   "https://capitalmindmf.com/uploads/Product_Dashboard_August_2026_312c6eb0da.xlsx",
+   "https://capitalmindmf.com/uploads/Product_Dashboard_July_2026_3ea918169e.xlsx",
+   "https://capitalmindmf.com/uploads/Product_Dashboard_June_2026_be7feade2f.xlsx",
+   "https://capitalmindmf.com/uploads/Product_Dashboard_May2026_f7def3c1d0.xlsx"
+  ],
+  "apiHints": [
+   "https://capitalmindmf.com",
+   "https://capitalmindmf.com/img/HeroBGbobile.png",
+   "https://fonts.googleapis.com",
+   "https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700|Lato:400,700",
+   "https://invest.capitalmindmf.com/",
+   "https://partner.capitalmindmf.com/"
+  ],
+  "fileStatus": 200,
+  "fileBytes": 493409,
+  "fileMagic": "504b0304"
+ },
+ "Choice Mutual Fund": {
+  "url": "https://choicemf.com/disclosures/monthly-portfolio",
+  "status": 200,
+  "bytes": 46903,
+  "files": 1,
+  "sample": [
+   "https://choicemf.com/CAMS-Branches.xlsx"
+  ],
+  "apiHints": [
+   "https://fonts.googleapis.com/css2?family=Onest:wght@100..900&amp;display=swap"
+  ],
+  "fileStatus": 200,
+  "fileBytes": 52177,
+  "fileMagic": "504b0304"
+ },
+ "DSP Mutual Fund": {
+  "url": "https://www.dspim.com/about-us/mandatory-disclosure/portfolio-disclosures",
+  "status": 200,
+  "bytes": 406435,
+  "files": 340,
+  "sample": [
+   "https://www.dspim.com/media/pages/mandatory-disclosures/portfolio-disclosures/440f134506-1792424869/dsp-isin-debt-fortnightly-portfolio-as-on-15-october-2026.xlsx",
+   "https://www.dspim.com/media/pages/mandatory-disclosures/portfolio-disclosures/4a103b4885-1791215145/dsp-isin-debt-fortnightly-portfolio-as-on-30-sep-2026.xlsx",
+   "https://www.dspim.com/media/pages/mandatory-disclosures/portfolio-disclosures/17f3c6f880-1790008770/dsp-isin-debt-fortnightly-portfolio-as-on-15-sep-2026.xlsx",
+   "https://www.dspim.com/media/pages/mandatory-disclosures/portfolio-disclosures/2482bd2343-1788621582/dsp-isin-debt-portfolio-as-on-31-aug-2026.xlsx",
+   "https://www.dspim.com/media/pages/mandatory-disclosures/portfolio-disclosures/415e8731e8-1787239919/dsp-isin-debt-fortnightly-portfolio-as-on-15-aug-2026.xlsx"
+  ],
+  "apiHints": [
+   "https://www.dspim.com/assets/js/fetch-api.js",
+   "https://www.google.com/recaptcha/api.js?render=6Lea30IsAAAAAFA715pA_hq5dj6efG7xrbVslCsD",
+   "https://api.whatsapp.com/send?phone=917738000030",
+   "https://www.google.com/recaptcha/api.js?render=6LcX73wkAAAAAOCmFNSvt955yKXOycah6gSwCbb6"
+  ],
+  "fileStatus": 200,
+  "fileBytes": 447900,
+  "fileMagic": "504b0304"
+ },
+ "Edelweiss Mutual Fund": {
+  "url": "https://www.edelweissmf.com/statutory#Portfolio-of-Schemes",
+  "status": 403,
+  "bytes": 380,
+  "files": 0,
+  "sample": [],
+  "apiHints": []
+ },
+ "Franklin Templeton Mutual Fund": {
+  "url": "https://www.franklintempletonindia.com/investor/reports",
+  "status": 200,
+  "bytes": 4708,
+  "files": 0,
+  "sample": [],
+  "apiHints": []
+ },
+ "Groww Mutual Fund": {
+  "url": "https://growwmf.in/statutory-disclosure/portfolio",
+  "status": 200,
+  "bytes": 409379,
+  "files": 1301,
+  "sample": [
+   "https://assets-netstorage.growwmf.in/compliance_docs/Statutory%20Disclosure/Portfolio/2026%20-2027/Monthly%20Portfolio-%20Sep%2030%202026.xlsx",
+   "https://assets-netstorage.growwmf.in/compliance_docs/Statutory%20Disclosure/Portfolio/2026%20-2027/Monthly%20Portfolio-%20May%2031,%202026.xlsx",
+   "https://assets-netstorage.growwmf.in/compliance_docs/Statutory%20Disclosure/Portfolio/2026%20-2027/Monthly%20Portfolio-%20June%2030,%202026.xlsx",
+   "https://assets-netstorage.growwmf.in/compliance_docs/Statutory%20Disclosure/Portfolio/2026%20-2027/Monthly%20Portfolio-%20July%2031%202026.xlsx",
+   "https://assets-netstorage.growwmf.in/compliance_docs/Statutory%20Disclosure/Portfolio/2026%20-2027/Monthly%20Portfolio-%20Aug%2031%202026.xlsx"
+  ],
+  "apiHints": [],
+  "fileStatus": 200,
+  "fileBytes": 3552859,
+  "fileMagic": "504b0304"
+ },
+ "HDFC Mutual Fund": {
+  "url": "https://www.hdfcfund.com/statutory-disclosure/portfolio/monthly-portfolio",
+  "status": 403,
+  "bytes": 434,
+  "files": 0,
+  "sample": [],
+  "apiHints": []
+ },
+ "HSBC Mutual Fund": {
+  "url": "https://www.assetmanagement.hsbc.co.in/en/mutual-funds/investor-resources/information-library",
+  "status": "error",
+  "error": "HTTPSConnectionPool(host='www.assetmanagement.hsbc.co.in', port=443): Read timed out. (read timeout=40)"
+ },
+ "Helios Mutual Fund": {
+  "url": "https://www.heliosmf.in/portfolio-disclosure/",
+  "status": 200,
+  "bytes": 237407,
+  "files": 292,
+  "sample": [
+   "https://www.heliosmf.in/wp-content/uploads/2026/10/helios-overnight-fund-fortnightly-portfolio-as-on-15th-october-2026.xls",
+   "https://www.heliosmf.in/wp-content/uploads/2026/10/helios-overnight-fund-fortnightly-portfolio-as-on-30th-september-2026.xls",
+   "https://www.heliosmf.in/wp-content/uploads/2026/09/helios-overnight-fund-fortnightly-portfolio-as-on-15th-september-2026.xls",
+   "https://www.heliosmf.in/wp-content/uploads/2026/09/helios-overnight-fund-fortnightly-portfolio-as-on-31st-august-2026.xls",
+   "https://www.heliosmf.in/wp-content/uploads/2026/08/helios-overnight-fund-fortnightly-portfolio-as-on-15th-august-2026.xls"
+  ],
+  "apiHints": [
+   "https://fonts.googleapis.com",
+   "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+  ],
+  "fileStatus": 200,
+  "fileBytes": 283648,
+  "fileMagic": "d0cf11e0"
+ },
+ "ICICI Prudential Mutual Fund": {
+  "url": "https://www.icicipruamc.com/news-and-media/downloads?currentTabFilter=Disclosures&subCatTabFilter=MonthlyPortfolioDisclosures",
+  "status": 200,
+  "bytes": 22203,
+  "files": 0,
+  "sample": [],
+  "apiHints": [
+   "https://apimf.icicipruamc.com",
+   "https://ext-api.notifyvisitors.com/ext/v1/settings",
+   "https://fonts.googleapis.com",
+   "https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap",
+   "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+  ]
+ },
+ "ITI Mutual Fund": {
+  "url": "https://www.itiamc.com/statuory-disclosure",
+  "status": 200,
+  "bytes": 275637,
+  "files": 0,
+  "sample": [],
+  "apiHints": []
+ },
+ "Invesco Mutual Fund": {
+  "url": "https://invescomutualfund.com/literature-and-form?tab=Complete",
+  "status": 200,
+  "bytes": 509640,
+  "files": 0,
+  "sample": [],
+  "apiHints": []
+ },
+ "JM Financial Mutual Fund": {
+  "url": "https://www.jmfinancialmf.com/downloads/Portfolio-Disclosure",
+  "status": 200,
+  "bytes": 3089,
+  "files": 0,
+  "sample": [],
+  "apiHints": []
+ },
+ "Jio BlackRock Mutual Fund": {
+  "url": "https://www.jioblackrockamc.com/statutory-disclosure/disclosures/monthly-portfolio-disclosure",
+  "status": 200,
+  "bytes": 297840,
+  "files": 0,
+  "sample": [],
+  "apiHints": []
+ },
+ "Kotak Mahindra Mutual Fund": {
+  "url": "https://www.kotakmf.com/Information/forms-and-downloads",
+  "status": 200,
+  "bytes": 15073,
+  "files": 0,
+  "sample": [],
+  "apiHints": [
+   "https://hcaptcha.com/1/api.js?recaptchacompat=off"
+  ]
+ },
+ "LIC Mutual Fund": {
+  "url": "https://www.licmf.com/downloads/monthly-portfolio",
+  "status": 200,
+  "bytes": 96487,
+  "files": 2,
+  "sample": [
+   "https://www.licmf.com/assets/pdf/statuary_disclosure_new/33/1792042594-LIC-MF-Dashboard-as-on-30-September-2026.xlsx",
+   "https://www.licmf.com/assets/pdf/Daily-Tracking-Error-on-rolling-basis.xlsx"
+  ],
+  "apiHints": [],
+  "fileStatus": 200,
+  "fileBytes": 1480317,
+  "fileMagic": "504b0304"
+ },
+ "Lakshya Mutual Fund": {
+  "url": null,
+  "status": "no page"
+ },
+ "Mahindra Manulife Mutual Fund": {
+  "url": "https://www.mahindramanulife.com/downloads#mandatory-disclosures",
+  "status": 200,
+  "bytes": 8986,
+  "files": 0,
+  "sample": [],
+  "apiHints": []
+ },
+ "Mirae Asset Mutual Fund": {
+  "url": "https://www.miraeassetmf.co.in/downloads/portfolio",
+  "status": 200,
+  "bytes": 145905,
+  "files": 0,
+  "sample": [],
+  "apiHints": [
+   "https://ext-api.notifyvisitors.com/ext/v1/settings",
+   "https://anuvadak.in/api/snippet/bundle/file",
+   "https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit"
+  ]
+ },
+ "Monarch Mutual Fund": {
+  "url": "https://www.monarchamc.in/forms-downloads/portfolio-holdings/monthly",
+  "status": 200,
+  "bytes": 100383,
+  "files": 1,
+  "sample": [
+   "https://www.monarchamc.in/uploads/Monthly_Portfolio_Monarch_Overnight_Fund_30_September_2026_8d5f63f3c7.xls"
+  ],
+  "apiHints": [],
+  "fileStatus": 200,
+  "fileBytes": 257536,
+  "fileMagic": "d0cf11e0"
+ },
+ "Motilal Oswal Mutual Fund": {
+  "url": "https://www.motilaloswalmf.com/downloads/scheme-portfolio-details",
+  "status": 200,
+  "bytes": 40618,
+  "files": 0,
+  "sample": [],
+  "apiHints": []
+ },
+ "NJ Mutual Fund": {
+  "url": "https://downloads.njmutualfund.com/downloads.php",
+  "status": 200,
+  "bytes": 216932,
+  "files": 12,
+  "sample": [
+   "https://downloads.njmutualfund.com/pdf/Scheme-Dashboard-as-on-October-29-2021.xlsx",
+   "https://downloads.njmutualfund.com/pdf/Total-Expense-Ratio.xlsx",
+   "https://downloads.njmutualfund.com/pdf/Monthly-Portfolio-Disclosure-as-on-October-2021.xlsx",
+   "https://downloads.njmutualfund.com/pdf/Details-of-Transactions-of-Debt-&-Money-Market-Securities-Settlement-date-11Nov2021.xls",
+   "https://downloads.njmutualfund.com/pdf/Details-of-Transactions-of-Debt-&-Money-Market-Securities-Settlement-date-10Nov2021.xls"
+  ],
+  "apiHints": [
+   "http://www.njcapital.in/",
+   "https://www.google.com/recaptcha/api.js"
+  ],
+  "fileStatus": 200,
+  "fileBytes": 18946,
+  "fileMagic": "504b0304"
+ },
+ "Navi Mutual Fund": {
+  "url": "https://navi.com/mutual-fund/downloads/portfolio",
+  "status": 403,
+  "bytes": 5801,
+  "files": 0,
+  "sample": [],
+  "apiHints": []
+ },
+ "Nippon India Mutual Fund": {
+  "url": "https://mf.nipponindiaim.com/investor-service/downloads/factsheet-portfolio-and-other-disclosures",
+  "status": 200,
+  "bytes": 413846,
+  "files": 349,
+  "sample": [
+   "https://mf.nipponindiaim.com/InvestorServices/FactsheetsDocuments/NIMF-FORTNIGHTLY-PORTFOLIO-15-Oct-26.xls",
+   "https://mf.nipponindiaim.com/InvestorServices/FactsheetsDocuments/Risk-Parameter-Sep-2026.xls",
+   "https://mf.nipponindiaim.com/InvestorServices/FactsheetsDocuments/NIMF-MONTHLY-PORTFOLIO-30-Sep-26.xls",
+   "https://mf.nipponindiaim.com/InvestorServices/FactsheetsDocuments/NIMF-FORTNIGHTLY-PORTFOLIO-30-Sep-26.xls",
+   "https://mf.nipponindiaim.com/InvestorServices/FactsheetsDocuments/NIMF-FORTNIGHTLY-PORTFOLIO-15-Sep-26.xls"
+  ],
+  "apiHints": [],
+  "fileStatus": 200,
+  "fileBytes": 596135,
+  "fileMagic": "504b0304"
+ },
+ "Old Bridge Mutual Fund": {
+  "url": "https://oldbridgemf.com/statutory-disclosures.html",
+  "status": 200,
+  "bytes": 809315,
+  "files": 1173,
+  "sample": [
+   "https://oldbridgemf.com/uploads/OBMF_Half_Yearly_Financials_March26_Final_f97588ca7d.xlsx",
+   "https://oldbridgemf.com/uploads/OBMF_Half_Yearly_Unaudited_Financials_September_2025_a82f54320b.xlsx",
+   "https://oldbridgemf.com/uploads/OBMF_Half_Yearly_Financials_March_2025_afbcfbff44.xlsx",
+   "https://oldbridgemf.com/uploads/OBMF_Half_Yearly_Financials_September_2024_Final_20b7cee5c7.xlsx",
+   "https://oldbridgemf.com/uploads/OBMF_Half_Yearly_Financials_Mar2024_Final_aa08d91639.xlsx"
+  ],
+  "apiHints": [
+   "https://fonts.googleapis.com",
+   "https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700|Lato:400,700"
+  ],
+  "fileStatus": 200,
+  "fileBytes": 478741,
+  "fileMagic": "504b0304"
+ },
+ "PGIM India Mutual Fund": {
+  "url": "https://www.pgimindia.com/mutual-funds/disclosures/Portfolios/Monthly-Portfolio",
+  "status": 200,
+  "bytes": 186491,
+  "files": 0,
+  "sample": [],
+  "apiHints": [
+   "https://www.pgimindia.com/api/v1/general/image/pgim-logo-small.png",
+   "https://maps.googleapis.com/maps/api/js?key=AIzaSyARmG36PtiRQc9yzGH2TQxgrbtrhuF6yWM"
+  ]
+ },
+ "PPFAS Mutual Fund": {
+  "url": "https://amc.ppfas.com/downloads/portfolio-disclosure/",
+  "status": 200,
+  "bytes": 435218,
+  "files": 423,
+  "sample": [
+   "https://amc.ppfas.com/downloads/portfolio-disclosure/2026/PPFAS_Monthly_Portfolio_Report_September_30_2026.xls",
+   "https://amc.ppfas.com/downloads/portfolio-disclosure/2026/PPFCF_PPFAS_Monthly_Portfolio_Report_September_30_2026.xlsx",
+   "https://amc.ppfas.com/downloads/portfolio-disclosure/2026/PPLF_PPFAS_Monthly_Portfolio_Report_September_30_2026.xlsx",
+   "https://amc.ppfas.com/downloads/portfolio-disclosure/2026/PPTSF_PPFAS_Monthly_Portfolio_Report_September_30_2026.xlsx",
+   "https://amc.ppfas.com/downloads/portfolio-disclosure/2026/PPCHF_PPFAS_Monthly_Portfolio_Report_September_30_2026.xlsx"
+  ],
+  "apiHints": [
+   "https://fonts.googleapis.com/css2?family=Varela+Round&display=swap",
+   "https://challenges.cloudflare.com/turnstile/v0/api.js"
+  ],
+  "fileStatus": 200,
+  "fileBytes": 400503,
+  "fileMagic": "504b0304"
+ },
+ "Quantum Mutual Fund": {
+  "url": "https://www.quantumamc.com/portfolio/combined/-1/1/0/0",
+  "status": 200,
+  "bytes": 149065,
+  "files": 20,
+  "sample": [
+   "https://www.quantumamc.com/FileCDN/FactSheet/18650bf5-c7b8-47b1-a725-78a86416c1a5.xlsx",
+   "https://www.quantumamc.com/FileCDN/FactSheet/f616b3fb-f263-439d-81da-d4663a287aed.xlsx",
+   "https://www.quantumamc.com/FileCDN/FactSheet/d701fe6a-e00f-4291-a9f3-47e40f4946da.xlsx",
+   "https://www.quantumamc.com/FileCDN/FactSheet/83d3ddb2-d731-4039-9884-8159ee1976ff.xlsx",
+   "https://www.quantumamc.com/FileCDN/FactSheet/cb50090a-93af-4863-a4cb-18ef81c6b14c.xlsx"
+  ],
+  "apiHints": [
+   "https://challenges.cloudflare.com/turnstile/v0/api.js"
+  ],
+  "fileStatus": 200,
+  "fileBytes": 994824,
+  "fileMagic": "504b0304"
+ },
+ "SBI Mutual Fund": {
+  "url": "https://www.sbimf.com/portfolios",
+  "status": 200,
+  "bytes": 44935,
+  "files": 0,
+  "sample": [],
+  "apiHints": [
+   "https://online.sbimf.com/api/CMS/CMSLoginCycle",
+   "https://online.sbimf.com/api/CMS/CMSRedirectToPortal",
+   "https://online.sbimf.com/api/CMS/QuickInvestRedirect",
+   "https://online.sbimf.com/api/CMS/PreLoginKYC",
+   "https://online.sbimf.com/api/CMS/PreLoginCreateFolio",
+   "https://online.sbimf.com/api/CMS/AddToCartMultiSelect"
+  ]
+ },
+ "Samco Mutual Fund": {
+  "url": "https://www.samcomf.com/StatutoryDisclosure",
+  "status": 200,
+  "bytes": 4195492,
+  "files": 7026,
+  "sample": [
+   "https://www.samcomf.com/amc-document-download/IN_MF_FORTNIGHTLY_Portfolio_Overnight_15102026_1792406384.xlsx",
+   "https://www.samcomf.com/IN_MF_FORTNIGHTLY_Portfolio_Overnight_15102026_1792406384.xlsx",
+   "https://www.samcomf.com/amc-document-download/IN_MF_Portfolio_Monthly_Fortnightly_OvernightFund_30092026_1791188043.xlsx",
+   "https://www.samcomf.com/IN_MF_Portfolio_Monthly_Fortnightly_OvernightFund_30092026_1791188043.xlsx",
+   "https://www.samcomf.com/amc-document-download/IN_MF_FORTNIGHTLY_Portfolio_Overnight_15092026_1789729389.xlsx"
+  ],
+  "apiHints": [
+   "https://fonts.googleapis.com",
+   "https://scom.samcomf.com/api/DownloadApi",
+   "https://www.samcomf.com/api/disclosure-of-exe-renum/log/data"
+  ],
+  "fileStatus": 500,
+  "fileBytes": 1558,
+  "fileMagic": "3c21444f"
+ },
+ "Shriram Mutual Fund": {
+  "url": "https://www.shriramamc.in/investor-statutory-disclosures",
+  "status": 200,
+  "bytes": 1309343,
+  "files": 25,
+  "sample": [
+   "https://cdn.shriramamc.in/uploads/Statutory-disclosure/Distributor-Commission-Disclosure/Mutual-Fund-Distributor-Commission-Disclosure/Shriram-Disclosure-of-Commission-Expenses-Act-FYR-2025-26.xlsx",
+   "https://cdn.shriramamc.in/uploads/Statutory-disclosure/Disclosure-of-Transaction-in-Debt-and-Money-Market-Securities/2025-2026/SHRI-IN-MF-SEBI-TRANSACTION-UPLOAD-REPORT-NEW-12102026.xls",
+   "https://cdn.shriramamc.in/uploads/Statutory-disclosure/Disclosure-of-Transaction-in-Debt-and-Money-Market-Securities/2026-2027/SHRI-IN-MF-SEBI-TRANSACTION-UPLOAD-REPORT-NEW-01102026.xls",
+   "https://cdn.shriramamc.in/uploads/Statutory-disclosure/Disclosure-of-Transaction-in-Debt-and-Money-Market-Securities/2026-2027/SHRI-IN-MF-SEBI-TRANSACTION-UPLOAD-REPORT-NEW-05102026.xls",
+   "https://cdn.shriramamc.in/uploads/Statutory-disclosure/Disclosure-of-Transaction-in-Debt-and-Money-Market-Securities/2026-2027/SHRI-IN-MF-SEBI-TRANSACTION-UPLOAD-REPORT-NEW-06102026.xls"
+  ],
+  "apiHints": [],
+  "fileStatus": 200,
+  "fileBytes": 267245,
+  "fileMagic": "504b0304"
+ },
+ "Sundaram Mutual Fund": {
+  "url": "https://www.sundarammutual.com/Monthly-Fortnightly-Adhoc-Portfolios",
+  "status": "error",
+  "bytes": 287499,
+  "files": 1,
+  "sample": [
+   "https://www.sundarammutual.com/pdf2/2024/LIVE_BANK_LIST_UPDATED_Aug_2024.xlsx"
+  ],
+  "apiHints": [
+   "https://fonts.googleapis.com",
+   "https://api.whatsapp.com/send?phone=919500057237&text=Hi&app_absent=0"
+  ],
+  "error": "HTTPSConnectionPool(host='www.sundarammutual.com', port=443): Read timed out. (read timeout=60)"
+ },
+ "Tata Mutual Fund": {
+  "url": "https://www.tatamutualfund.com/schemes-related",
+  "status": 200,
+  "bytes": 388854,
+  "files": 2,
+  "sample": [
+   "https://www.tatamutualfund.com/system/files/2026-10/Revised%20format%20Disclosure%20of%20scheme%20category-wise-%20AAUM%20data%20%20on%20quarterly%20basis_TATA_JUL%2726-SEP%2726.xlsx",
+   "https://tatamutualfund.com/system/files/2026-10/Debt%20Index%20Replication%20Factor%20as%20on%2015th%20October%202026.xlsx"
+  ],
+  "apiHints": [
+   "https://dist-api.tatamfdev.com",
+   "https://betacms.tatamutualfund.com/system/files/2026-10/Tata%20Nifty%20Capital%20Markets%20Index%20Fund_0.pdf",
+   "https://www.tatacapital.com/",
+   "https://www.tatacapital.com/\\",
+   "https://betacms.tatamutualfund.com/system/files/2026-10/Tata%20Nifty%20Capital%20Markets%20Index%20Fund_0.pdf\\",
+   "https://dist-api.tatamfdev.com\\"
+  ],
+  "fileStatus": 200,
+  "fileBytes": 13649,
+  "fileMagic": "504b0304"
+ },
+ "Taurus Mutual Fund": {
+  "url": "https://taurusmutualfund.com/monthly-portfolio",
+  "status": 200,
+  "bytes": 76129,
+  "files": 0,
+  "sample": [],
+  "apiHints": []
+ },
+ "The Wealth Company Mutual Fund": {
+  "url": "https://www.wealthcompanyamc.in/literature-forms/portfolio-documents/monthly/",
+  "status": 200,
+  "bytes": 172559,
+  "files": 0,
+  "sample": [],
+  "apiHints": []
+ },
+ "Trust Mutual Fund": {
+  "url": "https://www.trustmf.com/disclosures?activeTab=portfolio-disclosures",
+  "status": 200,
+  "bytes": 949,
+  "files": 0,
+  "sample": [],
+  "apiHints": []
+ },
+ "UTI Mutual Fund": {
+  "url": "https://www.utimf.com/downloads/consolidate-all-portfolio-disclosure",
+  "status": 200,
+  "bytes": 1329820,
+  "files": 0,
+  "sample": [],
+  "apiHints": [
+   "https://fonts.googleapis.com",
+   "https://fonts.googleapis.com/css?family=Material+Icons&amp;display=swap",
+   "https://fonts.googleapis.com/css?family=Material+Icons&display=swap",
+   "https://ext-api.notifyvisitors.com/ext/v1/settings",
+   "https://www.utimf.com/api/page/get-ter-download-page-docs",
+   "https://www.utimf.com/api/get-kyc-documents"
+  ]
+ },
+ "Unifi Mutual Fund": {
+  "url": "https://unifimf.com/statutorydocuments/#monthly-portfolio-disclosure",
+  "status": 200,
+  "bytes": 579941,
+  "files": 213,
+  "sample": [
+   "https://unifimf.com/wp-content/uploads/fund-sheets/Disclosure-of-Commission-for-FY-2025-26.xlsx",
+   "https://unifimf.com/wp-content/uploads/fund-sheets/Disclosure-of-Commissions_2024-25.xlsx",
+   "https://unifimf.com/wp-content/uploads/fund-sheets/Unifi-Dynamic-Asset-Allocation-Fund.zip",
+   "https://unifimf.com/wp-content/uploads/fund-sheets/Unifi-Flexi-Cap_09102025.zip",
+   "https://unifimf.com/wp-content/uploads/fund-sheets/SSD_LiquidFund-Sep-26.zip"
+  ],
+  "apiHints": [
+   "https://api.w.org/",
+   "https://www.google.com/recaptcha/api.js?render=6LdeNmYrAAAAAHvNXuT7gyozuLje97HjvY_j_0TE&#038;ver=3.0"
+  ],
+  "fileStatus": 200,
+  "fileBytes": 231391,
+  "fileMagic": "504b0304"
+ },
+ "Union Mutual Fund": {
+  "url": "https://www.unionmf.com/about-us/downloads/monthly-portfolio",
+  "status": "error",
+  "error": "HTTPSConnectionPool(host='www.unionmf.com', port=443): Max retries exceeded with url: /about-us/downloads/monthly-portfolio (Caused by NewConnectionError(\"HTTPS"
+ },
+ "WhiteOak Capital Mutual Fund": {
+  "url": "https://mf.whiteoakamc.com/regulatory-disclosures/scheme-portfolios",
+  "status": 403,
+  "bytes": 919,
+  "files": 0,
+  "sample": [],
+  "apiHints": []
+ },
+ "Zerodha Mutual Fund": {
+  "url": "https://www.zerodhafundhouse.com/resources/disclosures",
+  "status": 200,
+  "bytes": 759105,
+  "files": 3,
+  "sample": [
+   "https://assets.zerodhafundhouse.com/statutory-reports/nav-after-1st-may/NAV_29.04.2026.xlsx",
+   "https://assets.zerodhafundhouse.com/statutory-reports/other-disclosures/TER_29092026.xlsx",
+   "https://assets.zerodhafundhouse.com/statutory-reports/other-disclosures/ZERODMFFUNOUT_AMFI_NAV.xlsx"
+  ],
+  "apiHints": [],
+  "fileStatus": 200,
+  "fileBytes": 6899,
+  "fileMagic": "504b0304"
+ },
+ "quant Mutual Fund": {
+  "url": "https://quantmutual.com/statutory-disclosures",
+  "status": 200,
+  "bytes": 125164,
+  "files": 12,
+  "sample": [
+   "https://quantmutual.com/Admin/disclouser/Disclosure_of_commission_paid_to_Distributor_FY_24-25.xlsx",
+   "https://quantmutual.com/Admin/disclouser/Disclosure_of_Commission_Paid_to_the_Distributor_for_F_Y_2023-2024.xlsx",
+   "https://quantmutual.com/Admin/disclouser/qMF_Data_on_Commission_2018_19.xls",
+   "https://quantmutual.com/Admin/disclouser/QMF_Data_on_Commission_FY_2017-18.xlsx",
+   "https://quantmutual.com/Admin/disclouser/Quant_Disclosure_of_Commission_to_MFD_FY_2025-26.xlsx"
+  ],
+  "apiHints": [
+   "https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+  ],
+  "fileStatus": 200,
+  "fileBytes": 441267,
+  "fileMagic": "504b0304"
+ }
+}
