@@ -187,7 +187,7 @@ td.q1{background:var(--q1)} td.q2{background:var(--q2)} td.q3{background:var(--q
 .ai .off{font-size:13px;color:var(--ink2)}
 .ai .disc{font-size:11.5px;color:var(--muted)}
 /* money flows */
-main.fl #pulse,main.pf #pulse,main.pf #cats,main.pf .head,main.pf #controls,main.pf #tablebox,main.pf #catAI,main.pf #catFlows,main.pf #guide,main.fl #cats,main.fl .head,main.fl #controls,main.fl #tablebox,main.fl #catAI,main.fl #catFlows,main.fl #guide{display:none}
+main.fl #pulse,main.pf #pulse,main.sf #pulse,main.sf #cats,main.sf .head,main.sf #controls,main.sf #tablebox,main.sf #catAI,main.sf #catFlows,main.sf #guide,main.pf #cats,main.pf .head,main.pf #controls,main.pf #tablebox,main.pf #catAI,main.pf #catFlows,main.pf #guide,main.fl #cats,main.fl .head,main.fl #controls,main.fl #tablebox,main.fl #catAI,main.fl #catFlows,main.fl #guide{display:none}
 #flowsView{display:grid;gap:14px;min-width:0}
 .fh h2{margin:0;font-size:20px;font-weight:600}
 .fh .sub{color:var(--muted);font-size:13px;margin-top:2px}
@@ -273,6 +273,7 @@ input[type=checkbox]{accent-color:var(--accent);width:15px;height:15px;cursor:po
   <div id="catAI"></div>
   <section id="flowsView" hidden></section>
   <section id="pfView" hidden style="display:grid;gap:14px;min-width:0"></section>
+  <section id="sifView" style="display:none;gap:14px;min-width:0"></section>
   <details class="guide" open id="guide">
     <summary>New to fund analysis? How to analyse a mutual fund in 8 steps</summary>
     <ol>
@@ -320,7 +321,7 @@ let D, F, byCode = {};
 const S = { asset: store.get("asset", "Equity"), cat: store.get("cat", ""), theme: "", amc: "", minAge: 0, f: "",
             view: store.get("view", "returns"), sort: null, asc: false, cmp: [] };
 const ASSETS = ["Equity", "Hybrid", "Debt", "Index Funds & ETFs", "Fund of Funds", "Solution Oriented"];
-const FLOWS = "Money flows", PF = "My portfolio";
+const FLOWS = "Money flows", PF = "My portfolio", SIFT = "SIFs";
 const CAT_ORDER = { Equity: ["Large Cap","Mid Cap","Small Cap","Large & Mid Cap","Multi Cap","Flexi Cap","Focused","Value","Contra","ELSS","Sectoral / Thematic"],
   Debt: ["Overnight","Liquid","Money Market","Ultra Short Duration","Low Duration","Short Duration","Medium Duration","Medium to Long Duration","Long Duration","Dynamic Bond","Corporate Bond","Banking & PSU","Credit Risk","Gilt","Gilt 10Y Constant","Floater","Other Debt"],
   Hybrid: ["Arbitrage","Equity Savings","Conservative Hybrid","Balanced Hybrid","Balanced Advantage / DAA","Multi Asset","Aggressive Hybrid"] };
@@ -358,7 +359,8 @@ function fmt(v, t) {
   return t === "num" ? num(v) : t === "pct0" ? pct(v, 0) : pct(v); }
 
 // ---------------- data
-let AMC_LINKS = {}, FL = null, FL_ERR = "";
+let AMC_LINKS = {}, FL = null, FL_ERR = "", SIF = null, SIF_ERR = "";
+fetch("sif.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(j => { SIF = j; if (D) render(); }).catch(e => { SIF_ERR = e.message; if (D && S.asset === SIFT) render(); });
 fetch("flows.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(j => { FL = j; if (D) render(); }).catch(e => { FL_ERR = e.message; if (D && S.asset === FLOWS) render(); });
 fetch("amc_factsheets.json").then(r => r.ok ? r.json() : {}).then(j => { AMC_LINKS = j || {}; }).catch(() => {});
 fetch("data.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(init).catch(e => {
@@ -375,7 +377,7 @@ function init(data) {
   const amcs = [...new Set(F.map(f => f.amc))].sort();
   $("#amc").insertAdjacentHTML("beforeend", amcs.map(a => `<option>${esc(a)}</option>`).join(""));
   try { S.cmp = (store.get("cmp", []) || []).filter(c => byCode[c]).slice(0, 4); } catch { S.cmp = []; }
-  if (!ASSETS.includes(S.asset) && S.asset !== FLOWS && S.asset !== PF) S.asset = "Equity";
+  if (!ASSETS.includes(S.asset) && ![FLOWS, PF, SIFT].includes(S.asset)) S.asset = "Equity";
   pfInit();
   wire(); render();
   const h = location.hash.match(/^#f(\d+)$/); if (h && byCode[+h[1]]) openFund(+h[1]);
@@ -401,11 +403,14 @@ function visible() {
 function render() {
   // asset tabs
   $("#assets").innerHTML = `<button type="button" class="${S.asset === PF ? "on" : ""}" data-a="${PF}">★ ${PF}<span class="n">${PFS.items.length}</span></button>` + ASSETS.map(a => `<button type="button" class="${a === S.asset ? "on" : ""}" data-a="${esc(a)}">${esc(a)}<span class="n">${F.filter(f => f.asset === a).length}</span></button>`).join("") +
-    `<button type="button" class="${S.asset === FLOWS ? "on" : ""}" data-a="${FLOWS}">${FLOWS}</button>`;
-  const fl = S.asset === FLOWS, pf = S.asset === PF; $("main").classList.toggle("fl", fl); $("main").classList.toggle("pf", pf); $("#flowsView").hidden = !fl;
+    `<button type="button" class="${S.asset === FLOWS ? "on" : ""}" data-a="${FLOWS}">${FLOWS}</button>` +
+    `<button type="button" class="${S.asset === SIFT ? "on" : ""}" data-a="${SIFT}">${SIFT}${SIF ? `<span class="n">${SIF.strategies.length}</span>` : ""}</button>`;
+  const fl = S.asset === FLOWS, pf = S.asset === PF; $("main").classList.remove("sf"); $("#sifView").style.display = "none"; $("main").classList.toggle("fl", fl); $("main").classList.toggle("pf", pf); $("#flowsView").hidden = !fl;
   $("#pfView").style.display = pf ? "grid" : "none";
   if (fl) { renderFlows(); renderTray(); return; }
   if (pf) { renderPortfolio(); renderTray(); return; }
+  const sf = S.asset === SIFT; $("main").classList.toggle("sf", sf); $("#sifView").style.display = sf ? "grid" : "none";
+  if (sf) { renderSIF(); renderTray(); return; }
   const cats = catsFor(S.asset);
   if (S.cat && !cats.some(c => c[0] === S.cat)) S.cat = "";
   $("#cats").innerHTML = `<button type="button" class="chip ${!S.cat ? "on" : ""}" data-c="">Overview<span class="n">${cats.length}</span></button>` +
@@ -1019,6 +1024,86 @@ function pfWire() {
   };
   el.querySelectorAll(".pfin[data-k]").forEach(i => i.onchange = () => { const it = PFS.items.find(x => x.code === +i.dataset.c); if (!it) return; const v = parseFloat(i.value.replace(/[,₹\s]/g, "")); it[i.dataset.k] = isFinite(v) && v > 0 ? v : null; pfSave(); renderPortfolio(); });
   document.addEventListener("click", e => { if (!e.target.closest(".pfadd")) { const r = $("#pfRes"); if (r) r.hidden = true; } }, { once: true });
+}
+
+// ---------------- SIFs (Specialized Investment Funds)
+const SIF_INFO = {
+  "Equity Long-Short": "Invests at least 80% in equities and can hold short positions (through derivatives) of up to 25% of net assets, so it can bet against stocks or hedge the market. The aim: equity-like returns with smaller falls. Taxed as equity.",
+  "Equity Ex-Top 100 Long-Short": "Same long-short tools, but at least 65% must be in stocks outside India's top 100 by market cap: mid and small caps. Higher return potential and higher risk than a plain equity long-short; the short book is what should soften the falls.",
+  "Sector Rotation Long-Short": "Concentrated in up to four sectors at a time, rotating between them, with up to 25% short positions. A tactical, high-conviction strategy; outcomes depend heavily on the manager's sector calls.",
+  "Hybrid Long-Short": "Spreads money across equity, debt and derivatives, with up to 25% short exposure. Most behave like an enhanced arbitrage or low-risk hybrid fund, aiming to beat fixed income with limited equity risk. Tax depends on gross equity exposure.",
+  "Active Asset Allocator Long-Short": "Moves freely between equity, debt, commodities (including gold and silver) and REITs/InvITs, with up to 25% short exposure. A flexible multi-asset strategy; results depend on allocation calls."
+};
+const SIFS = { cat: "", sort: "since", asc: false };
+function sifGap(r) { return r.group === "Equity" ? (r.since != null && r.n500 != null ? r.since - r.n500 : null) : (r.since != null && r.arb != null ? r.since - r.arb : null); }
+function sifSoon(days) { if (!SIF?.historyFrom) return ""; const d = new Date(SIF.historyFrom + "T00:00:00"); d.setDate(d.getDate() + days); return d.toLocaleDateString("en-IN", { month: "short", year: "numeric" }); }
+function renderSIF() {
+  const el = $("#sifView");
+  if (!SIF) { el.innerHTML = SIF_ERR ? `<div class="empty">The SIF data did not load (${esc(SIF_ERR)}). Reload to try again.</div>` : `<div class="empty">Loading SIFs…</div>`; return; }
+  const all = SIF.strategies, cats = Object.keys(SIF_INFO).filter(c => all.some(r => r.cat === c));
+  const rows = all.filter(r => !SIFS.cat || r.cat === SIFS.cat);
+  const hasR = k => rows.some(r => r.r?.[k] != null), hasRisk = rows.some(r => r.risk);
+  const cols = [["since", "Since launch", r => r.since], ["n500", "Nifty 500 TRI, same dates", r => r.n500], ["arb", "Arbitrage-fund pace, same days", r => r.arb], ["gap", "Ahead of its yardstick", sifGap],
+    ...["1M", "3M", "6M", "1Y"].filter(hasR).map(k => [k, k, r => r.r?.[k]]),
+    ...(hasRisk ? [["beta", "Beta vs Nifty 500", r => r.risk?.beta], ["vol", "Volatility", r => r.risk?.vol], ["bad", "Avg on Nifty's 10 worst days", r => r.risk?.badDays?.sif], ["mdd", "Max drawdown", r => r.risk?.mdd]] : []),
+    ["days", "Days live", r => r.days], ["ter", "TER Direct (incl. costs)", r => r.ter?.dt]];
+  const get = (cols.find(c => c[0] === SIFS.sort) || cols[0])[2];
+  rows.sort((a, b) => { const x = get(a), y = get(b); if (x == null) return 1; if (y == null) return -1; return SIFS.asc ? x - y : y - x; });
+  const cell = (k, v, r) => k === "days" ? (v ?? '<span class="na">new</span>') : k === "ter" ? (v == null ? '<span class="na">–</span>' : `${v.toFixed(2)}%${v > 5 ? ' <span class="tag" title="Far above the SIF cap; likely an AMFI data error">check</span>' : ""}`) : k === "beta" ? num(v) : `<span class="${v < 0 ? "neg" : ""}">${pct(v)}</span>`;
+  const brands = new Set(all.map(r => r.brand)).size;
+  el.innerHTML = `<div class="fh"><h2>Specialized Investment Funds</h2><div class="sub">${all.length} SIF strategies (Direct, Growth) from ${brands} SIF brands · NAV as of ${new Date(SIF.asOf + "T00:00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })} · minimum investment ₹10 lakh per investor across an AMC's SIFs</div></div>
+    <div class="card" style="border-left:3px solid var(--warn-ink)"><h4>What you can and cannot judge yet</h4>
+      <p style="margin:0;font-size:13px;color:var(--ink2);line-height:1.55">AMFI publishes each SIF's latest NAV and daily TER, but no NAV history, and the SIF brands' own sites can't all be read automatically (Edelweiss blocks it, Union's is unreachable). So Fund Lens records every SIF's NAV each night from ${new Date((SIF.historyFrom || SIF.asOf) + "T00:00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}.
+      Today you get <b>return since launch</b> (NAV vs the launch price) against Nifty 500 TRI over the exact same dates, and against what an arbitrage fund would have earned. <b>1-month returns</b> appear from about ${sifSoon(31)}; <b>beta, volatility, max drawdown and behaviour on Nifty's worst days</b> from about ${sifSoon(90)}. Most SIFs are under a year old, so treat any ranking as early evidence, not a verdict.</p></div>
+    <div class="cats">${["", ...cats].map(c => `<button type="button" class="chip ${SIFS.cat === c ? "on" : ""}" data-sc="${esc(c)}">${c || "All"}<span class="n">${c ? all.filter(r => r.cat === c).length : all.length}</span></button>`).join("")}</div>
+    ${SIFS.cat ? `<div class="catinfo"><p style="margin:0">${esc(SIF_INFO[SIFS.cat])}</p></div>` : ""}
+    <div class="tablebox"><table><thead><tr><th class="fund">Strategy</th><th style="text-align:left">Launched</th>${cols.map(([k, t]) => `<th class="${SIFS.sort === k ? "sorted" + (SIFS.asc ? " asc" : "") : ""}"><button type="button" data-ss="${k}">${t}</button></th>`).join("")}<th>NAV</th></tr></thead><tbody>
+    ${rows.map(r => `<tr><td class="fund"><button type="button" class="fn" data-sif="${esc(r.key)}">${esc(r.name)}</button><span class="am">${esc(r.cat)} · ${esc(r.amc.replace(/ Mutual Fund$/i, ""))}</span></td>
+      <td style="text-align:left">${r.launch ? new Date(r.launch + "T00:00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "2-digit" }) : '<span class="na">–</span>'}</td>
+      ${cols.map(([k, , g]) => `<td>${cell(k, g(r), r)}</td>`).join("")}<td>${r.nav.toFixed(r.nav > 100 ? 2 : 4)}</td></tr>`).join("")}
+    </tbody></table></div>
+    <p class="note">Since launch is absolute (not annualised), from the launch-day price (₹10, or ₹1,000 where the NAV is in the hundreds) to the latest NAV. Launch date = the first day AMFI shows a TER for the strategy. Yardstick: Nifty 500 TRI for equity strategies; for hybrid and asset-allocator strategies, what the median arbitrage fund (${pct(SIF.arb1y)} over the past year) would have earned over the same days. A high since-launch figure from a few weeks of trading says very little.</p>
+    <div id="sifAI"></div>`;
+  el.querySelector(".cats").onclick = e => { const b = e.target.closest("[data-sc]"); if (b) { SIFS.cat = b.dataset.sc; renderSIF(); } };
+  el.querySelector("thead").onclick = e => { const b = e.target.closest("[data-ss]"); if (!b) return; if (SIFS.sort === b.dataset.ss) SIFS.asc = !SIFS.asc; else { SIFS.sort = b.dataset.ss; SIFS.asc = ["ter", "vol", "beta"].includes(b.dataset.ss); } renderSIF(); };
+  el.querySelector("tbody").onclick = e => { const b = e.target.closest("[data-sif]"); if (b) openSIF(b.dataset.sif); };
+  aiPanel($("#sifAI"), { title: SIFS.cat || "SIFs", context: sifContext, chips: ["Which SIFs look most promising so far, and what would make you wait?", "Is a hybrid long-short SIF better than an arbitrage fund for me?", "How should I judge an equity long-short SIF with under a year of history?", "Which SIFs look expensive on TER?"] });
+}
+function sifContext() {
+  const rows = SIF.strategies.filter(r => !SIFS.cat || r.cat === SIFS.cat);
+  return [`Indian Specialized Investment Funds (SIFs), Direct Growth, NAV as of ${SIF.asOf}. SIF rules: min Rs 10 lakh; unhedged short exposure up to 25% via derivatives. AMFI publishes no NAV history; nightly history starts ${SIF.historyFrom}. Arbitrage category median 1Y return: ${p1(SIF.arb1y)}.`,
+    ...rows.map(r => `${r.name} (${r.cat}, ${r.amc}): launched ${r.launch || "n/a"} (${r.days ?? "?"} days), since-launch ${p1(r.since)} absolute; Nifty 500 TRI same dates ${p1(r.n500)}; Nifty 50 TRI ${p1(r.n50)}; arbitrage pace ${p1(r.arb)}; TER Direct ${r.ter?.d ?? "n/a"}% base, ${r.ter?.dt ?? "n/a"}% incl. costs; NAV ${r.nav}` + (r.r ? `; returns ${Object.entries(r.r).map(([k, v]) => k + " " + p1(v)).join(", ")}` : "") + (r.risk ? `; beta ${n2(r.risk.beta)}, vol ${p1(r.risk.vol)}, max DD ${p1(r.risk.mdd)}, avg on Nifty 500's 10 worst days ${p1(r.risk.badDays.sif)} vs ${p1(r.risk.badDays.n500)}` : ""))].join("\n");
+}
+function openSIF(key) {
+  const r = SIF.strategies.find(x => x.key === key); if (!r) return;
+  const yard = r.group === "Equity" ? ["Nifty 500 TRI", r.n500] : ["Arbitrage fund pace", r.arb];
+  const bars = [["This SIF", r.since, "var(--s1)"], ["Nifty 50 TRI", r.n50, "var(--bm)"], ["Nifty 500 TRI", r.n500, "var(--bm)"], ["Arbitrage fund pace", r.arb, "var(--s3)"]].filter(b => b[1] != null);
+  const mx = Math.max(...bars.map(b => Math.abs(b[1])), 0.01);
+  const L = AMC_LINKS[r.amc] || {}, site = (L.factsheet || "").match(/^https?:\/\/[^/]+/)?.[0];
+  openDrawer(`<div class="dhead"><div style="min-width:0"><h3>${esc(r.name)}</h3><div class="meta">${esc(r.sif)} · ${esc(r.amc)} · ${esc(r.cat)} · Direct Growth · AMFI ${esc(r.sd)}</div></div><button type="button" class="x" aria-label="Close">×</button></div>
+    <div class="dbody">
+      <div class="facts f3"><div><div class="k">NAV</div><div class="v">${r.nav}</div><div class="note">${esc(r.navDate)}</div></div>
+        <div><div class="k">Since launch</div><div class="v">${pp(r.since, 1)}</div><div class="note">${r.days != null ? r.days + " days, absolute" : "launch date not known"}</div></div>
+        <div><div class="k">vs ${yard[0]}</div><div class="v">${pp(sifGap(r), 1)}</div><div class="note">same dates</div></div>
+        <div><div class="k">TER Direct</div><div class="v">${r.ter ? r.ter.d.toFixed(2) + "%" : "–"}</div><div class="note">${r.ter ? `${r.ter.dt.toFixed(2)}% incl. costs · Regular ${r.ter.rt?.toFixed(2)}%` : ""}</div></div>
+        <div><div class="k">Launched</div><div class="v">${esc(r.launch || "–")}</div><div class="note">first day with a TER at AMFI</div></div>
+        <div><div class="k">History recorded</div><div class="v">${r.hist.length} day${r.hist.length === 1 ? "" : "s"}</div><div class="note">since ${esc(SIF.historyFrom || "")}</div></div></div>
+      <div class="card"><h4>Since launch, against the alternatives <span class="h">same start and end dates</span></h4>
+        <div style="display:grid;gap:8px">${bars.map(([t, v, c]) => `<div style="display:grid;grid-template-columns:150px 1fr 70px;gap:10px;align-items:center;font-size:13px"><span>${t}</span><span style="position:relative;height:14px;background:var(--surface2);border-radius:4px"><i style="position:absolute;top:0;bottom:0;${v >= 0 ? "left:50%" : `right:50%`};width:${Math.abs(v) / mx * 50}%;background:${v < 0 ? "var(--neg)" : c};border-radius:3px"></i><i style="position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--line2)"></i></span><span style="font-family:var(--mono);text-align:right">${pp(v, 1)}</span></div>`).join("")}</div>
+        <p class="note" style="margin:8px 0 0">${r.group === "Equity" ? "An equity long-short should fall less than Nifty 500 in weak markets and keep up reasonably in strong ones." : "A hybrid long-short has to beat the arbitrage fund, its realistic low-risk alternative, by enough to justify the ₹10 lakh minimum and the newer structure."}</p></div>
+      ${r.hist.length >= 2 ? `<div class="card"><h4>NAV recorded by Fund Lens</h4><div class="chart" id="sifh"></div></div>` : ""}
+      <div class="card"><h4>Coming as history builds</h4><table class="mini"><tbody>
+        <tr><td>1-month return</td><td>${r.r?.["1M"] != null ? pct(r.r["1M"]) : `from ~${sifSoon(31)}`}</td></tr>
+        <tr><td>3-month return</td><td>${r.r?.["3M"] != null ? pct(r.r["3M"]) : `from ~${sifSoon(92)}`}</td></tr>
+        <tr><td>Beta and correlation vs Nifty 500</td><td>${r.risk ? `${num(r.risk.beta)} / ${num(r.risk.corr)}` : `from ~${sifSoon(90)}`}</td></tr>
+        <tr><td>Average return on Nifty 500's 10 worst days</td><td>${r.risk ? `${pct(r.risk.badDays.sif)} vs ${pct(r.risk.badDays.n500)}` : `from ~${sifSoon(90)}`}</td></tr>
+        <tr><td>Volatility and max drawdown</td><td>${r.risk ? `${pct(r.risk.vol)} / ${pct(r.risk.mdd)}` : `from ~${sifSoon(90)}`}</td></tr></tbody></table>
+        <p class="note" style="margin:8px 0 0">Not available automatically for every SIF, so not shown: redemption frequency and notice period, tax treatment, fund manager and portfolio (stock holdings, net short exposure). They are in each strategy's SID and monthly portfolio on ${esc(r.amc.replace(/ Mutual Fund$/i, ""))}'s website.</p></div>
+      <div class="card"><h4>Documents</h4><div class="docs">${site ? `<a href="${esc(site)}" target="_blank" rel="noopener">${esc(r.amc.replace(/ Mutual Fund$/i, ""))} website (SIF section, SID, portfolio) ↗</a>` : ""}<a href="https://www.amfiindia.com/sif/latest-nav" target="_blank" rel="noopener">AMFI: SIF latest NAV ↗</a><a href="https://www.amfiindia.com/sif/ter-of-sif" target="_blank" rel="noopener">AMFI: TER of SIF ↗</a></div></div>
+      <div id="sifAI1"></div></div>`);
+  const d = $("#drawer"); d.querySelector(".x").addEventListener("click", closeDrawer);
+  if (r.hist.length >= 2) lineChart($("#sifh"), r.hist.map(h => h[0].slice(0, 7)), [{ label: "NAV change", color: "var(--s1)", v: r.hist.map(h => h[1] / r.hist[0][1] - 1) }]);
+  aiPanel($("#sifAI1"), { title: r.name, context: () => sifContext().split("\n").filter((l, i) => i === 0 || l.startsWith(r.name)).join("\n"), chips: ["Is this SIF worth ₹10 lakh at this stage?", "How has it done against its yardstick, and is that meaningful yet?", "What should I check in its SID before investing?"] });
 }
 
 // ---------------- market pulse (explains what happened; does not predict)
