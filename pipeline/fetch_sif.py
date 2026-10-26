@@ -28,17 +28,14 @@ def get_ter():
         for m in months:  # newest first
             mv = m.get("MonthNumber") if isinstance(m, dict) else m
             rows = []
-            for page in range(1, 20):
+            for sid in sorted({x["sifId"] for x in schemes}):  # the API answers one SIF at a time
                 try:
                     j = requests.get(API + "sif-populate-te-rdata-revised", headers=H, timeout=60,
-                                     params={"SIF_Id": "-1", "Month": mv, "strCat": "-1", "strType": "-1", "page": page, "pageSize": 100}).json()
+                                     params={"SIF_Id": sid, "Month": mv, "strCat": "-1", "strType": "-1", "page": 1, "pageSize": 200}).json()
+                    rows += _rows(j)
                 except Exception:  # noqa: BLE001
-                    break
-                got = _rows(j)
-                rows += got
-                if len(got) < 100:
-                    break
-            if rows:
+                    pass
+            if len({r.get("SIF_Id") for r in rows}) >= len({x["sifId"] for x in schemes}) // 2:
                 return mv, rows
     return None, []
 
