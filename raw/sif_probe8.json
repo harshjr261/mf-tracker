@@ -1,0 +1,30 @@
+{
+ "sif-populate-ter-month?year=2026-2027": [
+  200,
+  "[{\"MonthYear\":\"October-2026\",\"MonthNumber\":\"10-2026\"},{\"MonthYear\":\"September-2026\",\"MonthNumber\":\"09-2026\"},{\"MonthYear\":\"August-2026\",\"MonthNumber\":\"08-2026\"},{\"MonthYear\":\"July-2026\",\"MonthNumber\":\"07-2026\"},{\"MonthYear\":\"June-2026\",\"MonthNumber\":\"06-2026\"},{\"MonthYear\":\"May-2026\",\"MonthNumber\":\"05-2026\"},{\"MonthYear\":\"April-2026\",\"MonthNumber\":\"04-2026\"}]"
+ ],
+ "sif-populate-ter-month?year=2025-2026": [
+  200,
+  "[{\"MonthYear\":\"March-2026\",\"MonthNumber\":\"03-2026\"},{\"MonthYear\":\"February-2026\",\"MonthNumber\":\"02-2026\"},{\"MonthYear\":\"January-2026\",\"MonthNumber\":\"01-2026\"},{\"MonthYear\":\"December-2025\",\"MonthNumber\":\"12-2025\"},{\"MonthYear\":\"November-2025\",\"MonthNumber\":\"11-2025\"},{\"MonthYear\":\"October-2025\",\"MonthNumber\":\"10-2025\"}]"
+ ],
+ "sif-populate-sub-category?type=1": [
+  200,
+  "[{\"SchemeCat_Desc\":\"Debt Oriented Investment Strategies\"},{\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies\"},{\"SchemeCat_Desc\":\"Hybrid Investment Strategies\"}]"
+ ],
+ "sif-populate-sub-category?type=-1": [
+  200,
+  "[{\"SchemeCat_Desc\":\"Debt Oriented Investment Strategies\"},{\"SchemeCat_Desc\":\"Equity Oriented Investment Strategies\"},{\"SchemeCat_Desc\":\"Hybrid Investment Strategies\"}]"
+ ],
+ "sif-populate-te-rdata-revised?SIF_Id=-1&Month=October-2026&strCat=-1&strType=-1&page=1&pageSize=50": [
+  400,
+  "{\"message\":\"Month must be in valid format MM-YYYY (e.g., 08-2026)\"}"
+ ],
+ "sif-populate-te-rdata-revised?SIF_Id=-1&Month=Oct-2026&strCat=-1&strType=1&page=1&pageSize=50": [
+  400,
+  "{\"message\":\"Month must be in valid format MM-YYYY (e.g., 08-2026)\"}"
+ ],
+ "sif-populate-te-rdata-revised?SIF_Id=13&Month=-1&strCat=-1&strType=-1&page=1&pageSize=50": [
+  400,
+  "{\"message\":\"Month must be in valid format MM-YYYY (e.g., 08-2026)\"}"
+ ]
+}
