@@ -1,0 +1,37 @@
+{
+ "https://www.edelweissmf.com/altivaSIF": [
+  "Altiva (Edelweiss)",
+  403,
+  380
+ ],
+ "https://www.edelweissmf.com/altivaSIF/docs/ALTIVA_SAI%2007112025.pdf": [
+  "Altiva (Edelweiss)",
+  403,
+  433
+ ],
+ "https://www.assetmanagement.hsbc.co.in/en/sif": [
+  "RedHex (HSBC)",
+  404,
+  94311
+ ],
+ "https://www.assetmanagement.hsbc.co.in/": [
+  "RedHex (HSBC)",
+  200,
+  97930
+ ],
+ "https://www.unionmf.com/": [
+  "Arthaya (Union)",
+  "error",
+  "HTTPSConnectionPool(host='www.unionmf.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"H"
+ ],
+ "https://www.unionmf.com/sif": [
+  "Arthaya (Union)",
+  "error",
+  "HTTPSConnectionPool(host='www.unionmf.com', port=443): Max retries exceeded with url: /sif (Caused by NewConnectionError"
+ ],
+ "https://www.tatamutualfund.com/sif": [
+  "Titanium (Tata)",
+  200,
+  220164
+ ]
+}
