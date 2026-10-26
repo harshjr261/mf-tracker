@@ -327,6 +327,25 @@ def main(nav_gz, bm_path, out, info_path=None):
     meta = meta[[navs[c].index[-1] >= latest - pd.Timedelta(days=21) for c in meta.code]]  # active only
     as_of = latest
 
+    # ---- drop pre-conversion history: a few schemes were debt-like funds before becoming equity funds
+    # (e.g. Quant Small Cap before 2019). Equity returns and risk must not include that stretch.
+    n500 = bms.get("NIFTY 500")
+    if n500 is not None:
+        bm_m = n500.resample("ME").last().pct_change()
+        for c in meta[meta.asset == "Equity"].code:
+            fm = navs[c].resample("ME").last().pct_change()
+            j = pd.concat([fm, bm_m], axis=1, join="inner").dropna()
+            if len(j) < 48:
+                continue
+            cut = None
+            for t in range(24, len(j)):
+                w = j.iloc[t - 24:t]
+                if w.iloc[:, 0].corr(w.iloc[:, 1]) < 0.3 and w.iloc[:, 0].std() < 0.015:
+                    cut = j.index[t - 1]
+            if cut is not None:
+                navs[c] = navs[c][navs[c].index > cut]
+                print(f"trimmed pre-conversion history: {c} starts {navs[c].index[0].date()}")
+
     # ---- benchmark assignment
     def assign(r):
         n = r["name"].lower()
