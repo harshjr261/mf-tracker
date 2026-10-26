@@ -1,0 +1,23 @@
+{
+ "historical_period&from_date=2025-10-01&to_date=2026-10-20&sd_id=120": [
+  200,
+  35,
+  "{\"message\":\"No records to display\"}",
+  false,
+  ""
+ ],
+ "historical_period&from_date=2025-10-01&to_date=2026-10-20&sd_id=SIF120": [
+  400,
+  68,
+  "{\"error\":\"Invalid parameter\",\"details\":\"sd_id must be a numeric id\"}",
+  false,
+  ""
+ ],
+ "all_for_date&from_date=2026-10-23": [
+  200,
+  3331865,
+  "{\"data\":[{\"mfName\":\"360 ONE Mutual Fund\",\"schemes\":[{\"schemeName\":\"360 ONE Balanced Hybrid Fund\",\"navs\":[{\"SD_ID\":\"152073\",\"NAV_Name\":\"360 ONE Balanced Hybrid Fund - Direct Plan - IDCW\",\"hNAV_Amt\":\"13.2540\",\"ISIN_RI\":\"INF579M01BA7\",\"ISIN_PO\":\"INF579M01AZ6\",\"hNAV_Date\":\"2026-10-23T00:00:00.000Z\",\"hNAV_Dtstamp\":\"2026-10-23T21:54:50.000Z\",\"hNAV_reissue\":\"\",\"hNAV_repurchase\":\"\",\"hNAV_Upload_display\":\"23 Oct 2026 21:54:50\",\"Plan\":\"Direct Plan\",\"Option\":\"IDCW Option\"},{\"SD_ID\":\"152075\",\"NAV_Name\":\"360",
+  false,
+  ""
+ ]
+}
