@@ -40,6 +40,9 @@ jobs:
           python pipeline/fetch_sip.py
       - name: Compute metrics and build app data
         run: cd engine && python build_app_data.py ../raw/mf_universe_nav.json.gz ../raw/benchmarks_tri.json ../docs/data.json ../raw/scheme_info.json
+      - name: Snapshot SIF NAVs and TER (AMFI publishes no SIF history)
+        continue-on-error: true
+        run: python pipeline/fetch_sif.py
       - name: Build money-flows data
         continue-on-error: true
         run: cd engine && python build_flows.py ../raw/amfi_monthly ../docs/flows.json
@@ -47,7 +50,7 @@ jobs:
         run: |
           git config user.name "fund-lens-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add docs/data.json docs/flows.json raw/benchmarks_tri.json raw/scheme_info.json raw/amfi_monthly 2>/dev/null || git add docs/data.json raw/benchmarks_tri.json
+          git add docs/data.json docs/flows.json raw/benchmarks_tri.json raw/scheme_info.json raw/amfi_monthly raw/sif 2>/dev/null || git add docs/data.json raw/benchmarks_tri.json
           if git diff --cached --quiet; then echo "No changes"; exit 0; fi
           git commit -m "Data refresh $(date -u +%Y-%m-%d)"
           git pull --rebase && git push
