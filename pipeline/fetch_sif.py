@@ -56,5 +56,24 @@ for s in schemes:
         h["navs"][d] = v; added += 1
 json.dump(hist, open(hist_p, "w"), separators=(",", ":"), sort_keys=True)
 json.dump({"asOf": dt.date.today().isoformat(), "schemes": schemes, "terMonth": ter_month, "ter": ter}, open(os.path.join(ROOT, "latest.json"), "w"), separators=(",", ":"))
+# launch dates: AMFI's daily TER rows start the day a strategy starts, so the earliest TER date per scheme = launch
+lp = os.path.join(ROOT, "launch.json")
+launch = json.load(open(lp)) if os.path.exists(lp) else {}
+names = {t.get("Scheme_Name") for t in ter}
+if any(n not in launch for n in names):
+    y, m = 2025, 10
+    while (y, m) <= (dt.date.today().year, dt.date.today().month):
+        for sid in sorted({x["sifId"] for x in schemes}):
+            try:
+                rows = _rows(requests.get(API + "sif-populate-te-rdata-revised", headers=H, timeout=60,
+                                          params={"SIF_Id": sid, "Month": f"{m:02d}-{y}", "strCat": "-1", "strType": "-1", "page": 1, "pageSize": 200}).json())
+            except Exception:  # noqa: BLE001
+                rows = []
+            for r in rows:
+                n, d = r.get("Scheme_Name"), (r.get("TER_Date") or "")[:10]
+                if n and d and (n not in launch or d < launch[n]):
+                    launch[n] = d
+        y, m = (y + 1, 1) if m == 12 else (y, m + 1)
+    json.dump(launch, open(lp, "w"), indent=0, sort_keys=True)
 dg = [s for s in schemes if "direct" in (s.get("Plan") or "").lower() and "growth" in (s.get("Option") or "").lower()]
-print(f"::notice title=SIF::{len(schemes)} scheme rows ({len(dg)} Direct Growth), {len({s['SIFName'] for s in schemes})} SIF brands, {len(ter)} TER rows ({ter_month}), {len({t.get("SIF_Id") for t in ter})} SIFs with TER, {added} new NAV points")
+print(f"::notice title=SIF::{len(schemes)} scheme rows ({len(dg)} Direct Growth), {len({s['SIFName'] for s in schemes})} SIF brands, {len(launch)} launch dates, {len(ter)} TER rows ({ter_month}), {len({t.get("SIF_Id") for t in ter})} SIFs with TER, {added} new NAV points")
