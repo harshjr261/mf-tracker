@@ -402,7 +402,7 @@ function visible() {
 // ---------------- render
 function render() {
   // asset tabs
-  $("#assets").innerHTML = `<button type="button" class="${S.asset === PF ? "on" : ""}" data-a="${PF}">★ ${PF}<span class="n">${PFS.items.length}</span></button>` + ASSETS.map(a => `<button type="button" class="${a === S.asset ? "on" : ""}" data-a="${esc(a)}">${esc(a)}<span class="n">${F.filter(f => f.asset === a).length}</span></button>`).join("") +
+  $("#assets").innerHTML = `<button type="button" class="${S.asset === PF ? "on" : ""}" data-a="${PF}">★ ${PF}${PF_DEMO ? "" : `<span class="n">${PFS.items.length}</span>`}</button>` + ASSETS.map(a => `<button type="button" class="${a === S.asset ? "on" : ""}" data-a="${esc(a)}">${esc(a)}<span class="n">${F.filter(f => f.asset === a).length}</span></button>`).join("") +
     `<button type="button" class="${S.asset === FLOWS ? "on" : ""}" data-a="${FLOWS}">${FLOWS}</button>` +
     `<button type="button" class="${S.asset === SIFT ? "on" : ""}" data-a="${SIFT}">${SIFT}${SIF ? `<span class="n">${SIF.strategies.length}</span>` : ""}</button>`;
   const fl = S.asset === FLOWS, pf = S.asset === PF; $("main").classList.remove("sf"); $("#sifView").style.display = "none"; $("main").classList.toggle("fl", fl); $("main").classList.toggle("pf", pf); $("#flowsView").hidden = !fl;
@@ -919,8 +919,12 @@ function pfInit() {
     } catch { PF_DB = null; }
   }).catch(() => {});
 }
+// sample portfolio for screenshots: shown instead of the real one, never saved, never touches PFS.items
+let PF_DEMO = false;
+const PF_SAMPLE = [[122639, 300000, 0.82, 10000], [118955, 200000, 0.9, 5000], [118778, 150000, 0.78, 5000], [118968, 200000, 0.92, 0], [120716, 100000, 0.88, 5000], [119091, 50000, 0.97, 0]];
+function pfDemoItems() { return PF_SAMPLE.filter(([c]) => byCode[c]).map(([c, amt, k, sip]) => ({ code: c, added: D.asOf, addedNav: byCode[c].nav * 0.97, amt, avgNav: +(byCode[c].nav * k).toFixed(4), sip: sip || null })); }
 function pfRows() {
-  return PFS.items.map(x => { const f = byCode[x.code]; const units = x.amt && x.avgNav ? x.amt / x.avgNav : null;
+  return (PF_DEMO ? pfDemoItems() : PFS.items).map(x => { const f = byCode[x.code]; const units = x.amt && x.avgNav ? x.amt / x.avgNav : null;
     return { x, f, units, val: units ? units * f.nav : null, since: x.addedNav ? f.nav / x.addedNav - 1 : null }; });
 }
 function quart(f, get, low) { const r = rankOf(f, get, low); if (!r) return null; const [a, b] = r.split("/").map(Number); return { r, q: Math.min(4, Math.ceil(a / b * 4)) }; }
@@ -959,7 +963,9 @@ function renderPortfolio() {
   const mix = {}; rows.forEach(r => mix[r.f.asset] = (mix[r.f.asset] || 0) + wt(r));
   const col = { Equity: "var(--s1)", Debt: "var(--s3)", Hybrid: "var(--s4)", "Index Funds & ETFs": "var(--s2)", "Fund of Funds": "var(--bm)", "Solution Oriented": "var(--warn-ink)" };
   const amcs = {}; rows.forEach(r => amcs[r.f.amc] = (amcs[r.f.amc] || 0) + wt(r));
-  const head = `<div class="fh"><h2>My portfolio</h2><div class="sub">Shortlist funds with ☆ in any fund's profile, or add them here. Amounts are optional; add them to see value, gains and weights. <span id="pfSync"></span></div></div>
+  const demoBtn = `<button type="button" class="btn ghost" id="pfDemo" style="flex:none">${PF_DEMO ? "Back to my portfolio" : "Show sample portfolio"}</button>`;
+  const head = PF_DEMO ? `<div class="fh" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-end"><div><h2>Sample portfolio</h2><div class="sub">Made-up holdings for screenshots and demos. Your own funds and amounts are hidden here and stay exactly as saved.</div></div>${demoBtn}</div>`
+    : `<div class="fh" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-end"><div><h2>My portfolio</h2><div class="sub">Shortlist funds with ☆ in any fund's profile, or add them here. Amounts are optional; add them to see value, gains and weights. <span id="pfSync"></span></div></div><span title="Shows made-up holdings so you can take screenshots without revealing yours">${demoBtn}</span></div>
     <div class="pfadd"><input id="pfQ" type="search" placeholder="Add a fund: type a name, AMC or category…" autocomplete="off" aria-label="Add a fund to portfolio"><div class="results" id="pfRes" hidden></div></div>`;
   if (!rows.length) { el.innerHTML = head + `<div class="card"><p style="margin:0;color:var(--ink2)">Your portfolio is empty. Search above, or open any fund and tap <b>☆ Add to portfolio</b>. Everything you add shows up here with its latest returns, rank, cost, manager and news, plus a health check for overlap, laggards and manager changes.</p></div>`; pfWire(); paintSync(); return; }
   const tiles = [
@@ -984,7 +990,7 @@ function renderPortfolio() {
         <td>${(wt(r) * 100).toFixed(1)}%</td>${hasVal ? `<td>${Math.round(r.val).toLocaleString("en-IN")}</td><td>${pp(r.val / r.x.amt - 1, 1)}</td>` : ""}
         <td title="since ${esc(r.x.added)}">${pp(r.since, 1)}</td><td class="${signCls(f.r?.["1M"])}">${pct(f.r?.["1M"])}</td><td class="${signCls(f.r?.["1Y"])}">${pct(f.r?.["1Y"])} ${q(f, "1Y")}</td><td class="${signCls(f.r?.["3Y"])}">${pct(f.r?.["3Y"])} ${q(f, "3Y")}</td><td class="${signCls(f.r?.["5Y"])}">${pct(f.r?.["5Y"])} ${q(f, "5Y")}</td>
         <td>${num(f.k3?.sharpe)}</td><td class="${signCls(f.curDD)}">${pct(f.curDD)}</td><td>${fmt(f.info?.terD, "ter")}</td><td>${fmt(f.info?.aum, "cr")}</td>
-        <td><button type="button" data-rm="${f.code}" aria-label="Remove ${esc(short(f.name))}" style="border:0;background:none;color:var(--muted);cursor:pointer;font-size:16px">×</button></td></tr>`; }).join("")}
+        <td>${PF_DEMO ? "" : `<button type="button" data-rm="${f.code}" aria-label="Remove ${esc(short(f.name))}" style="border:0;background:none;color:var(--muted);cursor:pointer;font-size:16px">×</button>`}</td></tr>`; }).join("")}
       </tbody></table></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button type="button" class="btn ghost" id="pfCmp">Compare ${Math.min(4, rows.length)} in detail</button></div></div>
     <div class="fgrid">
@@ -995,22 +1001,24 @@ function renderPortfolio() {
         <div style="font-weight:600;font-size:13px;margin:14px 0 4px">By fund house</div>
         <div class="pfkey" style="display:grid;gap:4px">${Object.entries(amcs).sort((a, b) => b[1] - a[1]).map(([a, w]) => `<span style="display:flex;justify-content:space-between">${esc(a.replace(/ Mutual Fund$/i, ""))} <b>${(w * 100).toFixed(0)}%</b></span>`).join("")}</div></div>
     </div>
-    <details class="card" ${hasAmt ? "" : "open"}><summary style="cursor:pointer;font-weight:600">Enter amounts (optional)</summary>
+    ${PF_DEMO ? "" : `<details class="card" ${hasAmt ? "" : "open"}><summary style="cursor:pointer;font-weight:600">Enter amounts (optional)</summary>
       <p class="note">Invested amount and your average buy NAV give units, current value and gain. SIP is just for your reference. Leave blank to track as a watchlist.</p>
       <div class="scroll"><table class="mini flow"><thead><tr><th>Fund</th><th>Invested ₹</th><th>Avg buy NAV</th><th>Monthly SIP ₹</th><th>NAV now</th></tr></thead><tbody>
       ${rows.map(r => `<tr><td style="white-space:normal">${esc(short(r.f.name))}</td><td><input class="pfin" inputmode="decimal" data-k="amt" data-c="${r.f.code}" value="${r.x.amt ?? ""}"></td><td><input class="pfin" inputmode="decimal" data-k="avgNav" data-c="${r.f.code}" value="${r.x.avgNav ?? ""}" placeholder="${r.f.nav}"></td><td><input class="pfin" inputmode="decimal" data-k="sip" data-c="${r.f.code}" value="${r.x.sip ?? ""}"></td><td>${(+r.f.nav).toFixed(4)}</td></tr>`).join("")}
-      </tbody></table></div></details>
+      </tbody></table></div></details>`}
     <div class="card"><h4>News on your fund houses and managers <span class="h">last 12 months, newest first</span></h4><div id="pfNews">${news ? newsList(news.map(n => ({ ...n, s: (n.s ? n.s + " · " : "") + n.w })), "No recent headlines for these fund houses or managers.", 12) : '<p class="note">Loading…</p>'}</div></div>
     <div id="pfAI"></div>
-    <details class="card"><summary style="cursor:pointer;font-weight:600">Move this portfolio to another device</summary>
+    ${PF_DEMO ? "" : `<details class="card"><summary style="cursor:pointer;font-weight:600">Move this portfolio to another device</summary>
       <p class="note">Opened inside Claude, your portfolio saves to your Claude account. On the public link it saves in this browser only. To copy it across, copy the code here and paste it on the other device.</p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn ghost" id="pfCopy">Copy backup code</button><input id="pfImp" class="pfin" style="flex:1;min-width:180px;text-align:left" placeholder="Paste a backup code"><button type="button" class="btn" id="pfDoImp">Restore</button></div><p class="note" id="pfMsg"></p></details>`;
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn ghost" id="pfCopy">Copy backup code</button><input id="pfImp" class="pfin" style="flex:1;min-width:180px;text-align:left" placeholder="Paste a backup code"><button type="button" class="btn" id="pfDoImp">Restore</button></div><p class="note" id="pfMsg"></p></details>`}`;
   if (!NEWS) loadNews().then(() => { if (S.asset === PF) renderPortfolio(); });
   pfWire(); paintSync();
-  aiPanel($("#pfAI"), { title: "my portfolio", context: pfContext, chips: ["Review my portfolio: what is good and what would you change?", "Do my funds overlap too much?", "Which fund is the weakest link and what could replace it within its category?", "Is this portfolio too risky for a 5-year goal?"] });
+  aiPanel($("#pfAI"), { title: PF_DEMO ? "sample portfolio" : "my portfolio", context: pfContext, chips: ["Review my portfolio: what is good and what would you change?", "Do my funds overlap too much?", "Which fund is the weakest link and what could replace it within its category?", "Is this portfolio too risky for a 5-year goal?"] });
 }
 function pfWire() {
   const el = $("#pfView"), q = $("#pfQ"), res = $("#pfRes");
+  const db = $("#pfDemo"); if (db) db.onclick = () => { PF_DEMO = !PF_DEMO; const a = $("#pfAI"); if (a) a.dataset.k = ""; render(); };
+  if (!q) return;
   q.oninput = () => { const t = q.value.trim().toLowerCase().split(/\s+/).filter(Boolean); if (!t.length) { res.hidden = true; return; }
     const hits = F.filter(f => { const s = (f.name + " " + f.amc + " " + f.cat).toLowerCase(); return t.every(w => s.includes(w)); }).sort((a, b) => a.name.length - b.name.length).slice(0, 12);
     res.innerHTML = hits.map(f => `<button type="button" data-add="${f.code}"><span class="rn">${pfHas(f.code) ? "★ " : ""}${esc(short(f.name))}</span><span class="rc">${esc(f.cat)}</span></button>`).join("") || `<div class="empty" style="padding:14px">No fund matches.</div>`; res.hidden = false; };
@@ -1018,7 +1026,7 @@ function pfWire() {
   el.onclick = e => {
     const rm = e.target.closest("[data-rm]"); if (rm) { pfToggle(+rm.dataset.rm); return; }
     const fn = e.target.closest("button.fn[data-code]"); if (fn) { openFund(+fn.dataset.code); return; }
-    if (e.target.closest("#pfCmp")) { S.cmp = PFS.items.slice(0, 4).map(x => x.code); store.set("cmp", S.cmp); openCompare(); return; }
+    if (e.target.closest("#pfCmp")) { S.cmp = pfRows().slice(0, 4).map(r => r.f.code); store.set("cmp", S.cmp); openCompare(); return; }
     if (e.target.closest("#pfCopy")) { const code = btoa(unescape(encodeURIComponent(JSON.stringify(PFS.items)))); (navigator.clipboard?.writeText(code) || Promise.reject()).then(() => $("#pfMsg").textContent = "Copied. Paste it on the other device.").catch(() => { $("#pfImp").value = code; $("#pfMsg").textContent = "Select the code in the box and copy it."; }); return; }
     if (e.target.closest("#pfDoImp")) { try { const items = JSON.parse(decodeURIComponent(escape(atob($("#pfImp").value.trim())))).filter(x => x && byCode[x.code]); if (!items.length) throw 0; PFS.items = items; pfSave(); render(); } catch { $("#pfMsg").textContent = "That code didn't work. Copy it again from the other device."; } }
   };
