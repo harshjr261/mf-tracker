@@ -360,10 +360,28 @@ function fmt(v, t) {
 
 // ---------------- data
 let AMC_LINKS = {}, FL = null, FL_ERR = "", SIF = null, SIF_ERR = "";
-fetch("sif.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(j => { SIF = j; if (D) render(); }).catch(e => { SIF_ERR = e.message; if (D && S.asset === SIFT) render(); });
-fetch("flows.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(j => { FL = j; if (D) render(); }).catch(e => { FL_ERR = e.message; if (D && S.asset === FLOWS) render(); });
-fetch("amc_factsheets.json").then(r => r.ok ? r.json() : {}).then(j => { AMC_LINKS = j || {}; }).catch(() => {});
-fetch("data.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(init).catch(e => {
+// Data loading. The GitHub Pages site is refreshed every night; a copy hosted elsewhere (e.g. inside Claude)
+// pulls those nightly files first and falls back to the copy bundled with the page only if that fails.
+const LIVE_BASES = ["https://harshjr261.github.io/mf-tracker/", "https://cdn.jsdelivr.net/gh/harshjr261/mf-tracker@main/docs/"];
+const ON_PAGES = /(^|\.)github\.io$/.test(location.hostname);
+let DATA_SRC = "";
+function getJSON(name, stamp) {
+  const local = () => fetch(name).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+  if (ON_PAGES) return local();
+  const live = base => { const c = new AbortController(), t = setTimeout(() => c.abort(), 8000);
+    return fetch(base + name + "?h=" + Math.floor(Date.now() / 3.6e6), { signal: c.signal, cache: "no-store" })
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).finally(() => clearTimeout(t)); };
+  return Promise.allSettled([local(), live(LIVE_BASES[0]).catch(() => live(LIVE_BASES[1]))]).then(([a, b]) => {
+    const L = a.status === "fulfilled" ? a.value : null, R = b.status === "fulfilled" ? b.value : null;
+    const useLive = R && (!L || !stamp || String(stamp(R) || "") >= String(stamp(L) || ""));
+    if (name === "data.json") DATA_SRC = useLive ? "live" : "snapshot";
+    if (useLive) return R; if (L) return L;
+    throw new Error(a.reason?.message || "load failed"); });
+}
+getJSON("sif.json", j => j.asOf).then(j => { SIF = j; if (D) render(); }).catch(e => { SIF_ERR = e.message; if (D && S.asset === SIFT) render(); });
+getJSON("flows.json", j => j.months?.at(-1)).then(j => { FL = j; if (D) render(); }).catch(e => { FL_ERR = e.message; if (D && S.asset === FLOWS) render(); });
+getJSON("amc_factsheets.json").then(j => { AMC_LINKS = j || {}; }).catch(() => {});
+getJSON("data.json", j => j.asOf).then(init).catch(e => {
   $("#tablebox").innerHTML = `<div class="empty">The fund data did not load (${esc(e.message)}). Reload the page to try again.</div>`;
 });
 
@@ -373,7 +391,7 @@ function init(data) {
   VIEWS.calendar.cols = years.map(y => ["Y" + y.slice(0, 4), y.replace(" YTD", " YTD"), f => f.cal?.[y], "pct"]);
   VIEWS.calendar.def = "Y" + (years[1] || years[0]).slice(0, 4);
   const d = new Date(D.asOf + "T00:00:00");
-  $("#asof").textContent = `${F.length.toLocaleString("en-IN")} funds · NAV as of ${d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}`;
+  $("#asof").textContent = `${F.length.toLocaleString("en-IN")} funds · NAV as of ${d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}${DATA_SRC === "snapshot" ? " · saved copy" : ""}`;
   const amcs = [...new Set(F.map(f => f.amc))].sort();
   $("#amc").insertAdjacentHTML("beforeend", amcs.map(a => `<option>${esc(a)}</option>`).join(""));
   try { S.cmp = (store.get("cmp", []) || []).filter(c => byCode[c]).slice(0, 4); } catch { S.cmp = []; }
@@ -750,7 +768,7 @@ function openManager(key) {
 
 // ---------------- news (weekly search of Google News for every AMC and every fund manager)
 let NEWS = null, NEWS_P = null;
-function loadNews() { return NEWS_P ||= fetch("news.json").then(r => r.ok ? r.json() : null).then(j => { NEWS = j; }).catch(() => {}); }
+function loadNews() { return NEWS_P ||= getJSON("news.json", j => j.asOf).then(j => { NEWS = j; }).catch(() => {}); }
 function newsList(items, empty, n = 8) {
   if (!NEWS) return `<p class="note">News is not available right now.</p>`;
   if (!items?.length) return `<p class="note">${esc(empty)}</p>`;
